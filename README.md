@@ -1,0 +1,1 @@
+Hey all, this is the github for our project, Cloudkiller. You can use the main branch as a base for any work you do, but make sure that you commit your updates to a new branch so we can all review and test it. Don't push any changes to main yourself! Please make a pull request on this site instead, that clearly documents all the changes you are going to merge.
