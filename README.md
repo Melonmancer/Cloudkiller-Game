@@ -1,1 +1,0 @@
-This is the testing branch for Cloudkiller. Your changes should be committed to this branch so that we can review and check for issues before updating the main branch. Remember: Make sure everyone knows which files you're working on! If multiple people make changes to the same files and commit at the same time, we'll end up with merge conflicts that need resolving.
