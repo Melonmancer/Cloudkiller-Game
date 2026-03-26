@@ -1,1 +1,0 @@
-Hey all! This is a test file to make sure you can all access and update the git project.
