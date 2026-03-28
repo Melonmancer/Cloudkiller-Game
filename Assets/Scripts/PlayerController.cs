@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     //speed manages how fast the player moves at base - manually modify this to speed up or slow down the player character
     //rotationSpeed manages how quickly the player object rotates to match the direction the camera is pointing
-    private float speed = 10.0f;
-    private float rotationSpeed = 15.0f;
+    private float speed = 1.0f;
+    private float rotationSpeed = 1.5f;
+    private float jumpHeight = 9f;
 
 
     private Vector3 direction;
@@ -18,15 +19,22 @@ public class PlayerMovement : MonoBehaviour
     public GameObject playerObject;
     public Camera playerCamera;
 
+    private Rigidbody playerRigidbody;
+
+    private bool grounded = true;
+
     // Start is called before the first frame update
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        playerRigidbody = playerObject.GetComponent<Rigidbody>();
     }
 
+    //NOTE: FixedUpdate to solve for some collision issues, if too janky switch back to Update and add * 'Time.deltaTime to all movements
     //Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         ProcessPlayerMovement();        
     }
@@ -41,6 +49,13 @@ public class PlayerMovement : MonoBehaviour
         //Vertical checks for W, S, Up and Down arrow keys
         float vertical = Input.GetAxis("Vertical");
 
+        if (Input.GetAxis("Jump") > 0 && grounded)
+        {
+            SetGrounded(false);
+            //Debug.Log("Jumping!");
+            playerRigidbody.AddForce(Vector3.up * jumpHeight, ForceMode.VelocityChange);
+        }
+
         //While the player is moving they rotate to face the direction the camera is facing
         if(horizontal != 0.0f || vertical != 0.0f)
         {
@@ -51,7 +66,7 @@ public class PlayerMovement : MonoBehaviour
         direction = new Vector3(horizontal, 0f, vertical).normalized;
 
         //Moves the player object in the new direction
-        playerObject.transform.Translate(direction * speed * Time.deltaTime);
+        playerObject.transform.Translate(direction * speed * 0.2f);
     }
 
 
@@ -63,6 +78,17 @@ public class PlayerMovement : MonoBehaviour
         viewDirection = playerObject.transform.position - new Vector3(playerCamera.transform.position.x, playerObject.transform.position.y, playerCamera.transform.position.z);
 
         //Interpolates between the direction the player is currently facing and the direction the camera is facing, and sets the player to face this new direction
-        playerObject.transform.forward = Vector3.Slerp(playerObject.transform.forward, viewDirection.normalized, rotationSpeed * Time.deltaTime);
+        playerObject.transform.forward = Vector3.Slerp(playerObject.transform.forward, viewDirection.normalized, rotationSpeed * 0.2f);
+    }
+
+
+    public void SetGrounded(bool boolean)
+    {
+        grounded = boolean;
+    }
+
+    public bool GetGrounded()
+    {
+        return grounded;
     }
 }
