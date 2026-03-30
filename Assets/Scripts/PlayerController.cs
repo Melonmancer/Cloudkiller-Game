@@ -6,9 +6,10 @@ public class PlayerController : MonoBehaviour
 {
     //speed manages how fast the player moves at base - manually modify this to speed up or slow down the player character
     //rotationSpeed manages how quickly the player object rotates to match the direction the camera is pointing
-    private float speed = 1.0f;
+    [SerializeField] private float speed = 1.0f;
+    [SerializeField] private float jumpHeight = 9f;
     private float rotationSpeed = 1.5f;
-    private float jumpHeight = 9f;
+    
 
 
     private Vector3 direction;
@@ -32,6 +33,12 @@ public class PlayerController : MonoBehaviour
         playerRigidbody = playerObject.GetComponent<Rigidbody>();
     }
 
+
+    void Update()
+    {
+
+    }
+
     //NOTE: FixedUpdate to solve for some collision issues, if too janky switch back to Update and add * 'Time.deltaTime to all movements
     //Update is called once per frame
     void FixedUpdate()
@@ -44,29 +51,39 @@ public class PlayerController : MonoBehaviour
     //ProcessPlayerMovement checks if the player is inputting anything, and updates the player object's position and facing
     private void ProcessPlayerMovement()
     {
+
+
         //Horizontal checks for A, D, Left and Right arrow keys
         float horizontal = Input.GetAxis("Horizontal");
         //Vertical checks for W, S, Up and Down arrow keys
         float vertical = Input.GetAxis("Vertical");
 
-        if (Input.GetAxis("Jump") > 0 && grounded)
-        {
-            SetGrounded(false);
-            //Debug.Log("Jumping!");
-            playerRigidbody.AddForce(Vector3.up * jumpHeight, ForceMode.VelocityChange);
-        }
-
-        //While the player is moving they rotate to face the direction the camera is facing
+         //While the player is moving they rotate to face the direction the camera is facing
         if(horizontal != 0.0f || vertical != 0.0f)
         {
             UpdatePlayerDirection();
         }
 
         //Creates a new direction based on which keys the player is pressing
-        direction = new Vector3(horizontal, 0f, vertical).normalized;
+        var verticalRotation = Quaternion.Euler(0,  playerObject.transform.rotation.eulerAngles.y, 0);
+        direction = (verticalRotation * new Vector3(horizontal, 0f, vertical)).normalized;
 
+        
+        
         //Moves the player object in the new direction
-        playerObject.transform.Translate(direction * speed * 0.2f);
+        //playerObject.transform.Translate(direction * speed);
+        var prevVerticalVelocity = playerRigidbody.velocity.y;
+        playerRigidbody.velocity = direction * speed; 
+        playerRigidbody.velocity += prevVerticalVelocity * Vector3.up;
+
+        if (Input.GetAxis("Jump") > 0 && grounded)
+        {
+            SetGrounded(false);
+            //Debug.Log("Jumping!");
+            playerRigidbody.AddForce(Vector3.up * jumpHeight, ForceMode.Impulse);
+        }
+
+       
     }
 
 
