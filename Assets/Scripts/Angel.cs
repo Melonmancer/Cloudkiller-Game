@@ -7,6 +7,7 @@ public class Angel
     private float health;
     private float damage;
     private float speed;
+    //private float followDistance = 5;
     
 
     public Angel()
@@ -45,6 +46,28 @@ public class Angel
     {
         return health;
     }
+
+    public void SetDamage(float d)
+    {
+        damage = d;
+    }
+
+    public float GetDamage()
+    {
+        return damage;
+    }
+
+
+    public void SetSpeed(float s)
+    {
+        speed = s;
+    }
+
+    public float GetSpeed()
+    {
+        return speed;
+    }
+
 
     //Destroys angel and returns true if lethal damage is dealt
     public bool DamageAngel(float dmg)
