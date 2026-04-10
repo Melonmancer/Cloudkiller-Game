@@ -4,54 +4,94 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    [SerializeField] private float maxHealth = 10f;
+    private float health;
+
+    [SerializeField] private GameObject respawnPoint;
+
     //speed manages how fast the player moves at base - manually modify this to speed up or slow down the player character
     //rotationSpeed manages how quickly the player object rotates to match the direction the camera is pointing
     [SerializeField] private float speed = 1.0f;
     [SerializeField] private float jumpHeight = 9f;
     private float rotationSpeed = 1.5f;
     
-
+    //Player inputs stored in these variables
     private float horizontalInput;
     private float verticalInput;
     private float jumpInput;
+    private float fireInput;
+
 
     //Controls player's ability to jump slightly after leaving a platform
     private bool coyoteTime = false;
     private float coyoteWindow = 0f;
     [SerializeField] private float coyoteMax = 8f;
 
+    //If player is touching the ground or not
+    private bool grounded = true;
+
+
+
+    //Controls attack input cooldown - should be roughly same speed as the attack object's lifespan!
+    [SerializeField] private float attackCooldown = 1f;
+    private float attackTimer = 0f;
+    private bool canAttack = true;
+
+    //This object is spawned when the player performs the attack input
+    [SerializeField] private GameObject attack;
+
+    //The direction the player is moving in
     private Vector3 direction;
+
+    //The direction the camera is facing
     private Vector3 viewDirection;
 
     //Stores references to the player and camera objects in the same scene
-    //NOTE: If you are making a new scene, you'll need to link these manually from the inspector
-    public GameObject playerObject;
-    public Camera playerCamera;
+    //NOTE: These should be set inside of the player prefab!
+    [SerializeField] private GameObject playerObject;
+    [SerializeField] private Camera playerCamera;
 
     private Rigidbody playerRigidbody;
 
-    private bool grounded = true;
 
     // Start is called before the first frame update
     void Start()
     {
+        //Locks mouse cursor whilst game is active
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
+        //Gets the player's Rigidbody collider - there should always be one attached to the player object!
         playerRigidbody = playerObject.GetComponent<Rigidbody>();
+
+        health = maxHealth;
     }
 
     //Update called each frame update, collects player inputs
     void Update()
     {
         GetPlayerInputs();
+
+        //If the player's attack is on cooldown, this ticks it.
+        if(!canAttack)
+        {
+            attackTimer += (1f * Time.deltaTime);
+            if(attackTimer >= attackCooldown)
+            {
+                canAttack = true;
+                //Debug.Log("Attack off cooldown!");
+            }
+        }
     }
 
     //FixedUpdate should be used for all rigidbody movement and collision work
     void FixedUpdate()
     {
+        //All player controls are executed in here.
         ProcessPlayerMovement();        
     }
+
+
 
     //Collects input data from the player
     void GetPlayerInputs()
@@ -62,6 +102,8 @@ public class PlayerController : MonoBehaviour
         verticalInput = Input.GetAxis("Vertical");
 
         jumpInput = Input.GetAxis("Jump");
+
+        fireInput = Input.GetAxis("Fire1");
     }
 
     //Resets input data
@@ -70,7 +112,10 @@ public class PlayerController : MonoBehaviour
         horizontalInput = 0f;
         verticalInput = 0f;
         jumpInput = 0f;
+        fireInput = 0f;
     }
+
+
 
     //ProcessPlayerMovement checks if the player is inputting anything, and updates the player object's position and facing
     private void ProcessPlayerMovement()
@@ -115,8 +160,15 @@ public class PlayerController : MonoBehaviour
             coyoteWindow = 0f;
         }
 
-       ResetPlayerInputs();
+
+        if (fireInput > 0 && canAttack)
+        {
+            PlayerAttack();
+        }
+
+        ResetPlayerInputs();
     }
+
 
 
     //UpdatePlayerDirection interpolates the player object to face towards the direction the camera is facing
@@ -160,5 +212,50 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    //Creates an attack object - this should be linked to a prefab that has the attack script somewhere inside it.
+    void PlayerAttack()
+    {
+        canAttack = false;
+        attackTimer = 0f;
+        Instantiate(attack, this.transform);
+    }
+
+    //Add all other respawn work in here (clear stored disguise material, etc.)
+    private void RespawnPlayer()
+    {
+        Debug.Log("Respawning player!");
+
+        if(respawnPoint != null)
+        {
+            this.gameObject.transform.position = respawnPoint.transform.position;        
+            playerRigidbody.velocity = Vector3.zero;    
+        }
+        else
+        {
+            Debug.Log("ERROR! No respawn point set for player controller!");
+        }
+
+        health = maxHealth;
+    }
+
+
+    public bool DamagePlayer(float damage)
+    {
+        health -= damage;
+        Debug.Log("DAMAGED PLAYER! " + health + " health remaining!");
+
+
+        //If the player is at 0 hp, they need to be respawned. FINISH THIS!!
+        if(health <= 0)
+        {
+            Debug.Log("PLAYER IS DEAD!");
+            RespawnPlayer();
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 
 }
