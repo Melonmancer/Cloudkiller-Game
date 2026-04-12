@@ -181,6 +181,12 @@ public class PlayerController : MonoBehaviour
         playerObject.transform.forward = Vector3.Slerp(playerObject.transform.forward, viewDirection.normalized, rotationSpeed * 0.2f);
     }
 
+    //Immediately sets player object to face the direction of the camera - used when attacking
+    private void SnapPlayerDirection()
+    {
+        viewDirection = playerObject.transform.position - new Vector3(playerCamera.transform.position.x, playerObject.transform.position.y, playerCamera.transform.position.z);
+        playerObject.transform.forward = viewDirection.normalized;
+    }
 
 
     //Called by the collider component
@@ -217,6 +223,7 @@ public class PlayerController : MonoBehaviour
     {
         canAttack = false;
         attackTimer = 0f;
+        SnapPlayerDirection();
         Instantiate(attack, this.transform);
     }
 

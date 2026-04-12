@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class SmallAngel : MonoBehaviour
 {
-    private Angel angel;
     private UnityEngine.AI.NavMeshAgent agent;
 
     [SerializeField] private GameObject target;
@@ -29,11 +28,16 @@ public class SmallAngel : MonoBehaviour
     //Vector object used for vector calculations
     Vector3 calc = new Vector3();
 
+    private AngelSpawner spawner = null;
+
     // Start is called before the first frame update
     void Start()
     {
-        //NOTE TO SELF: This class may be deprecated later - consider structure.
-        angel = new Angel(health, damage, speed);
+        //If target is not set, tries to find the player in the scene and set it as target
+        if(target == null)
+        {
+            FindPlayerTarget();
+        }
         
         //All small angels should have a NavMeshAgent attached for moving and navigating!
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
@@ -47,7 +51,7 @@ public class SmallAngel : MonoBehaviour
             bubble.transform.localScale = new Vector3(chaseDistance * 2, 0, chaseDistance * 2);
         }
 
-        agent.speed = angel.GetSpeed();
+        agent.speed = speed;
     }
 
     // Update is called once per frame
@@ -81,6 +85,20 @@ public class SmallAngel : MonoBehaviour
         }
     }
 
+    //Looks for an object in the scene with the player tag - if found, sets it as the target for the navmeshagent to use
+    private bool FindPlayerTarget()
+    {
+        target = GameObject.FindWithTag("Player");
+        if(target != null)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
     public bool DamageAngel(float damage)
     {
         health -= damage;
@@ -90,7 +108,11 @@ public class SmallAngel : MonoBehaviour
         //If the angel is at 0 hp, it is destroyed. Returns true or false based on if the angel was killed or not.
         if(health <= 0)
         {
-            Destroy(this.gameObject);
+            //Sends alert to spawner so it creates a new angel
+            spawner.DeathAlert();
+
+            //Destroys the whole angel prefab (the angel prefab should be an empty object containing the actual angel object and other relevant objects i.e. the bubble)
+            Destroy(this.gameObject.transform.parent.gameObject);
             return true;
         }
         else
@@ -99,10 +121,12 @@ public class SmallAngel : MonoBehaviour
         }
     }
 
+    //Runs whilst this angel's trigger collider is colliding with something
     public void OnTriggerStay(Collider col)
     {
         if(attackReady)
         {
+            //Checks if collision is with the player object
             if(col.gameObject.tag == "Player")
             {
                 Debug.Log("Hit player!");
@@ -110,8 +134,21 @@ public class SmallAngel : MonoBehaviour
                 agent.isStopped = true;
                 agent.velocity = Vector3.zero;
 
+                //Damages the player
                 col.gameObject.GetComponent<PlayerController>().DamagePlayer(damage);
             }
         }
+    }
+
+    //Sets all variables - this is used by spawners to fill in data for the spawned angel
+    public void SetVariables(AngelSpawner spawnScript, GameObject t, float h, float d, float s, float cD, float aC)
+    {
+        spawner = spawnScript;
+        target = t;
+        health = h;
+        damage = d;
+        speed = s;
+        chaseDistance = cD;
+        attackCooldown = aC;
     }
 }
