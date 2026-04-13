@@ -11,9 +11,11 @@ public class PlayerController : MonoBehaviour
 
     //speed manages how fast the player moves at base - manually modify this to speed up or slow down the player character
     //rotationSpeed manages how quickly the player object rotates to match the direction the camera is pointing
+    //meshRotationSpeed affects how quickly the mesh rotates to face a new direction (purely aesthetic)
     [SerializeField] private float speed = 1.0f;
     [SerializeField] private float jumpHeight = 9f;
-    private float rotationSpeed = 1.5f;
+    [SerializeField] private float rotationSpeed = 0.3f;
+    [SerializeField] private float meshRotationSpeed = 7.5f;
     
     //Player inputs stored in these variables
     private float horizontalInput;
@@ -52,7 +54,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Camera playerCamera;
 
     private Rigidbody playerRigidbody;
+
     private GameObject playerMesh;
+    private bool spinningMesh = false;
 
 
     // Start is called before the first frame update
@@ -82,6 +86,19 @@ public class PlayerController : MonoBehaviour
             {
                 canAttack = true;
                 //Debug.Log("Attack off cooldown!");
+            }
+        }
+
+
+        //If the player is supposed to be facing a certain direction, spin the mesh closer to this direction
+        if(spinningMesh)
+        {
+            //Adjusts the mesh to face whichever way the camera is facing
+            playerMesh.transform.forward = Vector3.Slerp(playerMesh.transform.forward, viewDirection.normalized, meshRotationSpeed * Time.deltaTime);
+
+            if(Vector3.Distance(playerMesh.transform.forward, viewDirection.normalized) == 0f)
+            {
+                spinningMesh = false;
             }
         }
     }
@@ -131,6 +148,10 @@ public class PlayerController : MonoBehaviour
         //While the player is moving they rotate to face the direction the camera is facing
         if(horizontalInput != 0.0f || verticalInput != 0.0f)
         {
+            //Stop trying to spin the mesh if it is currently doing so (UpdatePlayerDirection sets it properly)
+            spinningMesh = false;
+
+            //Update the player object and meshes' facings
             UpdatePlayerDirection();
         }
 
@@ -182,21 +203,22 @@ public class PlayerController : MonoBehaviour
         viewDirection = playerObject.transform.position - new Vector3(playerCamera.transform.position.x, playerObject.transform.position.y, playerCamera.transform.position.z);
 
         //Interpolates between the direction the player is currently facing and the direction the camera is facing, and sets the player object to face this new direction
-        playerObject.transform.forward = Vector3.Slerp(playerObject.transform.forward, viewDirection.normalized, rotationSpeed * 0.2f);
+        playerObject.transform.forward = Vector3.Slerp(playerObject.transform.forward, viewDirection.normalized, rotationSpeed);
 
         //Adjusts the mesh to face whichever way the player object is moving
-        playerMesh.transform.forward = direction;
+        playerMesh.transform.forward = Vector3.Slerp(playerMesh.transform.forward, direction, rotationSpeed);
     }
 
     //Immediately sets player object to face the direction of the camera - used when attacking
     private void SnapPlayerDirection()
     {
+        Vector3 oldFacing = playerMesh.transform.forward;
+
         //Snaps the player object to face whichever way the camera is facing
         viewDirection = playerObject.transform.position - new Vector3(playerCamera.transform.position.x, playerObject.transform.position.y, playerCamera.transform.position.z);
         playerObject.transform.forward = viewDirection.normalized;
 
-        //Adjusts the mesh to face whichever way the player object is facing
-        playerMesh.transform.forward = playerObject.transform.forward;
+        playerMesh.transform.forward = oldFacing;
     }
 
 
@@ -230,11 +252,18 @@ public class PlayerController : MonoBehaviour
     }
 
     //Creates an attack object - this should be linked to a prefab that has the attack script somewhere inside it.
+    //Turns the player to face wherever the attack is coming from
     void PlayerAttack()
     {
         canAttack = false;
         attackTimer = 0f;
+
+        //Makes player object face the attack direction
         SnapPlayerDirection();
+
+        //Causes mesh to spin towards the attack direction
+        spinningMesh = true;
+
         Instantiate(attack, this.transform);
     }
 
