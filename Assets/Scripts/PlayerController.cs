@@ -52,6 +52,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Camera playerCamera;
 
     private Rigidbody playerRigidbody;
+    private GameObject playerMesh;
 
 
     // Start is called before the first frame update
@@ -63,6 +64,7 @@ public class PlayerController : MonoBehaviour
 
         //Gets the player's Rigidbody collider - there should always be one attached to the player object!
         playerRigidbody = playerObject.GetComponent<Rigidbody>();
+        playerMesh = playerObject.transform.GetChild(0).gameObject;
 
         health = maxHealth;
     }
@@ -121,15 +123,17 @@ public class PlayerController : MonoBehaviour
     private void ProcessPlayerMovement()
     {
 
-         //While the player is moving they rotate to face the direction the camera is facing
+        //Creates a new direction based on which keys the player is pressing
+        var verticalRotation = Quaternion.Euler(0,  playerObject.transform.rotation.eulerAngles.y, 0);
+        direction = (verticalRotation * new Vector3(horizontalInput, 0f, verticalInput)).normalized;
+
+
+        //While the player is moving they rotate to face the direction the camera is facing
         if(horizontalInput != 0.0f || verticalInput != 0.0f)
         {
             UpdatePlayerDirection();
         }
 
-        //Creates a new direction based on which keys the player is pressing
-        var verticalRotation = Quaternion.Euler(0,  playerObject.transform.rotation.eulerAngles.y, 0);
-        direction = (verticalRotation * new Vector3(horizontalInput, 0f, verticalInput)).normalized;
 
         //Moves the player object in the new direction
         //playerObject.transform.Translate(direction * speed);
@@ -177,15 +181,22 @@ public class PlayerController : MonoBehaviour
         //Subtracting the camera's position along the X and Z axes from the player's position yields the direction the camera is facing (excluding the camera's tilt up or down)
         viewDirection = playerObject.transform.position - new Vector3(playerCamera.transform.position.x, playerObject.transform.position.y, playerCamera.transform.position.z);
 
-        //Interpolates between the direction the player is currently facing and the direction the camera is facing, and sets the player to face this new direction
+        //Interpolates between the direction the player is currently facing and the direction the camera is facing, and sets the player object to face this new direction
         playerObject.transform.forward = Vector3.Slerp(playerObject.transform.forward, viewDirection.normalized, rotationSpeed * 0.2f);
+
+        //Adjusts the mesh to face whichever way the player object is moving
+        playerMesh.transform.forward = direction;
     }
 
     //Immediately sets player object to face the direction of the camera - used when attacking
     private void SnapPlayerDirection()
     {
+        //Snaps the player object to face whichever way the camera is facing
         viewDirection = playerObject.transform.position - new Vector3(playerCamera.transform.position.x, playerObject.transform.position.y, playerCamera.transform.position.z);
         playerObject.transform.forward = viewDirection.normalized;
+
+        //Adjusts the mesh to face whichever way the player object is facing
+        playerMesh.transform.forward = playerObject.transform.forward;
     }
 
 
