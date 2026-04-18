@@ -30,6 +30,11 @@ public class SmallAngel : MonoBehaviour
 
     private AngelSpawner spawner = null;
 
+    //Animation Controller
+    [SerializeField] private GameObject angelObject;
+    private Animator animator;
+    private float animationSpeed;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -52,6 +57,9 @@ public class SmallAngel : MonoBehaviour
         }
 
         agent.speed = speed;
+
+        animator = angelObject.GetComponent<Animator>();
+        
     }
 
     // Update is called once per frame
@@ -83,6 +91,18 @@ public class SmallAngel : MonoBehaviour
                 agent.isStopped = false;
             }
         }
+        UpdateAnimations();
+    }
+
+    //Handles idle/run animations
+    void UpdateAnimations()
+    {
+        animationSpeed = agent.velocity.magnitude;
+        if (agent != null && animator != null)
+        {
+            animator.SetFloat("flySpeed", animationSpeed);
+        }
+        //Debug.Log("Agent speed: " + animationSpeed);
     }
 
     //Looks for an object in the scene with the player tag - if found, sets it as the target for the navmeshagent to use
@@ -98,7 +118,7 @@ public class SmallAngel : MonoBehaviour
             return false;
         }
     }
-
+    
     public bool DamageAngel(float damage)
     {
         health -= damage;
