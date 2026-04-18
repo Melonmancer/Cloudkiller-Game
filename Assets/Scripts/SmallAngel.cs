@@ -21,12 +21,23 @@ public class SmallAngel : MonoBehaviour
     [SerializeField] private float attackCooldown;
     private float attackTimer = 0f;
     private bool attackReady = true;
+
+    [SerializeField] private float maxWaitTime;
+    private float timeWaiting = 0f;
+    bool isWaiting = false;
     
+    [SerializeField] private float spotSpeed;
+    private float tickSpotting = 0f;
+    private bool spottedPlayer = false;
+
     //Starting point for the angel - returns here when not chasing the player
     Vector3 home;
 
     //Vector object used for vector calculations
-    Vector3 calc = new Vector3();
+    private Vector3 directionToTarget = new Vector3();
+    private Vector3 directionToTargetFromHome = new Vector3();
+
+    private LayerMask lm;
 
     private AngelSpawner spawner = null;
 
@@ -59,24 +70,91 @@ public class SmallAngel : MonoBehaviour
         agent.speed = speed;
 
         animator = angelObject.GetComponent<Animator>();
+
+        lm = LayerMask.GetMask("Obstacle");
         
     }
 
     // Update is called once per frame
     void Update()
     { 
-        //Gets the distance between the home point and the target's position using vector math
+        //Gets the directional data using vector math
+        directionToTarget = (target.transform.position - this.transform.position);
+        directionToTargetFromHome = (target.transform.position - home);
+
         //If the target is further away than the chase distance allows, the angel starts moving to its home point instead
         //NOTE: All the programming for the angel's movement is done using NavMeshAgent - consult the Unity documentation
-        calc = (target.transform.position - home);
+        if(directionToTargetFromHome.magnitude <= chaseDistance)
+        {   
+            //Line of sight is calculated using a raycast line
+            RaycastHit hit;
+            //If the raycast hits an obstacle between them and the player, the angel's destination does not update - they stay at home, or move to the player's last known position and wait there
+            if(Physics.Raycast(this.transform.position, directionToTarget, out hit, chaseDistance, lm) && hit.distance < directionToTarget.magnitude)
+            {
+                Debug.DrawRay(this.transform.position, directionToTarget.normalized * hit.distance, Color.yellow);
 
-        if(calc.magnitude <= chaseDistance)
-        {
-            agent.destination = target.transform.position; 
+                //Resets spotting progress - the player is hidden!
+                tickSpotting = 0f;
+
+                if(agent.destination != home && agent.remainingDistance <= 0.5f)
+                {
+                    isWaiting = true;
+                }
+            }
+            //If the raycast doesn't hit an obstacle, there is line of sight - the angel starts spotting the player
+            else
+            {
+                //If the player has been 'spotted' the angel locks on and starts moving to their destination
+                if(spottedPlayer)
+                {
+                    Debug.DrawRay(this.transform.position, directionToTarget, Color.red);
+
+                    agent.destination = target.transform.position; 
+                }
+                //Otherwise, spot value builds until the player is spotted
+                else
+                {
+                    Debug.DrawRay(this.transform.position, directionToTarget, Color.magenta);
+
+                    tickSpotting += (1f * Time.deltaTime);
+
+                    if(tickSpotting >= spotSpeed)
+                    {
+                        spottedPlayer = true;
+                        tickSpotting = 0f;
+                        //Debug.Log("Spotted player!");
+                    }
+                }
+
+                //If the angel can see the player (and the player is inside the chase distance), any waiting progress is reset
+                timeWaiting = 0f;
+                isWaiting = false;
+            }
         }
-        else
+        
+        //If the angel can see the player but they are outside the angel's chase distance, they will wait at the player's last known position inside their chase distance
+        if(agent.destination != home && directionToTargetFromHome.magnitude >= chaseDistance && agent.remainingDistance <= 0.5f)
         {
-            agent.destination = home;
+            isWaiting = true;
+        }
+
+
+        //Debug: Draws a blue line to the angel's destination
+        Debug.DrawRay(this.transform.position, (agent.destination - this.transform.position).normalized * agent.remainingDistance, Color.blue);
+
+
+        //If the angel is waiting, ticks down until maxWaitTime is exceeded. Then, the angel returns to its home and un-spots the player
+        if(isWaiting)
+        {
+            timeWaiting += (1f * Time.deltaTime);
+
+            if(timeWaiting >= maxWaitTime)
+            {
+                agent.destination = home;
+                timeWaiting = 0f;
+                isWaiting = false;
+                spottedPlayer = false;
+            }
         }
 
         //Ticks down attack cooldown if it is on cooldown
@@ -161,7 +239,7 @@ public class SmallAngel : MonoBehaviour
     }
 
     //Sets all variables - this is used by spawners to fill in data for the spawned angel
-    public void SetVariables(AngelSpawner spawnScript, GameObject t, float h, float d, float s, float cD, float aC)
+    public void SetVariables(AngelSpawner spawnScript, GameObject t, float h, float d, float s, float cD, float aC, float mWT, float sS)
     {
         spawner = spawnScript;
         target = t;
@@ -170,5 +248,7 @@ public class SmallAngel : MonoBehaviour
         speed = s;
         chaseDistance = cD;
         attackCooldown = aC;
+        maxWaitTime = mWT;
+        spotSpeed = sS;
     }
 }

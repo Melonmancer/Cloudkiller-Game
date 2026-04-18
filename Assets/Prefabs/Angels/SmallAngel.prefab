@@ -131,7 +131,7 @@ SphereCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.49723458
-  m_Center: {x: 0, y: -0.002765417, z: 0}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!114 &6407911039682653378
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -151,6 +151,8 @@ MonoBehaviour:
   bubble: {fileID: 6407911038848692418}
   chaseDistance: 20
   attackCooldown: 1
+  maxWaitTime: 0
+  spotSpeed: 0
   angelObject: {fileID: 8253372038188727995}
 --- !u!195 &6407911039682653385
 NavMeshAgent:
@@ -186,7 +188,7 @@ SphereCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.6
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &8253372038188727995
 GameObject:
   m_ObjectHideFlags: 0
@@ -212,7 +214,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8253372038188727995}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.18, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
