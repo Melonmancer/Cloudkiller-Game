@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class PlayerController : MonoBehaviour
 {
@@ -22,6 +23,8 @@ public class PlayerController : MonoBehaviour
     private float verticalInput;
     private float jumpInput;
     private float fireInput;
+
+    private bool disguiseInput;
 
 
     //Controls player's ability to jump slightly after leaving a platform
@@ -55,8 +58,19 @@ public class PlayerController : MonoBehaviour
 
     private Rigidbody playerRigidbody;
 
-    private GameObject playerMesh;
+    [SerializeField] private GameObject playerMesh;
     private bool spinningMesh = false;
+
+    [SerializeField] private GameObject disguiseMesh;
+
+    [SerializeField] private float disguiseHealthMax;
+    [SerializeField] private float startingDisguiseHealth = 0;
+    private float disguiseHealth = 0;
+    private bool isDisguised = false;
+    
+    //WIP - Can display disguise health as text!
+    [SerializeField] private GameObject textObject;
+    private TMP_Text text;
 
     //Animation controller
     private Animator animator;
@@ -72,9 +86,12 @@ public class PlayerController : MonoBehaviour
 
         //Gets the player's Rigidbody collider - there should always be one attached to the player object!
         playerRigidbody = playerObject.GetComponent<Rigidbody>();
-        playerMesh = playerObject.transform.GetChild(0).gameObject;
 
         health = maxHealth;
+
+        text = textObject.GetComponent<TMP_Text>();
+
+        ChangeDisguiseHealth(startingDisguiseHealth);
 
         //Gets the animation controller from the player prefab set in the inspector
         animator = playerObject.GetComponent<Animator>();
@@ -109,12 +126,20 @@ public class PlayerController : MonoBehaviour
                 spinningMesh = false;
             }
         }
+
+
+        //'E' toggles disguise on or off, if player has charged it up
+        if(disguiseInput)
+        {
+            ToggleDisguise();
+        }
+
     }
 
     //FixedUpdate should be used for all rigidbody movement and collision work
     void FixedUpdate()
     {
-        //All player controls are executed in here.
+        //All axis-based player controls (movement and attacking) are executed in here.
         ProcessPlayerMovement();        
     }
 
@@ -131,9 +156,11 @@ public class PlayerController : MonoBehaviour
         jumpInput = Input.GetAxis("Jump");
 
         fireInput = Input.GetAxis("Fire1");
+
+        disguiseInput = Input.GetButtonDown("Disguise");
     }
 
-    //Resets input data
+    //Resets axis-based input data
     void ResetPlayerInputs()
     {
         horizontalInput = 0f;
@@ -205,7 +232,7 @@ public class PlayerController : MonoBehaviour
         }
 
 
-        if (fireInput > 0 && canAttack)
+        if(fireInput > 0f && canAttack)
         {
             PlayerAttack();
         }
@@ -286,6 +313,34 @@ public class PlayerController : MonoBehaviour
         Instantiate(attack, this.transform);
     }
 
+    public void ChangeDisguiseHealth(float val)
+    {
+        disguiseHealth += val;
+        if(disguiseHealth > disguiseHealthMax)
+        {
+            disguiseHealth = disguiseHealthMax;
+            Debug.Log("Disguise at max health!");
+        }
+        if(disguiseHealth <= 0)
+        {
+            Debug.Log("Disguise depleted!");
+
+            disguiseHealth = 0;
+            isDisguised = false;
+            disguiseMesh.SetActive(false);
+        }
+        float truncatedHealth = Mathf.Floor(disguiseHealth * 10) / 10;
+        text.text = truncatedHealth.ToString() + "%";
+
+
+        //Debug.Log("Disguise health: " + disguiseHealth);
+    }
+
+    public bool GetIsDisguised()
+    {
+        return isDisguised;
+    }
+
     //Add all other respawn work in here (clear stored disguise material, etc.)
     private void RespawnPlayer()
     {
@@ -302,6 +357,31 @@ public class PlayerController : MonoBehaviour
         }
 
         health = maxHealth;
+    }
+
+    //Toggles the player's disguise
+    //Only activates the disguise if it has charge
+    private void ToggleDisguise()
+    {
+        if(isDisguised)
+        {
+            isDisguised = false;
+            disguiseMesh.SetActive(false);
+            //Debug.Log("Undisguised!");
+        }
+        else
+        {
+            if(disguiseHealth > 0)
+            {
+                isDisguised = true;
+                disguiseMesh.SetActive(true);
+                //Debug.Log("Disguised!");
+            }
+            else
+            {
+                Debug.Log("Cannot disguise! Disguise has ran out!");
+            }
+        }
     }
 
 

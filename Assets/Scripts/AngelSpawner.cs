@@ -16,6 +16,7 @@ public class AngelSpawner : MonoBehaviour
     [SerializeField] private float angelAttackCooldown;
     [SerializeField] private float angelMaxWaitTime;
     [SerializeField] private float angelSpotSpeed;
+    [SerializeField] private float angelDisguiseDamage;
 
 
     //Cooldown timer for respawning a dead angel
@@ -49,7 +50,8 @@ public class AngelSpawner : MonoBehaviour
     void SpawnAngel()
     {
         GameObject newAngel = Instantiate(angelPrefab, this.transform);
-        newAngel.transform.GetChild(0).GetComponent<SmallAngel>().SetVariables(this, angelTarget, angelHealth, angelDamage, angelSpeed, angelChaseDistance, angelAttackCooldown, angelMaxWaitTime, angelSpotSpeed);
+        newAngel.transform.GetChild(0).GetComponent<SmallAngel>().SetVariables(this, angelTarget, angelHealth, angelDamage, angelSpeed, angelChaseDistance, 
+                angelAttackCooldown, angelMaxWaitTime, angelSpotSpeed, angelDisguiseDamage);
     }
 
     //Alert sent by the spawned angel on death

@@ -112,6 +112,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lifespan: 0.2
   damage: 5
+  harvestValue: 10
 --- !u!1 &8657331365328042622
 GameObject:
   m_ObjectHideFlags: 0
