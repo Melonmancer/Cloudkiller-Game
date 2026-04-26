@@ -47,7 +47,7 @@ public class BigAngel : MonoBehaviour
             playerController = target.GetComponent<PlayerController>();
         }
         
-        //All small angels should have a NavMeshAgent attached for moving and navigating!
+        //Uses a navMeshAgent to get around
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();   
 
 
