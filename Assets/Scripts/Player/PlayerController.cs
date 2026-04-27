@@ -404,4 +404,23 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void ChangeHealth(float hp)
+    {
+        health += hp;
+        if(health > maxHealth)
+        {
+            health = maxHealth;
+        }
+        Debug.Log("Health changed! New health: " + health);
+    }
+
+    public float[] GetHealthValues()
+    {
+        float[] values = new float[2];
+        values[0] = health;
+        values[1] = maxHealth;
+
+        return values;
+    }
+
 }

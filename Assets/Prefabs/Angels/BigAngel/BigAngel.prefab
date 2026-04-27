@@ -272,6 +272,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8997884647117295867}
+  - component: {fileID: 421097084610365461}
+  - component: {fileID: 1623069745258971824}
   m_Layer: 0
   m_Name: ProxyCenter
   m_TagString: Untagged
@@ -295,6 +297,32 @@ Transform:
   m_Father: {fileID: 8997884646575285877}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &421097084610365461
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8997884647117295864}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1.25
+  m_Center: {x: 0, y: 1.8, z: 2.25}
+--- !u!135 &1623069745258971824
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8997884647117295864}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1.85
+  m_Center: {x: 0, y: -1, z: 0.5}
 --- !u!1001 &8530147479916296385
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -387,22 +415,3 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 8530147479916296385}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &8836135181927024016 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: ce3b9e93918c26d42a0d787d9ebdbf57,
-    type: 3}
-  m_PrefabInstance: {fileID: 8530147479916296385}
-  m_PrefabAsset: {fileID: 0}
---- !u!65 &265980347008596865
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8836135181927024016}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.4687487, y: 2.4571102, z: 2.3799002}
-  m_Center: {x: 0.01621393, y: 0.24169524, z: -0.4241148}
