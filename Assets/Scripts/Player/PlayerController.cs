@@ -423,4 +423,8 @@ public class PlayerController : MonoBehaviour
         return values;
     }
 
+    public float GetDisguiseHealth()
+    {
+        return disguiseHealth;
+    }
 }
