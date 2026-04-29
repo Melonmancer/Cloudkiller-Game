@@ -311,6 +311,7 @@ public class PlayerController : MonoBehaviour
         spinningMesh = true;
 
         Instantiate(attack, this.transform);
+        animator.SetTrigger("attack");
     }
 
     public void ChangeDisguiseHealth(float val)
