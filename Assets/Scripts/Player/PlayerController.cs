@@ -75,6 +75,7 @@ public class PlayerController : MonoBehaviour
     //Animation controller
     private Animator animator;
     private float animationSpeed;
+    [SerializeField] private GameObject daggerMesh;
 
 
     // Start is called before the first frame update
@@ -168,7 +169,7 @@ public class PlayerController : MonoBehaviour
         jumpInput = 0f;
         fireInput = 0f;
     }
-
+    
     //Handles idle/run animations
     void UpdateAnimations()
     {
@@ -180,6 +181,16 @@ public class PlayerController : MonoBehaviour
         {
             animator.SetFloat("runSpeed", animationSpeed);
         }
+    }
+
+    public void ShowWeapon()
+    {
+        daggerMesh.SetActive(true);
+    }
+
+    public void HideWeapon()
+    {
+        daggerMesh.SetActive(false);
     }
 
     //ProcessPlayerMovement checks if the player is inputting anything, and updates the player object's position and facing
