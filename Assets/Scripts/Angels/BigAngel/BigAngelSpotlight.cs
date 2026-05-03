@@ -10,15 +10,31 @@ public class BigAngelSpotlight : MonoBehaviour
 
     [SerializeField] private GameObject angelPlane;
 
+    [SerializeField] private GameObject bigAngel;
+
+    [SerializeField] private BigAngel bigAngelScript;
+
     [SerializeField] private GameObject spotlightCenter;
 
     [SerializeField] private float leashRange;
 
-    private GameObject parentAngel;
+    [SerializeField] private float patrolSpeed;
 
-    private UnityEngine.AI.NavMeshAgent agent;
+    [SerializeField] private float pursuitSpeed;
+
+    private float currentSpeed;
+
+    private Vector3 destination;
+
+    private bool patrolMode;
+
+    private bool reachedPatrolPoint = true;
+
+    private bool pursuitMode = false;
+
+    //private UnityEngine.AI.NavMeshAgent agent;
     
-    private bool spotlightOnFloor;
+    //private bool spotlightOnFloor;
 
     //A layer mask makes sure that only objects in the 'obstacle' layer count as the floor of the level
     private LayerMask lm;
@@ -39,12 +55,13 @@ public class BigAngelSpotlight : MonoBehaviour
         }
 
         //Spotlight moves using a navMeshAgent
-        agent = GetComponent<UnityEngine.AI.NavMeshAgent>();   
+        //agent = GetComponent<UnityEngine.AI.NavMeshAgent>();   
 
         //Sets layer mask to grab only 'Obstacle' layer
         lm = LayerMask.GetMask("Obstacle");
 
-        parentAngel = this.transform.parent.gameObject;
+        patrolMode = true;
+        currentSpeed = patrolSpeed;
     }
 
     // Update is called once per frame
@@ -56,38 +73,50 @@ public class BigAngelSpotlight : MonoBehaviour
         {
             Debug.DrawRay(this.transform.position, Vector3.down * hit.distance, Color.grey);
 
-            spotlightOnFloor = true;
+            //spotlightOnFloor = true;
 
             spotlightCenter.transform.position = new Vector3(this.transform.position.x, (this.transform.position.y - hit.distance), this.transform.position.z);
         }
         else
         {
-            spotlightOnFloor = false;
+            //spotlightOnFloor = false;
 
             spotlightCenter.transform.position = new Vector3(this.transform.position.x, (this.transform.position.y - 100f), this.transform.position.z);
         }
 
-        Vector3 distanceFromParent = parentAngel.transform.position - this.transform.position;
-        if(distanceFromParent.magnitude > leashRange)
+        //Whilst patrolling, destination is set to a random point near the angel
+        if(patrolMode)
         {
-            //Debug.Log("Too far from big angel! New position: " + distanceFromParent);
-
-            agent.velocity = Vector3.zero;
-            //this.transform.position = distanceFromParent;
+            if(reachedPatrolPoint)
+            {
+                AdjustDestinationToAngelPlane(bigAngelScript.CreatePointOfInterest(leashRange));
+                reachedPatrolPoint = false;
+            }
+            else
+            {
+                Vector3 distanceToDestination = new Vector3();
+                distanceToDestination = (destination - this.transform.position);
+                if(distanceToDestination.magnitude <= 0.5f)
+                {
+                    reachedPatrolPoint = true;
+                }
+            }
         }
-
-        if(spotlightOnFloor)
+        else
         {
             AdjustDestinationToAngelPlane(target.transform.position);     
-        }
+        }   
+
+        MoveToDestination();
     }
 
 
 
     //Adjusts any given position to account for the offset of the angel's designated navmesh plane, setting the new destination
-    void AdjustDestinationToAngelPlane(Vector3 destination)
+    void AdjustDestinationToAngelPlane(Vector3 d)
     {
-        agent.destination = new Vector3(destination.x, angelPlane.transform.position.y, destination.z);   
+        destination = new Vector3(d.x, angelPlane.transform.position.y, d.z);   
+
     }
 
     
@@ -103,6 +132,51 @@ public class BigAngelSpotlight : MonoBehaviour
         else
         {
             return false;
+        }
+    }
+
+    private void MoveToDestination()
+    {
+        Vector3 directionToAngel = new Vector3();
+        directionToAngel = (bigAngel.transform.position - this.transform.position);
+
+        Vector3 directionToDestination = new Vector3();
+        directionToDestination = (destination - this.transform.position);
+
+        this.transform.Translate(directionToDestination.normalized * (currentSpeed * Time.deltaTime));
+
+
+        if(directionToAngel.magnitude > leashRange)
+        {
+            //Debug.Log("Too far! " + directionToAngel.magnitude);
+            this.transform.Translate(directionToAngel.normalized * (currentSpeed * Time.deltaTime));
+
+            //If spotlight is outside of leash range whilst patrolling, it probably cannot reach the current patrol point anymore - this makes a new one.
+            if(patrolMode)
+            {
+                reachedPatrolPoint = true;
+            }
+        }
+
+
+        this.transform.position = new Vector3(this.transform.position.x, angelPlane.transform.position.y, this.transform.position.z);
+    }
+
+    public void ToggleMode()
+    {
+        if(patrolMode)
+        {
+            patrolMode = false;
+            pursuitMode = true;
+
+            currentSpeed = pursuitSpeed;
+        }
+        else
+        {
+            pursuitMode = false;
+            patrolMode = true;
+
+            currentSpeed = patrolSpeed;
         }
     }
 }

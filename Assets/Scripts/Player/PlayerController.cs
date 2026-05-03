@@ -299,7 +299,7 @@ public class PlayerController : MonoBehaviour
     {
         if(grounded)
         {
-            if(playerRigidbody.GetPointVelocity(this.transform.position) != Vector3.zero)
+            if(playerRigidbody.GetPointVelocity(this.transform.position).y <= 0f)
             {
                 //Debug.Log("Falling!");
                 grounded = false;

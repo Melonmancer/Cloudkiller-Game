@@ -98,8 +98,8 @@ public class SmallAngel : MonoBehaviour
 
         animator = angelMesh.GetComponent<Animator>();
 
-        //Sets layer mask for the line of sight system - cannot see through anything in the obstacles layer
-        lm = LayerMask.GetMask("Obstacle");
+        //Sets layer mask for the line of sight system - cannot see through anything in the obstacles layers
+        lm = LayerMask.GetMask("Obstacle", "ObstacleNoSpotlight");
 
         //WIP - Gets text component
         text = textObject.GetComponent<TMP_Text>();

@@ -13,7 +13,9 @@ public class BigAngel : MonoBehaviour
 
     [SerializeField] private GameObject proxyCenter;
 
-    [SerializeField] private GameObject meshObject;
+    [SerializeField] private BigAngelSpotlight spotlightScript;
+
+    //[SerializeField] private GameObject meshObject;
 
 
     //The target distance this should float from the nearest surface below it
@@ -31,6 +33,19 @@ public class BigAngel : MonoBehaviour
     //A layer mask used for the angel's line of sight - makes sure that only objects in the 'obstacle' layer block LOS
     private LayerMask lm;
     private LayerMask lm2;
+
+    private bool patrolMode = true;
+    private bool pursuitMode = false;
+
+    [SerializeField] private GameObject patrol0;
+    [SerializeField] private GameObject patrol1;
+    [SerializeField] private GameObject patrol2;
+    [SerializeField] private GameObject patrol3;
+
+    private GameObject[] patrolPath;
+
+    private GameObject activePatrol;
+    private int aP;
 
     // Start is called before the first frame update
     void Start()
@@ -52,7 +67,7 @@ public class BigAngel : MonoBehaviour
 
 
         //Sets layer mask for the line of sight system - cannot see through anything in the obstacles layer
-        lm = LayerMask.GetMask("Obstacle");
+        lm = LayerMask.GetMask("Obstacle", "ObstacleNoSpotlight");
         //Another layer mask for the big angel's base - uses this to determine how high up the angel should be moved so it doesn't clip into surfaces
         lm2 = LayerMask.GetMask("BigAngelBase");
 
@@ -66,12 +81,36 @@ public class BigAngel : MonoBehaviour
         minFloatingHeight = hit.distance;
         //Debug.Log(hit.distance);
 
+        patrolPath = new GameObject[4];
+        patrolPath[0] = patrol0;
+        patrolPath[1] = patrol1;
+        patrolPath[2] = patrol2;
+        patrolPath[3] = patrol2;
+
+        aP = 0;
+        activePatrol = patrolPath[aP];
+                
+        AdjustDestinationToAngelPlane(activePatrol.transform.position);   
     }
 
     // Update is called once per frame
     void Update()
     {
-        AdjustDestinationToAngelPlane(target.transform.position);     
+        if(patrolMode)
+        {
+            if(agent.remainingDistance <= 0.5f)
+            {
+                aP += 1;
+                if(aP >= patrolPath.Length)
+                {
+                    aP = 0;
+                }
+                activePatrol = patrolPath[aP];
+                AdjustDestinationToAngelPlane(activePatrol.transform.position);   
+                //Debug.Log(aP);
+            }  
+        }
+        //AdjustDestinationToAngelPlane(target.transform.position);     
     }
 
     void FixedUpdate()
@@ -147,5 +186,30 @@ public class BigAngel : MonoBehaviour
         {
             return false;
         }
+    }
+
+    //Toggles between pursuit and patrol mode
+    public void ToggleMode()
+    {
+        if(patrolMode)
+        {
+            patrolMode = false;
+            pursuitMode = true;
+        }
+        else
+        {
+            pursuitMode = false;
+            patrolMode = true;
+        }
+    }  
+
+    //Randomly returns a point in space within [range] radius, used to make spotlight wander
+    public Vector3 CreatePointOfInterest(float range)
+    {
+        //Note: Range favours Z axis so that points of interest are created ahead of the angel
+        Vector3 newVec = new Vector3(Random.Range(range * -1, range), 0, Random.Range(range * -1, range));
+        Vector3 pos = new Vector3(this.transform.position.x + newVec.x, 0, this.transform.position.z + newVec.z);
+        //Debug.Log("New point of interest: " + pos);
+        return pos;
     }
 }
