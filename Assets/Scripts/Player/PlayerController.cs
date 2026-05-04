@@ -53,7 +53,6 @@ public class PlayerController : MonoBehaviour
 
     //Stores references to the player and camera objects in the same scene
     //NOTE: These should be set inside of the player prefab!
-    [SerializeField] private GameObject playerObject;
     [SerializeField] private Camera playerCamera;
 
     private Rigidbody playerRigidbody;
@@ -73,7 +72,7 @@ public class PlayerController : MonoBehaviour
     private TMP_Text text;
 
     //Animation controller
-    private Animator animator;
+    [SerializeField] private Animator animator;
     private float animationSpeed;
     [SerializeField] private GameObject daggerMesh;
 
@@ -86,16 +85,13 @@ public class PlayerController : MonoBehaviour
         Cursor.visible = false;
 
         //Gets the player's Rigidbody collider - there should always be one attached to the player object!
-        playerRigidbody = playerObject.GetComponent<Rigidbody>();
+        playerRigidbody = GetComponent<Rigidbody>();
 
         health = maxHealth;
 
         text = textObject.GetComponent<TMP_Text>();
 
         ChangeDisguiseHealth(startingDisguiseHealth);
-
-        //Gets the animation controller from the player prefab set in the inspector
-        animator = playerObject.GetComponent<Animator>();
     }
 
     //Update called each frame update, collects player inputs
@@ -114,7 +110,7 @@ public class PlayerController : MonoBehaviour
                 //Debug.Log("Attack off cooldown!");
             }
         }
-
+        
 
         //If the player is supposed to be facing a certain direction, spin the mesh closer to this direction
         if(spinningMesh)
@@ -198,7 +194,7 @@ public class PlayerController : MonoBehaviour
     {
 
         //Creates a new direction based on which keys the player is pressing
-        var verticalRotation = Quaternion.Euler(0,  playerObject.transform.rotation.eulerAngles.y, 0);
+        var verticalRotation = Quaternion.Euler(0,  transform.rotation.eulerAngles.y, 0);
         direction = (verticalRotation * new Vector3(horizontalInput, 0f, verticalInput)).normalized;
 
 
@@ -257,10 +253,10 @@ public class PlayerController : MonoBehaviour
     private void UpdatePlayerDirection()
     {
         //Subtracting the camera's position along the X and Z axes from the player's position yields the direction the camera is facing (excluding the camera's tilt up or down)
-        viewDirection = playerObject.transform.position - new Vector3(playerCamera.transform.position.x, playerObject.transform.position.y, playerCamera.transform.position.z);
+        viewDirection = transform.position - new Vector3(playerCamera.transform.position.x, transform.position.y, playerCamera.transform.position.z);
 
         //Interpolates between the direction the player is currently facing and the direction the camera is facing, and sets the player object to face this new direction
-        playerObject.transform.forward = Vector3.Slerp(playerObject.transform.forward, viewDirection.normalized, rotationSpeed);
+        transform.forward = Vector3.Slerp(transform.forward, viewDirection.normalized, rotationSpeed);
 
         //Adjusts the mesh to face whichever way the player object is moving
         playerMesh.transform.forward = Vector3.Slerp(playerMesh.transform.forward, direction, rotationSpeed);
@@ -272,8 +268,8 @@ public class PlayerController : MonoBehaviour
         Vector3 oldFacing = playerMesh.transform.forward;
 
         //Snaps the player object to face whichever way the camera is facing
-        viewDirection = playerObject.transform.position - new Vector3(playerCamera.transform.position.x, playerObject.transform.position.y, playerCamera.transform.position.z);
-        playerObject.transform.forward = viewDirection.normalized;
+        viewDirection = transform.position - new Vector3(playerCamera.transform.position.x, transform.position.y, playerCamera.transform.position.z);
+        transform.forward = viewDirection.normalized;
 
         playerMesh.transform.forward = oldFacing;
     }
