@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 0b39c507bc82a6b43a167988d1132c74
+guid: 78bf40e0ce29de04d8bfe980a12d7047
 ModelImporter:
   serializedVersion: 22103
   internalIDToNameTable: []
@@ -33,9 +33,9 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Armature|flying
-      takeName: Armature|flying
-      internalID: -3730209407256190404
+      name: rig|flying
+      takeName: rig|flying
+      internalID: -6503632067105468782
       firstFrame: 0
       lastFrame: 10
       wrapMode: 0
@@ -62,11 +62,11 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Armature|idle
-      takeName: Armature|idle
-      internalID: -1978303741906493279
+      name: rig|idle
+      takeName: rig|idle
+      internalID: 1599155768152908184
       firstFrame: 0
-      lastFrame: 40
+      lastFrame: 58
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
