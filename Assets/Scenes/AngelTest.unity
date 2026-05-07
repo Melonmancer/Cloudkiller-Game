@@ -799,21 +799,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 669006427}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f179b035db45c86409ee9c96ba2df29d, type: 3}
+  m_Script: {fileID: 11500000, guid: a474a5dd6e35b754eaa375871d85da53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  angelPrefab: {fileID: 8253372038188727995, guid: 1a15ff774a189584db2dd35efa04fb81,
-    type: 3}
-  angelTarget: {fileID: 1975172455}
-  angelHealth: 5
-  angelDamage: 1
-  angelSpeed: 10
-  angelChaseDistance: 25
-  angelAttackCooldown: 1
-  angelMaxWaitTime: 5
-  angelSpotSpeed: 1
-  angelDisguiseDamage: 5
-  respawnCooldown: 15
+  angelPrefab: {fileID: 0}
+  angelTarget: {fileID: 0}
+  angelHealth: 0
+  angelDamage: 0
+  angelSpeed: 0
+  angelChaseDistance: 0
+  angelAttackCooldown: 0
+  angelMaxWaitTime: 0
+  angelSpotSpeed: 0
+  angelDisguiseDamage: 0
+  angelBigAngelAlertRange: 0
+  respawnCooldown: 0
 --- !u!1 &690767287
 GameObject:
   m_ObjectHideFlags: 0
@@ -2421,6 +2421,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalRotation.z
       value: -2.2069034e-10
+      objectReference: {fileID: 0}
+    - target: {fileID: 842032930061554324, guid: 38f3a15f061995d4781c8bf4e49f954e,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 842032930061554324, guid: 38f3a15f061995d4781c8bf4e49f954e,
         type: 3}
@@ -12638,12 +12643,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1974471855}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &1975172455 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 842032930271689535, guid: 38f3a15f061995d4781c8bf4e49f954e,
-    type: 3}
-  m_PrefabInstance: {fileID: 1515047383}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1992006803
 GameObject:
   m_ObjectHideFlags: 0

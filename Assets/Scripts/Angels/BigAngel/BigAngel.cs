@@ -29,6 +29,9 @@ public class BigAngel : MonoBehaviour
     private float minFloatingHeight;
     private Vector3 newWorldPosition = new Vector3();
 
+    //Position on the ground closest to the big angel
+    private Vector3 closestGroundedPosition;
+
 
     //A layer mask used for the angel's line of sight - makes sure that only objects in the 'obstacle' layer block LOS
     private LayerMask lm;
@@ -105,10 +108,17 @@ public class BigAngel : MonoBehaviour
                 {
                     aP = 0;
                 }
-                activePatrol = patrolPath[aP];
+                if(patrolPath[aP] != null)
+                {
+                    activePatrol = patrolPath[aP];
+                }
                 AdjustDestinationToAngelPlane(activePatrol.transform.position);   
                 //Debug.Log(aP);
             }  
+        }
+        else if(pursuitMode)
+        {
+            //Pursuit behaviour
         }
         //AdjustDestinationToAngelPlane(target.transform.position);     
     }
@@ -131,6 +141,8 @@ public class BigAngel : MonoBehaviour
 
             //New target height is the distance the collision occured from the angel's base object + the set floating height of the angel
             newHeight = (hit.distance * -1f) + floatingHeight;
+
+            closestGroundedPosition = new Vector3(transform.position.x, transform.position.y - hit.distance, transform.position.z);
 
             //New target position in world space is the base object's position + the new height
             newWorldPosition = new Vector3 (proxyCenter.transform.position.x, this.transform.position.y + newHeight, proxyCenter.transform.position.z);
@@ -211,5 +223,17 @@ public class BigAngel : MonoBehaviour
         Vector3 pos = new Vector3(this.transform.position.x + newVec.x, 0, this.transform.position.z + newVec.z);
         //Debug.Log("New point of interest: " + pos);
         return pos;
+    }
+
+    public void Alert(Vector3 alertPosition)
+    {
+        AdjustDestinationToAngelPlane(alertPosition);
+        pursuitMode = true;
+        patrolMode = false;
+    }
+
+    public Vector3 GetClosestGroundedPosition()
+    {
+        return closestGroundedPosition;
     }
 }

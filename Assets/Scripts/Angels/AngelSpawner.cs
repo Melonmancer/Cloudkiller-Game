@@ -18,6 +18,9 @@ public class AngelSpawner : MonoBehaviour
     [SerializeField] private float angelSpotSpeed;
     [SerializeField] private float angelDisguiseDamage;
 
+    //Used only by Snitches
+    [SerializeField] private float angelBigAngelAlertRange;
+
 
     //Cooldown timer for respawning a dead angel
     [SerializeField] private float respawnCooldown;
@@ -27,7 +30,8 @@ public class AngelSpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        SpawnAngel();
+        angelIsDead = true;
+        respawnTimer = respawnCooldown;
     }
 
     // Update is called once per frame
@@ -41,7 +45,19 @@ public class AngelSpawner : MonoBehaviour
             {
                 respawnTimer = 0f;
                 angelIsDead = false;
-                SpawnAngel();
+
+                if(angelPrefab.transform.GetChild(0).GetComponent<SmallAngel>() != null)
+                {
+                    SpawnAngel();            
+                }
+                else if(angelPrefab.transform.GetChild(0).GetComponent<SnitchAngel>() != null)
+                {
+                    SpawnSnitchAngel();
+                }
+                else
+                {
+                    Debug.Log("Error! Spawner has no assigned angel prefab.");
+                }
             }
         }
     }
@@ -52,6 +68,13 @@ public class AngelSpawner : MonoBehaviour
         GameObject newAngel = Instantiate(angelPrefab, this.transform);
         newAngel.transform.GetChild(0).GetComponent<SmallAngel>().SetVariables(this, angelTarget, angelHealth, angelDamage, angelSpeed, angelChaseDistance, 
                 angelAttackCooldown, angelMaxWaitTime, angelSpotSpeed, angelDisguiseDamage);
+    }
+
+    void SpawnSnitchAngel()
+    {
+        GameObject newAngel = Instantiate(angelPrefab, this.transform);
+        newAngel.transform.GetChild(0).GetComponent<SnitchAngel>().SetVariables(this, angelTarget, angelHealth, angelSpeed, angelChaseDistance, 
+                angelMaxWaitTime, angelSpotSpeed, angelDisguiseDamage, angelBigAngelAlertRange);        
     }
 
     //Alert sent by the spawned angel on death

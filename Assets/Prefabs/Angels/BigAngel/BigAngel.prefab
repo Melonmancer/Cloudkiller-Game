@@ -139,7 +139,7 @@ GameObject:
   - component: {fileID: 3180901396968573032}
   m_Layer: 0
   m_Name: BigAngel
-  m_TagString: Untagged
+  m_TagString: BigAngel
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -204,6 +204,7 @@ MonoBehaviour:
   patrol0: {fileID: 0}
   patrol1: {fileID: 0}
   patrol2: {fileID: 0}
+  patrol3: {fileID: 0}
 --- !u!1 &6256741240569480653
 GameObject:
   m_ObjectHideFlags: 0

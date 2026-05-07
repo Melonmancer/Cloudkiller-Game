@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3209426953809817048}
   - component: {fileID: 3209426953809817049}
   m_Layer: 0
-  m_Name: AngelSpawner
+  m_Name: SnitchAngelSpawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,16 +44,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a474a5dd6e35b754eaa375871d85da53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  angelPrefab: {fileID: 8253372038188727995, guid: 1a15ff774a189584db2dd35efa04fb81,
+  angelPrefab: {fileID: 8948090199087705009, guid: cacbbe0f007945a4f961d45d96d4d413,
     type: 3}
   angelTarget: {fileID: 0}
   angelHealth: 5
-  angelDamage: 1
-  angelSpeed: 5
-  angelChaseDistance: 10
-  angelAttackCooldown: 1
-  angelMaxWaitTime: 5
+  angelDamage: 0
+  angelSpeed: 12
+  angelChaseDistance: 40
+  angelAttackCooldown: 0
+  angelMaxWaitTime: 10
   angelSpotSpeed: 1
   angelDisguiseDamage: 5
-  angelBigAngelAlertRange: 15
-  respawnCooldown: 10
+  angelBigAngelAlertRange: 5
+  respawnCooldown: 20
