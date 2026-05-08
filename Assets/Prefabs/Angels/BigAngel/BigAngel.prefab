@@ -198,9 +198,13 @@ MonoBehaviour:
   target: {fileID: 0}
   proxyCenter: {fileID: 6256741240569480653}
   spotlightScript: {fileID: 808267372843364899}
+  patrolSpeed: 2
+  pursuitSpeed: 4
   floatingHeight: 9
   maxWorldHeight: 15
   heightChangeSpeed: 0.02
+  pursuitVisionRange: 60
+  pursuitTimeMax: 15
   patrol0: {fileID: 0}
   patrol1: {fileID: 0}
   patrol2: {fileID: 0}
@@ -400,7 +404,7 @@ MonoBehaviour:
   spotlightCenter: {fileID: 1690999902275165584}
   leashRange: 15
   patrolSpeed: 3
-  pursuitSpeed: 10
+  pursuitSpeed: 7
 --- !u!1001 &4591371405782055480
 PrefabInstance:
   m_ObjectHideFlags: 0

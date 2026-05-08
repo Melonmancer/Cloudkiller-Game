@@ -102,7 +102,7 @@ public class BigAngelSpotlight : MonoBehaviour
                 }
             }
         }
-        else
+        else if(pursuitMode)
         {
             AdjustDestinationToAngelPlane(target.transform.position);     
         }   
@@ -162,21 +162,19 @@ public class BigAngelSpotlight : MonoBehaviour
         this.transform.position = new Vector3(this.transform.position.x, angelPlane.transform.position.y, this.transform.position.z);
     }
 
-    public void ToggleMode()
+    public void SetPatrolMode()
     {
-        if(patrolMode)
-        {
-            patrolMode = false;
-            pursuitMode = true;
+        pursuitMode = false;
+        patrolMode = true;
 
-            currentSpeed = pursuitSpeed;
-        }
-        else
-        {
-            pursuitMode = false;
-            patrolMode = true;
+        currentSpeed = patrolSpeed;
+    }
 
-            currentSpeed = patrolSpeed;
-        }
+    public void SetPursuitMode()
+    {
+        pursuitMode = true;
+        patrolMode = false;
+
+        currentSpeed = pursuitSpeed;
     }
 }

@@ -15,6 +15,9 @@ public class BigAngel : MonoBehaviour
 
     [SerializeField] private BigAngelSpotlight spotlightScript;
 
+    [SerializeField] private float patrolSpeed;
+    [SerializeField] private float pursuitSpeed;
+
     //[SerializeField] private GameObject meshObject;
 
 
@@ -39,6 +42,10 @@ public class BigAngel : MonoBehaviour
 
     private bool patrolMode = true;
     private bool pursuitMode = false;
+
+    [SerializeField] private float pursuitVisionRange;
+    [SerializeField] private float pursuitTimeMax;
+    private float pursuitTimeTick = 0f;
 
     [SerializeField] private GameObject patrol0;
     [SerializeField] private GameObject patrol1;
@@ -67,6 +74,8 @@ public class BigAngel : MonoBehaviour
         
         //Uses a navMeshAgent to get around
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();   
+
+        agent.speed = patrolSpeed;
 
 
         //Sets layer mask for the line of sight system - cannot see through anything in the obstacles layer
@@ -119,6 +128,32 @@ public class BigAngel : MonoBehaviour
         else if(pursuitMode)
         {
             //Pursuit behaviour
+
+            Vector3 d = (target.transform.position - proxyCenter.transform.position);
+
+            //If the player is nearby, the angel's spotlight starts tracking toward them, and if it reaches its first destination it goes for the player
+            if(d.magnitude <= pursuitVisionRange)
+            {
+                spotlightScript.SetPursuitMode();
+                if(agent.remainingDistance <= 0.5f)
+                {
+                    agent.destination = target.transform.position;
+                    //Debug.Log("I SEE YOU.");
+                }
+            }
+
+            //After a while, the angel stops pursuing - this resets if a snitch alerts them again
+            pursuitTimeTick += 1f * Time.deltaTime;
+            if(pursuitTimeTick >= pursuitTimeMax)
+            {
+                pursuitTimeTick = 0f;
+                ToggleMode();
+                spotlightScript.SetPatrolMode();
+
+                agent.speed = patrolSpeed;
+
+                //Debug.Log("ENOUGH.");
+            }
         }
         //AdjustDestinationToAngelPlane(target.transform.position);     
     }
@@ -230,6 +265,12 @@ public class BigAngel : MonoBehaviour
         AdjustDestinationToAngelPlane(alertPosition);
         pursuitMode = true;
         patrolMode = false;
+
+        pursuitTimeTick = 0f;
+
+        agent.speed = pursuitSpeed;
+
+        //spotlightScript.SetPursuitMode();
     }
 
     public Vector3 GetClosestGroundedPosition()
