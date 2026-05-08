@@ -61,15 +61,13 @@ public class PlayerController : MonoBehaviour
     private bool spinningMesh = false;
 
     [SerializeField] private GameObject disguiseMesh;
+    [SerializeField] private GameObject hairMesh;
 
     [SerializeField] private float disguiseHealthMax;
     [SerializeField] private float startingDisguiseHealth = 0;
     private float disguiseHealth = 0;
     private bool isDisguised = false;
     
-    //WIP - Can display disguise health as text!
-    [SerializeField] private GameObject textObject;
-    private TMP_Text text;
 
     //Animation controller
     [SerializeField] private Animator animator;
@@ -89,7 +87,6 @@ public class PlayerController : MonoBehaviour
 
         health = maxHealth;
 
-        text = textObject.GetComponent<TMP_Text>();
 
         ChangeDisguiseHealth(startingDisguiseHealth);
     }
@@ -110,20 +107,6 @@ public class PlayerController : MonoBehaviour
                 //Debug.Log("Attack off cooldown!");
             }
         }
-        
-
-        //If the player is supposed to be facing a certain direction, spin the mesh closer to this direction
-        if(spinningMesh)
-        {
-            //Adjusts the mesh to face whichever way the camera is facing
-            playerMesh.transform.forward = Vector3.Slerp(playerMesh.transform.forward, viewDirection.normalized, meshRotationSpeed * Time.deltaTime);
-
-            if(Vector3.Distance(playerMesh.transform.forward, viewDirection.normalized) == 0f)
-            {
-                spinningMesh = false;
-            }
-        }
-
 
         //'E' toggles disguise on or off, if player has charged it up
         if(disguiseInput)
@@ -137,7 +120,20 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
         //All axis-based player controls (movement and attacking) are executed in here.
-        ProcessPlayerMovement();        
+        ProcessPlayerMovement();
+
+
+        //If the player is supposed to be facing a certain direction, spin the mesh closer to this direction
+        if(spinningMesh)
+        {
+            //Adjusts the mesh to face whichever way the camera is facing
+            playerMesh.transform.forward = Vector3.Slerp(playerMesh.transform.forward, viewDirection.normalized, meshRotationSpeed);
+
+            if(Vector3.Distance(playerMesh.transform.forward, viewDirection.normalized) <= 0.05f)
+            {
+                spinningMesh = false;
+            }
+        }  
     }
 
 
@@ -326,9 +322,8 @@ public class PlayerController : MonoBehaviour
             disguiseHealth = 0;
             isDisguised = false;
             disguiseMesh.SetActive(false);
+            hairMesh.SetActive(true);
         }
-        float truncatedHealth = Mathf.Floor(disguiseHealth * 10) / 10;
-        text.text = truncatedHealth.ToString() + "%";
 
 
         //Debug.Log("Disguise health: " + disguiseHealth);
@@ -365,6 +360,7 @@ public class PlayerController : MonoBehaviour
         {
             isDisguised = false;
             disguiseMesh.SetActive(false);
+            hairMesh.SetActive(true);
             //Debug.Log("Undisguised!");
         }
         else
@@ -373,6 +369,7 @@ public class PlayerController : MonoBehaviour
             {
                 isDisguised = true;
                 disguiseMesh.SetActive(true);
+                hairMesh.SetActive(false);
                 //Debug.Log("Disguised!");
             }
             else
