@@ -12,20 +12,21 @@ public class InGameUI : MonoBehaviour
 
     private float maxHealth;
     private float currHealth;
+
+    private bool disguiseTextDone = false;
+
+    public GameObject disguiseControlsText;
+
     
     void Start()
     {
-        //PlayerController playerController = new PlayerController();
-        //float value = playerController.health;
-        //float value = playerController.maxHealth;
-
-        //playerController.GetDisguiseHealth();
-        //playerController.GetHealthValues();
 
         float[] healthValues = playerController.GetHealthValues();
         healthSlider.maxValue = healthValues[1];
 
         currHealth = maxHealth;
+
+        disguiseControlsText.SetActive(false);
     }
 
     
@@ -55,5 +56,27 @@ public class InGameUI : MonoBehaviour
         disguiseSlider.value = disguise;
     }
 
-    
+    public void ShowDisguiseText()
+    {
+        if(disguiseTextDone == false)
+        {
+            disguiseTextDone = true;
+            StartCoroutine(ShowTextRoutine());
+        }
+        else
+        {
+            Debug.Log("disguise info already shown");
+        }
+        
+    }
+
+    IEnumerator ShowTextRoutine()
+    {
+        yield return new WaitForSeconds(0.2f);
+        disguiseControlsText.SetActive(true);
+        yield return new WaitForSeconds(4f);
+        disguiseControlsText.SetActive(false);
+    }
+
+
 }

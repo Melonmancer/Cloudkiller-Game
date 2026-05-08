@@ -67,9 +67,13 @@ public class SmallAngel : MonoBehaviour
     [SerializeField] private GameObject textObject;
     private TMP_Text text;
 
+    private InGameUI ui;
+
     // Start is called before the first frame update
     void Start()
     {
+        ui = FindObjectOfType<InGameUI>();
+
         //If target is not set, tries to find the player in the scene and set it as target
         if(target == null)
         {
@@ -333,7 +337,12 @@ public class SmallAngel : MonoBehaviour
 
             //Destroys the whole angel prefab (the angel prefab should be an empty object containing the actual angel object and other relevant objects i.e. the bubble)
             Destroy(this.gameObject.transform.parent.gameObject);
+           
+           //Shows text explaining that "E" toggles disguise on and off if this is the first small angel killed.
+            ui.ShowDisguiseText(); 
+           
             return true;
+            
         }
         else
         {
