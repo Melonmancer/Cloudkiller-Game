@@ -277,6 +277,7 @@ MonoBehaviour:
   chaseDistance: 30
   maxWaitTime: 5
   spotSpeed: 3
+  snitchMesh: {fileID: 5041952544668284179}
   textObject: {fileID: 3228363729736489744}
 --- !u!1 &8948090199087705009
 GameObject:
@@ -320,8 +321,8 @@ Animator:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8948090199087705009}
   m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 0b39c507bc82a6b43a167988d1132c74, type: 3}
-  m_Controller: {fileID: 9100000, guid: f996447bb61ac004facdad6c1b1c6089, type: 2}
+  m_Avatar: {fileID: 9000000, guid: 5c038e73d0aebff4db49d909228a52c0, type: 3}
+  m_Controller: {fileID: 9100000, guid: beda1e093f1b9814386f640f294f206e, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -414,9 +415,20 @@ PrefabInstance:
       propertyPath: m_Name
       value: snitchAngel
       objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: 5c038e73d0aebff4db49d909228a52c0,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: beda1e093f1b9814386f640f294f206e, type: 2}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 5c038e73d0aebff4db49d909228a52c0, type: 3}
+--- !u!1 &5041952544668284179 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 5c038e73d0aebff4db49d909228a52c0,
+    type: 3}
+  m_PrefabInstance: {fileID: 5276517758045603906}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5670961622263541673 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 5c038e73d0aebff4db49d909228a52c0,

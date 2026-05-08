@@ -65,10 +65,10 @@ public class SnitchAngel : MonoBehaviour
     //A reference to the spawner that made the angel instance - ALL ANGELS SHOULD BE MADE FROM SPAWNERS! This lets them respawn!
     private AngelSpawner spawner = null;
 
-
-    //---
-    //ADD ANIMATION CONTROLLER HERE!
-    //---
+    //Animation controller
+    [SerializeField] private GameObject snitchMesh;
+    private Animator animator;
+    private float animationSpeed;
 
 
     //WIP - Might delete later - Allows a text display over the angel's head (Using this to demonstrate its L.O.S. behaviours at the moment)
@@ -100,6 +100,7 @@ public class SnitchAngel : MonoBehaviour
         
         home = this.transform.position;
 
+        animator = snitchMesh.GetComponent<Animator>();
         
         //Sets speed of the NavMeshAgent
         agent.speed = speed;
@@ -197,7 +198,7 @@ public class SnitchAngel : MonoBehaviour
             }
         }
 
-        //Can add update for animations here
+        UpdateAnimations();
     }
 
     //Handles all the line-of-sight AI, including the angel's alert and spot behaviours
@@ -314,6 +315,16 @@ public class SnitchAngel : MonoBehaviour
                 //Debug.Log("Finished turning!");
             }
         }
+    }
+
+    void UpdateAnimations()
+    {
+        animationSpeed = agent.velocity.magnitude;
+        if (agent != null && animator != null)
+        {
+            animator.SetFloat("flySpeed", animationSpeed);
+        }
+        //Debug.Log("Agent speed: " + animationSpeed);
     }
 
     //Looks for an object in the scene with the player tag - if found, sets it as the target for the NavMeshAgent to use
