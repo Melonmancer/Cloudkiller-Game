@@ -47,4 +47,4 @@ MonoBehaviour:
   orbPrefab: {fileID: 6398055786052932574, guid: d263f3895c2df4543818634518b4867f,
     type: 3}
   orbHealthRestored: 100
-  respawnCooldown: 10
+  respawnCooldown: 20
