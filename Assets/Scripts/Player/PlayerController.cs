@@ -285,12 +285,12 @@ public class PlayerController : MonoBehaviour
                 coyoteTime = true;
             }
             grounded = false;
-            Debug.Log("Not grounded!");
+            //Debug.Log("Not grounded!");
         }
         else
         {
             grounded = true;
-            Debug.Log("Grounded!");
+            //Debug.Log("Grounded!");
         }
     }
 
@@ -387,13 +387,13 @@ public class PlayerController : MonoBehaviour
     public bool DamagePlayer(float damage)
     {
         health -= damage;
-        Debug.Log("DAMAGED PLAYER! " + health + " health remaining!");
+        //Debug.Log("DAMAGED PLAYER! " + health + " health remaining!");
 
 
         //If the player is at 0 hp, they need to be respawned. FINISH THIS!!
         if(health <= 0)
         {
-            Debug.Log("PLAYER IS DEAD!");
+            //Debug.Log("PLAYER IS DEAD!");
             RespawnPlayer();
             return true;
         }
@@ -410,7 +410,7 @@ public class PlayerController : MonoBehaviour
         {
             health = maxHealth;
         }
-        Debug.Log("Health changed! New health: " + health);
+        //Debug.Log("Health changed! New health: " + health);
     }
 
     public float[] GetHealthValues()
