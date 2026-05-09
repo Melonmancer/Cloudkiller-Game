@@ -41,15 +41,15 @@ public class PauseMenu : MonoBehaviour
 
     public void Pause()
     {
-        if (levelEnd.win == false)
-        {
+        //if (levelEnd.win == false)
+        //{
             pauseMenu.SetActive(true);
             Time.timeScale = 0f;
             isPaused = true;
 
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
-        }
+        //}
         
 
     }
