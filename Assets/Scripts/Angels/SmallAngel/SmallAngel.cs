@@ -62,6 +62,7 @@ public class SmallAngel : MonoBehaviour
     [SerializeField] private GameObject angelMesh;
     private Animator animator;
     private float animationSpeed;
+    private float randomOffset;
 
     //WIP - Might delete later - Allows a text display over the angel's head (Using this to demonstrate its L.O.S. behaviours at the moment)
     [SerializeField] private GameObject textObject;
@@ -100,7 +101,10 @@ public class SmallAngel : MonoBehaviour
         //Sets speed of the NavMeshAgent
         agent.speed = speed;
 
+
+        randomOffset = Random.Range(0f, 1f);
         animator = angelMesh.GetComponent<Animator>();
+        animator.SetFloat("Offset", randomOffset);
 
         //Sets layer mask for the line of sight system - cannot see through anything in the obstacles layers
         lm = LayerMask.GetMask("Obstacle", "ObstacleNoSpotlight");

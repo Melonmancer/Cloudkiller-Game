@@ -69,7 +69,7 @@ public class SnitchAngel : MonoBehaviour
     [SerializeField] private GameObject snitchMesh;
     private Animator animator;
     private float animationSpeed;
-
+    private float randomOffset;
 
     //WIP - Might delete later - Allows a text display over the angel's head (Using this to demonstrate its L.O.S. behaviours at the moment)
     [SerializeField] private GameObject textObject;
@@ -100,7 +100,9 @@ public class SnitchAngel : MonoBehaviour
         
         home = this.transform.position;
 
+        randomOffset = Random.Range(0f, 1f);
         animator = snitchMesh.GetComponent<Animator>();
+        animator.SetFloat("Offset", randomOffset);
         
         //Sets speed of the NavMeshAgent
         agent.speed = speed;
