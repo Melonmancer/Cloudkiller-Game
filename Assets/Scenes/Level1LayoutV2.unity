@@ -307,8 +307,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3209426953809817049, guid: a34132bee11d30548b59dd639a4ee0d1,
         type: 3}
+      propertyPath: angelSpeed
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: a34132bee11d30548b59dd639a4ee0d1,
+        type: 3}
+      propertyPath: respawnCooldown
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: a34132bee11d30548b59dd639a4ee0d1,
+        type: 3}
       propertyPath: angelChaseDistance
       value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: a34132bee11d30548b59dd639a4ee0d1,
+        type: 3}
+      propertyPath: angelDisguiseDamage
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 3209426953809817049, guid: a34132bee11d30548b59dd639a4ee0d1,
         type: 3}
@@ -1000,7 +1015,17 @@ PrefabInstance:
         type: 3}
       propertyPath: respawnPoint
       value: 
-      objectReference: {fileID: 1577347552}
+      objectReference: {fileID: 0}
+    - target: {fileID: 6685713315079873966, guid: cdd7c8f63a7919540b92d05a79d501ff,
+        type: 3}
+      propertyPath: attackCooldown
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6685713315079873966, guid: cdd7c8f63a7919540b92d05a79d501ff,
+        type: 3}
+      propertyPath: outOfBoundsFloor
+      value: -20
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: cdd7c8f63a7919540b92d05a79d501ff, type: 3}
@@ -3416,12 +3441,37 @@ PrefabInstance:
     - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
         type: 3}
       propertyPath: angelSpeed
-      value: 7
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: angelDamage
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: respawnCooldown
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
         type: 3}
       propertyPath: angelChaseDistance
       value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: angelAttackCooldown
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: angelDisguiseDamage
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: angelBigAngelAlertRange
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3209426953809817050, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
         type: 3}
@@ -4787,12 +4837,37 @@ PrefabInstance:
     - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
         type: 3}
       propertyPath: angelSpeed
-      value: 7
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: angelDamage
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: respawnCooldown
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
         type: 3}
       propertyPath: angelChaseDistance
       value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: angelAttackCooldown
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: angelDisguiseDamage
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: angelBigAngelAlertRange
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3209426953809817050, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
         type: 3}
@@ -7520,6 +7595,37 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 140391759}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &143903946
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 143903947}
+  m_Layer: 6
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &143903947
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 143903946}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1493017947}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &143955930
 GameObject:
   m_ObjectHideFlags: 0
@@ -8730,12 +8836,37 @@ PrefabInstance:
     - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
         type: 3}
       propertyPath: angelSpeed
-      value: 7
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: angelDamage
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: respawnCooldown
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
         type: 3}
       propertyPath: angelChaseDistance
       value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: angelAttackCooldown
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: angelDisguiseDamage
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: angelBigAngelAlertRange
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3209426953809817050, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
         type: 3}
@@ -8778,7 +8909,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 163619430}
   m_LocalRotation: {x: -0, y: 0.80853856, z: -0, w: -0.5884433}
-  m_LocalPosition: {x: 43.700012, y: 46.91992, z: 96}
+  m_LocalPosition: {x: 44.59, y: 38.88, z: 96.29}
   m_LocalScale: {x: 3, y: 4.8235373, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -10785,12 +10916,37 @@ PrefabInstance:
     - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
         type: 3}
       propertyPath: angelSpeed
-      value: 7
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: angelDamage
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: respawnCooldown
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
         type: 3}
       propertyPath: angelChaseDistance
       value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: angelAttackCooldown
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: angelDisguiseDamage
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: angelBigAngelAlertRange
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3209426953809817050, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
         type: 3}
@@ -10881,12 +11037,37 @@ PrefabInstance:
     - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
         type: 3}
       propertyPath: angelSpeed
-      value: 7
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: angelDamage
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: respawnCooldown
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
         type: 3}
       propertyPath: angelChaseDistance
       value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: angelAttackCooldown
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: angelDisguiseDamage
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: angelBigAngelAlertRange
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3209426953809817050, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
         type: 3}
@@ -12999,12 +13180,37 @@ PrefabInstance:
     - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
         type: 3}
       propertyPath: angelSpeed
-      value: 7
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: angelDamage
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: respawnCooldown
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
         type: 3}
       propertyPath: angelChaseDistance
       value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: angelAttackCooldown
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: angelDisguiseDamage
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: angelBigAngelAlertRange
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3209426953809817050, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
         type: 3}
@@ -14501,12 +14707,37 @@ PrefabInstance:
     - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
         type: 3}
       propertyPath: angelSpeed
-      value: 7
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: angelDamage
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: respawnCooldown
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
         type: 3}
       propertyPath: angelChaseDistance
       value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: angelAttackCooldown
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: angelDisguiseDamage
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: angelBigAngelAlertRange
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3209426953809817050, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
         type: 3}
@@ -14597,12 +14828,37 @@ PrefabInstance:
     - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
         type: 3}
       propertyPath: angelSpeed
-      value: 7
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: angelDamage
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: respawnCooldown
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
         type: 3}
       propertyPath: angelChaseDistance
       value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: angelAttackCooldown
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: angelDisguiseDamage
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: angelBigAngelAlertRange
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3209426953809817050, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
         type: 3}
@@ -14773,11 +15029,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 280179351}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.4163513, y: 19.199995, z: 33.52649}
-  m_LocalScale: {x: 108.817825, y: 2.3874054, z: 108.817825}
+  m_LocalPosition: {x: -0.20399986, y: -0.80000067, z: -0.19600013}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1293842405}
+  m_Father: {fileID: 2071703125}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!64 &280179353
@@ -19147,17 +19403,17 @@ PrefabInstance:
     - target: {fileID: 3209426953809817048, guid: a34132bee11d30548b59dd639a4ee0d1,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 342.3
+      value: 345.7
       objectReference: {fileID: 0}
     - target: {fileID: 3209426953809817048, guid: a34132bee11d30548b59dd639a4ee0d1,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 53.3
+      value: 48.5
       objectReference: {fileID: 0}
     - target: {fileID: 3209426953809817048, guid: a34132bee11d30548b59dd639a4ee0d1,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -265.6
+      value: -260.65
       objectReference: {fileID: 0}
     - target: {fileID: 3209426953809817048, guid: a34132bee11d30548b59dd639a4ee0d1,
         type: 3}
@@ -19196,8 +19452,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3209426953809817049, guid: a34132bee11d30548b59dd639a4ee0d1,
         type: 3}
+      propertyPath: angelSpeed
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: a34132bee11d30548b59dd639a4ee0d1,
+        type: 3}
+      propertyPath: respawnCooldown
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: a34132bee11d30548b59dd639a4ee0d1,
+        type: 3}
       propertyPath: angelChaseDistance
       value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: a34132bee11d30548b59dd639a4ee0d1,
+        type: 3}
+      propertyPath: angelDisguiseDamage
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 3209426953809817049, guid: a34132bee11d30548b59dd639a4ee0d1,
         type: 3}
@@ -20401,12 +20672,37 @@ PrefabInstance:
     - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
         type: 3}
       propertyPath: angelSpeed
-      value: 7
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: angelDamage
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: respawnCooldown
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
         type: 3}
       propertyPath: angelChaseDistance
       value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: angelAttackCooldown
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: angelDisguiseDamage
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: angelBigAngelAlertRange
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3209426953809817050, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
         type: 3}
@@ -27285,7 +27581,7 @@ Transform:
   - {fileID: 820894793}
   - {fileID: 639724295}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &546201265
 PrefabInstance:
@@ -29973,12 +30269,37 @@ PrefabInstance:
     - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
         type: 3}
       propertyPath: angelSpeed
-      value: 7
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: angelDamage
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: respawnCooldown
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
         type: 3}
       propertyPath: angelChaseDistance
       value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: angelAttackCooldown
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: angelDisguiseDamage
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: angelBigAngelAlertRange
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3209426953809817050, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
         type: 3}
@@ -30391,12 +30712,37 @@ PrefabInstance:
     - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
         type: 3}
       propertyPath: angelSpeed
-      value: 7
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: angelDamage
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: respawnCooldown
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
         type: 3}
       propertyPath: angelChaseDistance
       value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: angelAttackCooldown
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: angelDisguiseDamage
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: angelBigAngelAlertRange
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3209426953809817050, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
         type: 3}
@@ -31132,6 +31478,7 @@ Transform:
   - {fileID: 7229961}
   - {fileID: 1895744823}
   - {fileID: 339511619}
+  - {fileID: 1912005501}
   m_Father: {fileID: 544263500}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -32376,6 +32723,39 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2077911166}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &667193775
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 667193776}
+  m_Layer: 0
+  m_Name: RespawnPoints
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &667193776
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 667193775}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 98.85, y: -0.93713, z: -252.56}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2121885040}
+  - {fileID: 2048690196}
+  m_Father: {fileID: 0}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &667981781
 GameObject:
   m_ObjectHideFlags: 0
@@ -34670,12 +35050,37 @@ PrefabInstance:
     - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
         type: 3}
       propertyPath: angelSpeed
-      value: 7
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: angelDamage
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: respawnCooldown
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
         type: 3}
       propertyPath: angelChaseDistance
       value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: angelAttackCooldown
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: angelDisguiseDamage
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: angelBigAngelAlertRange
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3209426953809817050, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
         type: 3}
@@ -34898,12 +35303,37 @@ PrefabInstance:
     - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
         type: 3}
       propertyPath: angelSpeed
-      value: 7
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: angelDamage
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: respawnCooldown
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
         type: 3}
       propertyPath: angelChaseDistance
       value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: angelAttackCooldown
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: angelDisguiseDamage
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: angelBigAngelAlertRange
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3209426953809817050, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
         type: 3}
@@ -38883,7 +39313,7 @@ Transform:
   - {fileID: 13764381}
   - {fileID: 391550228}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &815979449
 PrefabInstance:
@@ -40214,7 +40644,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1293842405}
+  - {fileID: 2071703125}
   - {fileID: 1656478503}
   m_Father: {fileID: 544263500}
   m_RootOrder: -1
@@ -41733,12 +42163,37 @@ PrefabInstance:
     - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
         type: 3}
       propertyPath: angelSpeed
-      value: 7
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: angelDamage
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: respawnCooldown
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
         type: 3}
       propertyPath: angelChaseDistance
       value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: angelAttackCooldown
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: angelDisguiseDamage
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: angelBigAngelAlertRange
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3209426953809817050, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
         type: 3}
@@ -42590,12 +43045,37 @@ PrefabInstance:
     - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
         type: 3}
       propertyPath: angelSpeed
-      value: 7
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: angelDamage
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: respawnCooldown
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
         type: 3}
       propertyPath: angelChaseDistance
       value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: angelAttackCooldown
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: angelDisguiseDamage
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: angelBigAngelAlertRange
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3209426953809817050, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
         type: 3}
@@ -48189,12 +48669,37 @@ PrefabInstance:
     - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
         type: 3}
       propertyPath: angelSpeed
-      value: 7
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: angelDamage
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: respawnCooldown
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
         type: 3}
       propertyPath: angelChaseDistance
       value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: angelAttackCooldown
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: angelDisguiseDamage
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: angelBigAngelAlertRange
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3209426953809817050, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
         type: 3}
@@ -52164,7 +52669,7 @@ RectTransform:
   - {fileID: 1784741060}
   - {fileID: 1856333677}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -52837,7 +53342,7 @@ Transform:
   - {fileID: 1919378118}
   - {fileID: 1955030117}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1094144228
 PrefabInstance:
@@ -58187,7 +58692,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1228524849 stripped
 GameObject:
@@ -61480,39 +61985,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.20977527, y: 0.06524993, z: 0.0062981416}
   m_Center: {x: 0.00000047311187, y: -0.00011624395, z: 0.00000047683716}
---- !u!1 &1293842404
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1293842405}
-  m_Layer: 0
-  m_Name: AngelPlane
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1293842405
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1293842404}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 286.6, y: 79.5, z: -323}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1493017947}
-  - {fileID: 280179352}
-  m_Father: {fileID: 820894793}
-  m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1294450098
 GameObject:
   m_ObjectHideFlags: 0
@@ -63587,14 +64059,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1348254745}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 63.71, y: 0.54, z: -253.99}
+  m_LocalPosition: {x: 63.65, y: 0.06, z: -253.99}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 17622865}
-  - {fileID: 1577347553}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1349482417
 GameObject:
@@ -63758,8 +64229,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3209426953809817049, guid: a34132bee11d30548b59dd639a4ee0d1,
         type: 3}
+      propertyPath: angelSpeed
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: a34132bee11d30548b59dd639a4ee0d1,
+        type: 3}
+      propertyPath: respawnCooldown
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: a34132bee11d30548b59dd639a4ee0d1,
+        type: 3}
       propertyPath: angelChaseDistance
       value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: a34132bee11d30548b59dd639a4ee0d1,
+        type: 3}
+      propertyPath: angelDisguiseDamage
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 3209426953809817049, guid: a34132bee11d30548b59dd639a4ee0d1,
         type: 3}
@@ -65047,12 +65533,37 @@ PrefabInstance:
     - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
         type: 3}
       propertyPath: angelSpeed
-      value: 7
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: angelDamage
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: respawnCooldown
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
         type: 3}
       propertyPath: angelChaseDistance
       value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: angelAttackCooldown
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: angelDisguiseDamage
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: angelBigAngelAlertRange
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3209426953809817050, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
         type: 3}
@@ -66567,12 +67078,37 @@ PrefabInstance:
     - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
         type: 3}
       propertyPath: angelSpeed
-      value: 7
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: angelDamage
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: respawnCooldown
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
         type: 3}
       propertyPath: angelChaseDistance
       value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: angelAttackCooldown
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: angelDisguiseDamage
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: angelBigAngelAlertRange
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3209426953809817050, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
         type: 3}
@@ -72375,11 +72911,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1493017946}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 28.99231, y: 19.2, z: 78.64856}
-  m_LocalScale: {x: 108.817825, y: 2.3874054, z: 108.817825}
+  m_LocalPosition: {x: 0.10301473, y: -0.8, z: 0.21865684}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1293842405}
+  m_Children:
+  - {fileID: 143903947}
+  m_Father: {fileID: 2071703125}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!64 &1493017948
@@ -72527,12 +73064,37 @@ PrefabInstance:
     - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
         type: 3}
       propertyPath: angelSpeed
-      value: 7
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: angelDamage
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: respawnCooldown
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
         type: 3}
       propertyPath: angelChaseDistance
       value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: angelAttackCooldown
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: angelDisguiseDamage
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: angelBigAngelAlertRange
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3209426953809817050, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
         type: 3}
@@ -72852,12 +73414,37 @@ PrefabInstance:
     - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
         type: 3}
       propertyPath: angelSpeed
-      value: 7
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: angelDamage
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: respawnCooldown
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
         type: 3}
       propertyPath: angelChaseDistance
       value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: angelAttackCooldown
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: angelDisguiseDamage
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: angelBigAngelAlertRange
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3209426953809817050, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
         type: 3}
@@ -73755,12 +74342,37 @@ PrefabInstance:
     - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
         type: 3}
       propertyPath: angelSpeed
-      value: 7
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: angelDamage
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: respawnCooldown
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
         type: 3}
       propertyPath: angelChaseDistance
       value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: angelAttackCooldown
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: angelDisguiseDamage
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: angelBigAngelAlertRange
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3209426953809817050, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
         type: 3}
@@ -73892,12 +74504,37 @@ PrefabInstance:
     - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
         type: 3}
       propertyPath: angelSpeed
-      value: 7
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: angelDamage
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: respawnCooldown
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
         type: 3}
       propertyPath: angelChaseDistance
       value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: angelAttackCooldown
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: angelDisguiseDamage
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: angelBigAngelAlertRange
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3209426953809817050, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
         type: 3}
@@ -76345,37 +76982,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1576822579}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &1577347552
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1577347553}
-  m_Layer: 0
-  m_Name: RespawnPoint
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1577347553
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1577347552}
-  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1348254746}
-  m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!1 &1578208050
 GameObject:
   m_ObjectHideFlags: 0
@@ -76489,7 +77095,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!4 &1581024896 stripped
 Transform:
@@ -76890,12 +77496,37 @@ PrefabInstance:
     - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
         type: 3}
       propertyPath: angelSpeed
-      value: 7
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: angelDamage
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: respawnCooldown
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
         type: 3}
       propertyPath: angelChaseDistance
       value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: angelAttackCooldown
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: angelDisguiseDamage
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: angelBigAngelAlertRange
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3209426953809817050, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
         type: 3}
@@ -78633,11 +79264,16 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 820894793}
     m_Modifications:
+    - target: {fileID: 514962720200481625, guid: 1fc03f69c2915134fac28631cd6eb387,
+        type: 3}
+      propertyPath: disguiseDamage
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 808267372843364899, guid: 1fc03f69c2915134fac28631cd6eb387,
         type: 3}
       propertyPath: angelPlane
       value: 
-      objectReference: {fileID: 1293842404}
+      objectReference: {fileID: 2071703124}
     - target: {fileID: 808267372843364899, guid: 1fc03f69c2915134fac28631cd6eb387,
         type: 3}
       propertyPath: leashRange
@@ -78737,7 +79373,7 @@ PrefabInstance:
         type: 3}
       propertyPath: angelPlane
       value: 
-      objectReference: {fileID: 1293842404}
+      objectReference: {fileID: 2071703124}
     - target: {fileID: 3180901396968573032, guid: 1fc03f69c2915134fac28631cd6eb387,
         type: 3}
       propertyPath: floatingHeight
@@ -88484,6 +89120,97 @@ Transform:
   m_Father: {fileID: 2049060538}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 36.366, z: 0}
+--- !u!1001 &1868017168
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 2
+    m_TransformParent: {fileID: 667193776}
+    m_Modifications:
+    - target: {fileID: 3464016213996230564, guid: 87aa91c579b4d10429dba4e3f1d8813e,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 12.033
+      objectReference: {fileID: 0}
+    - target: {fileID: 3464016213996230564, guid: 87aa91c579b4d10429dba4e3f1d8813e,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 55.109
+      objectReference: {fileID: 0}
+    - target: {fileID: 3464016213996230564, guid: 87aa91c579b4d10429dba4e3f1d8813e,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 4.63
+      objectReference: {fileID: 0}
+    - target: {fileID: 4539220481074752428, guid: 87aa91c579b4d10429dba4e3f1d8813e,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4539220481074752428, guid: 87aa91c579b4d10429dba4e3f1d8813e,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.2283
+      objectReference: {fileID: 0}
+    - target: {fileID: 4539220481074752428, guid: 87aa91c579b4d10429dba4e3f1d8813e,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 239.78
+      objectReference: {fileID: 0}
+    - target: {fileID: 4539220481074752428, guid: 87aa91c579b4d10429dba4e3f1d8813e,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 40.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4539220481074752428, guid: 87aa91c579b4d10429dba4e3f1d8813e,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -73.41
+      objectReference: {fileID: 0}
+    - target: {fileID: 4539220481074752428, guid: 87aa91c579b4d10429dba4e3f1d8813e,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.38536483
+      objectReference: {fileID: 0}
+    - target: {fileID: 4539220481074752428, guid: 87aa91c579b4d10429dba4e3f1d8813e,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4539220481074752428, guid: 87aa91c579b4d10429dba4e3f1d8813e,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.92276436
+      objectReference: {fileID: 0}
+    - target: {fileID: 4539220481074752428, guid: 87aa91c579b4d10429dba4e3f1d8813e,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4539220481074752428, guid: 87aa91c579b4d10429dba4e3f1d8813e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4539220481074752428, guid: 87aa91c579b4d10429dba4e3f1d8813e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -134.667
+      objectReference: {fileID: 0}
+    - target: {fileID: 4539220481074752428, guid: 87aa91c579b4d10429dba4e3f1d8813e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6102884141660597539, guid: 87aa91c579b4d10429dba4e3f1d8813e,
+        type: 3}
+      propertyPath: m_Name
+      value: Checkpoint
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_AddedGameObjects: []
+  m_SourcePrefab: {fileID: 100100000, guid: 87aa91c579b4d10429dba4e3f1d8813e, type: 3}
 --- !u!1 &1869093472
 GameObject:
   m_ObjectHideFlags: 0
@@ -89355,8 +90082,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3209426953809817049, guid: a34132bee11d30548b59dd639a4ee0d1,
         type: 3}
+      propertyPath: angelSpeed
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: a34132bee11d30548b59dd639a4ee0d1,
+        type: 3}
+      propertyPath: respawnCooldown
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: a34132bee11d30548b59dd639a4ee0d1,
+        type: 3}
       propertyPath: angelChaseDistance
       value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: a34132bee11d30548b59dd639a4ee0d1,
+        type: 3}
+      propertyPath: angelDisguiseDamage
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 3209426953809817049, guid: a34132bee11d30548b59dd639a4ee0d1,
         type: 3}
@@ -89842,6 +90584,108 @@ PrefabInstance:
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 8ba020f508395334e8f40ab480abfb31, type: 3}
+--- !u!1001 &1912005500
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 2
+    m_TransformParent: {fileID: 639724295}
+    m_Modifications:
+    - target: {fileID: 3209426953809817048, guid: a34132bee11d30548b59dd639a4ee0d1,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817048, guid: a34132bee11d30548b59dd639a4ee0d1,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 305.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817048, guid: a34132bee11d30548b59dd639a4ee0d1,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 48.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817048, guid: a34132bee11d30548b59dd639a4ee0d1,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -217.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817048, guid: a34132bee11d30548b59dd639a4ee0d1,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817048, guid: a34132bee11d30548b59dd639a4ee0d1,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817048, guid: a34132bee11d30548b59dd639a4ee0d1,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817048, guid: a34132bee11d30548b59dd639a4ee0d1,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817048, guid: a34132bee11d30548b59dd639a4ee0d1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817048, guid: a34132bee11d30548b59dd639a4ee0d1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817048, guid: a34132bee11d30548b59dd639a4ee0d1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: a34132bee11d30548b59dd639a4ee0d1,
+        type: 3}
+      propertyPath: angelSpeed
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: a34132bee11d30548b59dd639a4ee0d1,
+        type: 3}
+      propertyPath: respawnCooldown
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: a34132bee11d30548b59dd639a4ee0d1,
+        type: 3}
+      propertyPath: angelChaseDistance
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: a34132bee11d30548b59dd639a4ee0d1,
+        type: 3}
+      propertyPath: angelDisguiseDamage
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: a34132bee11d30548b59dd639a4ee0d1,
+        type: 3}
+      propertyPath: angelBigAngelAlertRange
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817050, guid: a34132bee11d30548b59dd639a4ee0d1,
+        type: 3}
+      propertyPath: m_Name
+      value: SnitchAngelSpawner (4)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_AddedGameObjects: []
+  m_SourcePrefab: {fileID: 100100000, guid: a34132bee11d30548b59dd639a4ee0d1, type: 3}
+--- !u!4 &1912005501 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3209426953809817048, guid: a34132bee11d30548b59dd639a4ee0d1,
+    type: 3}
+  m_PrefabInstance: {fileID: 1912005500}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1914309426 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: c33ffa0bae4342c4eb01690c080c9faf,
@@ -94217,7 +95061,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2031360117}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.8, y: -52.199997, z: 47.9}
+  m_LocalPosition: {x: 29, y: -52.199997, z: 57.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -95031,12 +95875,37 @@ PrefabInstance:
     - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
         type: 3}
       propertyPath: angelSpeed
-      value: 7
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: angelDamage
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: respawnCooldown
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
         type: 3}
       propertyPath: angelChaseDistance
       value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: angelAttackCooldown
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: angelDisguiseDamage
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: angelBigAngelAlertRange
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3209426953809817050, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
         type: 3}
@@ -95386,6 +96255,12 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 3582805594628865998, guid: 563f577f66fa79d4fb1f8854684aec00, type: 3}
+--- !u!4 &2048690196 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4539220481074752428, guid: 87aa91c579b4d10429dba4e3f1d8813e,
+    type: 3}
+  m_PrefabInstance: {fileID: 1868017168}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2049060537
 GameObject:
   m_ObjectHideFlags: 0
@@ -95860,12 +96735,37 @@ PrefabInstance:
     - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
         type: 3}
       propertyPath: angelSpeed
-      value: 7
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: angelDamage
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: respawnCooldown
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
         type: 3}
       propertyPath: angelChaseDistance
       value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: angelAttackCooldown
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: angelDisguiseDamage
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: angelBigAngelAlertRange
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3209426953809817050, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
         type: 3}
@@ -96372,6 +97272,39 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.20977531, y: 0.06524993, z: 0.00629814}
   m_Center: {x: 0.0000011883676, y: -0.000116203904, z: -0.00000047683716}
+--- !u!1 &2071703124
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2071703125}
+  m_Layer: 6
+  m_Name: AngelPlane
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2071703125
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2071703124}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 304.38248, y: 100.5, z: -268.1452}
+  m_LocalScale: {x: 108.817825, y: 2.3874054, z: 108.817825}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1493017947}
+  - {fileID: 280179352}
+  m_Father: {fileID: 820894793}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2071767997
 GameObject:
   m_ObjectHideFlags: 0
@@ -96602,12 +97535,37 @@ PrefabInstance:
     - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
         type: 3}
       propertyPath: angelSpeed
-      value: 7
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: angelDamage
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: respawnCooldown
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
         type: 3}
       propertyPath: angelChaseDistance
       value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: angelAttackCooldown
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: angelDisguiseDamage
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209426953809817049, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
+        type: 3}
+      propertyPath: angelBigAngelAlertRange
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3209426953809817050, guid: e4ddb3dfab64ea94c965b950e5ce8be2,
         type: 3}
@@ -97780,6 +98738,83 @@ Transform:
   m_Father: {fileID: 1192662121}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &2121885039
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 2
+    m_TransformParent: {fileID: 667193776}
+    m_Modifications:
+    - target: {fileID: 4539220481074752428, guid: 87aa91c579b4d10429dba4e3f1d8813e,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4539220481074752428, guid: 87aa91c579b4d10429dba4e3f1d8813e,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -35.199997
+      objectReference: {fileID: 0}
+    - target: {fileID: 4539220481074752428, guid: 87aa91c579b4d10429dba4e3f1d8813e,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.99713
+      objectReference: {fileID: 0}
+    - target: {fileID: 4539220481074752428, guid: 87aa91c579b4d10429dba4e3f1d8813e,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1.4300079
+      objectReference: {fileID: 0}
+    - target: {fileID: 4539220481074752428, guid: 87aa91c579b4d10429dba4e3f1d8813e,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4539220481074752428, guid: 87aa91c579b4d10429dba4e3f1d8813e,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4539220481074752428, guid: 87aa91c579b4d10429dba4e3f1d8813e,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4539220481074752428, guid: 87aa91c579b4d10429dba4e3f1d8813e,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4539220481074752428, guid: 87aa91c579b4d10429dba4e3f1d8813e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4539220481074752428, guid: 87aa91c579b4d10429dba4e3f1d8813e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4539220481074752428, guid: 87aa91c579b4d10429dba4e3f1d8813e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6102884141660597539, guid: 87aa91c579b4d10429dba4e3f1d8813e,
+        type: 3}
+      propertyPath: m_Name
+      value: StartCheckpoint
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_AddedGameObjects: []
+  m_SourcePrefab: {fileID: 100100000, guid: 87aa91c579b4d10429dba4e3f1d8813e, type: 3}
+--- !u!4 &2121885040 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4539220481074752428, guid: 87aa91c579b4d10429dba4e3f1d8813e,
+    type: 3}
+  m_PrefabInstance: {fileID: 2121885039}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2122224894
 GameObject:
   m_ObjectHideFlags: 0

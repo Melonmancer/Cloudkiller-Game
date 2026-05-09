@@ -35,6 +35,7 @@ public class PlayerController : MonoBehaviour
     //If player is touching the ground or not
     private bool grounded = true;
 
+    private LayerMask lm;
 
 
     //Controls attack input cooldown - should be roughly same speed as the attack object's lifespan!
@@ -69,11 +70,12 @@ public class PlayerController : MonoBehaviour
     private bool isDisguised = false;
     
 
+    [SerializeField] private float outOfBoundsFloor;
+
     //Animation controller
     [SerializeField] private Animator animator;
     private float animationSpeed;
     
-
 
     // Start is called before the first frame update
     void Start()
@@ -87,8 +89,9 @@ public class PlayerController : MonoBehaviour
 
         health = maxHealth;
 
-
         ChangeDisguiseHealth(startingDisguiseHealth);
+
+        lm = LayerMask.GetMask("Obstacle", "ObstacleNoSpotlight");
     }
 
     //Update called each frame update, collects player inputs
@@ -119,6 +122,8 @@ public class PlayerController : MonoBehaviour
     //FixedUpdate should be used for all rigidbody movement and collision work
     void FixedUpdate()
     {
+        CheckIfFalling();
+
         //All axis-based player controls (movement and attacking) are executed in here.
         ProcessPlayerMovement();
 
@@ -201,14 +206,17 @@ public class PlayerController : MonoBehaviour
         playerRigidbody.velocity = direction * speed; 
         playerRigidbody.velocity += prevVerticalVelocity * Vector3.up;
 
-
-        if (jumpInput > 0 && (grounded || coyoteTime))
+        if (jumpInput > 0)
         {
-            grounded = false;
-            coyoteTime = false;
-            coyoteWindow = 0f;           
-            //Debug.Log("Jumping!");
-            playerRigidbody.AddForce(Vector3.up * jumpHeight, ForceMode.Impulse);
+            if(grounded || coyoteTime)
+            {
+                grounded = false;
+                coyoteTime = false;
+                coyoteWindow = 0f;           
+                //Debug.Log("Jumping!");
+                playerRigidbody.velocity = new Vector3(playerRigidbody.velocity.x, 0f, playerRigidbody.velocity.z);
+                playerRigidbody.AddForce(Vector3.up * jumpHeight, ForceMode.Impulse);
+            }
         }
 
 
@@ -218,7 +226,7 @@ public class PlayerController : MonoBehaviour
             coyoteWindow += 1f;
             //Debug.Log(coyoteWindow);
         }
-        if(coyoteTime && (coyoteWindow >= coyoteMax))
+        if((coyoteTime && (coyoteWindow >= coyoteMax)) || grounded)
         {
             coyoteTime = false;
             coyoteWindow = 0f;
@@ -228,6 +236,12 @@ public class PlayerController : MonoBehaviour
         if(fireInput > 0f && canAttack)
         {
             PlayerAttack();
+        }
+
+        //If player is out of world, respawn
+        if(transform.position.y <= outOfBoundsFloor)
+        {
+            RespawnPlayer();
         }
 
         ResetPlayerInputs();
@@ -260,33 +274,23 @@ public class PlayerController : MonoBehaviour
         playerMesh.transform.forward = oldFacing;
     }
 
-
-    //Called by the collider component
-    //If the player has no vertical velocity (ie. not falling or rising) and collides with something, reset their jump
-    void OnCollisionStay()
+    void CheckIfFalling()
     {
-        if(!grounded)
+        RaycastHit hit;
+        
+        if(!Physics.Raycast(transform.position, Vector3.down, out hit, 0.99f, lm))
         {
-            if(playerRigidbody.GetPointVelocity(this.transform.position).y == 0f)
+            if(grounded)
             {
-                //Debug.Log("Grounded!");
-                grounded = true;
-            }
-        }
-    }
-
-    //Called by the collider component
-    //Sets the player's falling state if they are moving and leave a collision
-    void OnCollisionExit()
-    {
-        if(grounded)
-        {
-            if(playerRigidbody.GetPointVelocity(this.transform.position).y <= 0f)
-            {
-                //Debug.Log("Falling!");
-                grounded = false;
                 coyoteTime = true;
-            }            
+            }
+            grounded = false;
+            Debug.Log("Not grounded!");
+        }
+        else
+        {
+            grounded = true;
+            Debug.Log("Grounded!");
         }
     }
 
@@ -421,5 +425,10 @@ public class PlayerController : MonoBehaviour
     public float GetDisguiseHealth()
     {
         return disguiseHealth;
+    }
+
+    public void SetRespawnPoint(GameObject newPoint)
+    {
+        respawnPoint = newPoint;
     }
 }
