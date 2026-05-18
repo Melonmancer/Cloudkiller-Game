@@ -288,7 +288,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2964918270929791679}
-  - component: {fileID: 7670419362890131545}
   m_Layer: 0
   m_Name: SnitchAngel
   m_TagString: Untagged
@@ -312,26 +311,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &7670419362890131545
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8948090199087705009}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 5c038e73d0aebff4db49d909228a52c0, type: 3}
-  m_Controller: {fileID: 9100000, guid: beda1e093f1b9814386f640f294f206e, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
 --- !u!1001 &5276517758045603906
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -414,6 +393,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: snitchAngel
+      objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: 5c038e73d0aebff4db49d909228a52c0,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: 5c038e73d0aebff4db49d909228a52c0,
         type: 3}
