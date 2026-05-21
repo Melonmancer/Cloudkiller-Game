@@ -181,9 +181,7 @@ public class PlayerController : MonoBehaviour
 
         if (animator != null)
         {
-            animator.SetFloat("runSpeed", animationSpeed, 0.1f, Time.deltaTime);
-            //animator.SetFloat("verticalVelocity", playerRigidbody.velocity.y, 0.1f, Time.deltaTime);
-            //animator.SetBool("grounded", grounded);
+            animator.SetFloat("runSpeed", animationSpeed);
         }
     }
 
@@ -335,16 +333,6 @@ public class PlayerController : MonoBehaviour
             disguiseMesh.SetActive(false);
             hairMesh.SetActive(true);
 
-            // Spawn particle effect at player's position
-            ParticleSystem effect = Instantiate(
-            disguiseDepletedEffect,
-            transform.position,
-            Quaternion.identity
-            );
-
-            effect.Play();
-
-            Destroy(effect.gameObject, effect.main.duration);
             
         }
 
@@ -389,7 +377,7 @@ public class PlayerController : MonoBehaviour
             // Spawn particle effect at player's position
                 ParticleSystem effect = Instantiate(
                 disguiseInactiveEffect,
-                transform.position,
+                transform.position + Vector3.down * 0.9f,
                 Quaternion.identity
                 );
 
@@ -408,9 +396,9 @@ public class PlayerController : MonoBehaviour
 
                 // Spawn particle effect at player's position
                 ParticleSystem effect = Instantiate(
-                disguiseActiveEffect,
-                transform.position,
-                Quaternion.identity
+                    disguiseActiveEffect,
+                    transform.position + Vector3.down * 0.9f,
+                    Quaternion.identity
                 );
 
                 effect.Play();
