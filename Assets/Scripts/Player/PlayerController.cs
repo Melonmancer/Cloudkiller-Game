@@ -68,6 +68,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float startingDisguiseHealth = 0;
     private float disguiseHealth = 0;
     private bool isDisguised = false;
+
+    public ParticleSystem disguiseDepletedEffect;
+    public ParticleSystem disguiseActiveEffect;
+    public ParticleSystem disguiseInactiveEffect;
+
     
 
     [SerializeField] private float outOfBoundsFloor;
@@ -327,6 +332,18 @@ public class PlayerController : MonoBehaviour
             isDisguised = false;
             disguiseMesh.SetActive(false);
             hairMesh.SetActive(true);
+
+            // Spawn particle effect at player's position
+            ParticleSystem effect = Instantiate(
+            disguiseDepletedEffect,
+            transform.position,
+            Quaternion.identity
+            );
+
+            effect.Play();
+
+            Destroy(effect.gameObject, effect.main.duration);
+            
         }
 
 
@@ -366,6 +383,17 @@ public class PlayerController : MonoBehaviour
             disguiseMesh.SetActive(false);
             hairMesh.SetActive(true);
             //Debug.Log("Undisguised!");
+
+            // Spawn particle effect at player's position
+                ParticleSystem effect = Instantiate(
+                disguiseInactiveEffect,
+                transform.position,
+                Quaternion.identity
+                );
+
+                effect.Play();
+
+                Destroy(effect.gameObject, effect.main.duration);
         }
         else
         {
@@ -375,6 +403,17 @@ public class PlayerController : MonoBehaviour
                 disguiseMesh.SetActive(true);
                 hairMesh.SetActive(false);
                 //Debug.Log("Disguised!");
+
+                // Spawn particle effect at player's position
+                ParticleSystem effect = Instantiate(
+                disguiseActiveEffect,
+                transform.position,
+                Quaternion.identity
+                );
+
+                effect.Play();
+
+                Destroy(effect.gameObject, effect.main.duration);
             }
             else
             {

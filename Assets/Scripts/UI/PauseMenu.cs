@@ -9,6 +9,7 @@ public class PauseMenu : MonoBehaviour
 
 {
 
+    public GameObject controlsPanel;
     public GameObject pauseMenu;
     
     public static bool isPaused;
@@ -17,6 +18,7 @@ public class PauseMenu : MonoBehaviour
     
     void Start()
     {
+        controlsPanel.SetActive(false);
         pauseMenu.SetActive(false);
     }
 
@@ -27,6 +29,7 @@ public class PauseMenu : MonoBehaviour
         {
             if(isPaused)
             {
+                CloseControls();
                 Resume();
             }
             else
@@ -67,6 +70,19 @@ public class PauseMenu : MonoBehaviour
 
     }
 
+    public void OpenControls()
+    {
+        controlsPanel.SetActive(true);
+        pauseMenu.SetActive(false);
+    }
+
+    public void CloseControls()
+    {
+            controlsPanel.SetActive(false);
+            pauseMenu.SetActive(true);
+
+    }
+
     public void GoToMainMenu()
     {
         Debug.Log("MainMenu clicked");
@@ -77,7 +93,12 @@ public class PauseMenu : MonoBehaviour
 
     public void ExitGame()
     {
+        #if UNITY_STANDALONE
         Application.Quit();
+        #endif
+        #if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+        #endif
     }
 
 }

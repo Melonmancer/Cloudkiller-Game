@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Xml.Schema;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,6 +17,7 @@ public class InGameUI : MonoBehaviour
     private bool disguiseTextDone = false;
 
     public GameObject disguiseControlsText;
+
 
     
     void Start()

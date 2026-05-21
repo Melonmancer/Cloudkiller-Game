@@ -13,6 +13,8 @@ public class HealthOrbSpawner : MonoBehaviour
     private float respawnTimer = 0f;
     private bool orbIsGone;
 
+    public ParticleSystem healthPickupEffect;
+
 
     // Start is called before the first frame update
     void Start()
@@ -45,8 +47,23 @@ public class HealthOrbSpawner : MonoBehaviour
 
     //Alert sent by the spawned angel on death
     public void DeathAlert()
-    {
-        orbIsGone = true;
-    }
+{
+    orbIsGone = true;
+
+    // Spawn particle effect at apples position
+    ParticleSystem effect = Instantiate(
+        healthPickupEffect,
+        transform.position,
+        Quaternion.identity
+    );
+
+    effect.Play();
+
+    // Destroy effect after it finishes
+    Destroy(effect.gameObject, effect.main.duration);
+    
+    // Destroy the health object
+    Destroy(gameObject);
+}
 
 }
