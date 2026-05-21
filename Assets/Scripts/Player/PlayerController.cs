@@ -181,7 +181,9 @@ public class PlayerController : MonoBehaviour
 
         if (animator != null)
         {
-            animator.SetFloat("runSpeed", animationSpeed);
+            animator.SetFloat("runSpeed", animationSpeed, 0.1f, Time.deltaTime);
+            //animator.SetFloat("verticalVelocity", playerRigidbody.velocity.y, 0.1f, Time.deltaTime);
+            //animator.SetBool("grounded", grounded);
         }
     }
 
