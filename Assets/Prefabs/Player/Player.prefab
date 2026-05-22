@@ -104,7 +104,6 @@ MonoBehaviour:
   disguiseInactiveEffect: {fileID: 4184910651958639010, guid: 39ce58613f68b0843b2b1b09d6be6f7c,
     type: 3}
   outOfBoundsFloor: -100
-  animator: {fileID: 2881080822578226239}
 --- !u!1001 &1186765683525518260
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4427,3 +4426,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   daggerMesh: {fileID: 2069778722028044005}
+  animator: {fileID: 2881080822578226239}

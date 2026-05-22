@@ -76,11 +76,7 @@ public class PlayerController : MonoBehaviour
     
 
     [SerializeField] private float outOfBoundsFloor;
-
-    //Animation controller
-    [SerializeField] private Animator animator;
-    private float animationSpeed;
-    
+   
 
     // Start is called before the first frame update
     void Start()
@@ -103,7 +99,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         GetPlayerInputs();
-        UpdateAnimations();
+       
 
         //If the player's attack is on cooldown, this ticks it.
         if(!canAttack)
@@ -172,18 +168,7 @@ public class PlayerController : MonoBehaviour
         fireInput = 0f;
     }
     
-    //Handles idle/run animations
-    void UpdateAnimations()
-    {
-        //New run speed variable for use with animator. If animator detects horizontal or vertical input, 
-        //begins transition from idle to run
-        animationSpeed = new Vector3(horizontalInput, 0f, verticalInput).magnitude;
-
-        if (animator != null)
-        {
-            animator.SetFloat("runSpeed", animationSpeed);
-        }
-    }
+    
 
     //ProcessPlayerMovement checks if the player is inputting anything, and updates the player object's position and facing
     private void ProcessPlayerMovement()
@@ -313,7 +298,6 @@ public class PlayerController : MonoBehaviour
         spinningMesh = true;
 
         Instantiate(attack, this.transform);
-        animator.SetTrigger("attack");
     }
 
     public void ChangeDisguiseHealth(float val)
