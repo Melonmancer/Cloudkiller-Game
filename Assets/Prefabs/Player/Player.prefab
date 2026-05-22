@@ -84,8 +84,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 10
   respawnPoint: {fileID: 0}
-  speed: 10
-  jumpHeight: 9
+  speed: 8
+  jumpHeight: 11
   rotationSpeed: 0.3
   meshRotationSpeed: 0.2
   coyoteMax: 8
@@ -97,6 +97,12 @@ MonoBehaviour:
   hairMesh: {fileID: 6222238947794081975}
   disguiseHealthMax: 100
   startingDisguiseHealth: 0
+  disguiseDepletedEffect: {fileID: 2046423111115588791, guid: d86e2d3d0a3d0984994cd36703e22752,
+    type: 3}
+  disguiseActiveEffect: {fileID: 3801482814205744112, guid: 58216ee926837964dbe6298649f97a26,
+    type: 3}
+  disguiseInactiveEffect: {fileID: 4184910651958639010, guid: 39ce58613f68b0843b2b1b09d6be6f7c,
+    type: 3}
   outOfBoundsFloor: -100
   animator: {fileID: 2881080822578226239}
 --- !u!1001 &1186765683525518260

@@ -28,17 +28,12 @@ public class HealthOrb : MonoBehaviour
         {
             PlayerController pc = col.gameObject.GetComponent<PlayerController>();
 
-            float[] values = pc.GetHealthValues();
-            //Only gives health and consumes orb is health is below max health
-            if(values[0] < values[1])
-            {
-                //Adds health
-                pc.ChangeHealth(healthRestored);
+            //Adds health
+            pc.ChangeHealth(healthRestored);
 
-                spawner.DeathAlert();
+            spawner.DeathAlert();
 
-                Destroy(this.gameObject);
-            }
+            Destroy(this.gameObject);
         }
     }
 

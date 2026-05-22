@@ -61,9 +61,6 @@ public class HealthOrbSpawner : MonoBehaviour
 
     // Destroy effect after it finishes
     Destroy(effect.gameObject, effect.main.duration);
-    
-    // Destroy the health object
-    Destroy(gameObject);
 }
 
 }

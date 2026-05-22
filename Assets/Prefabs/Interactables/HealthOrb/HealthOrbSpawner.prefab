@@ -48,3 +48,5 @@ MonoBehaviour:
     type: 3}
   orbHealthRestored: 100
   respawnCooldown: 20
+  healthPickupEffect: {fileID: 4667394314991571619, guid: b75023308bdeb0d4b8443e4ef6172080,
+    type: 3}

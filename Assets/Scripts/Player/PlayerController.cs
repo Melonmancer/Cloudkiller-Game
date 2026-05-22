@@ -94,7 +94,7 @@ public class PlayerController : MonoBehaviour
 
         health = maxHealth;
 
-        ChangeDisguiseHealth(startingDisguiseHealth);
+        disguiseHealth = startingDisguiseHealth;
 
         lm = LayerMask.GetMask("Obstacle", "ObstacleNoSpotlight");
     }
@@ -322,18 +322,27 @@ public class PlayerController : MonoBehaviour
         if(disguiseHealth > disguiseHealthMax)
         {
             disguiseHealth = disguiseHealthMax;
-            Debug.Log("Disguise at max health!");
+            //Debug.Log("Disguise at max health!");
         }
         if(disguiseHealth <= 0)
         {
-            Debug.Log("Disguise depleted!");
+            //Debug.Log("Disguise depleted!");
 
             disguiseHealth = 0;
             isDisguised = false;
             disguiseMesh.SetActive(false);
             hairMesh.SetActive(true);
 
-            
+            // Spawn particle effect at player's position
+            ParticleSystem effect = Instantiate(
+                disguiseDepletedEffect,
+                transform.position + Vector3.down * 0.9f,
+                Quaternion.identity
+            );
+
+            effect.Play();
+
+            Destroy(effect.gameObject, effect.main.duration);
         }
 
 
@@ -460,4 +469,14 @@ public class PlayerController : MonoBehaviour
     {
         respawnPoint = newPoint;
     }
-}
+
+    public Vector3 GetPlayerVelocity()
+    {
+        return playerRigidbody.velocity;
+    }
+
+    public bool GetGrounded()
+    {
+        return grounded;
+    }
+} 
