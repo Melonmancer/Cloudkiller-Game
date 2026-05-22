@@ -73,7 +73,7 @@ public class PlayerController : MonoBehaviour
     public ParticleSystem disguiseActiveEffect;
     public ParticleSystem disguiseInactiveEffect;
 
-    
+    private AnimationController AnimationController;
 
     [SerializeField] private float outOfBoundsFloor;
    
@@ -93,6 +93,8 @@ public class PlayerController : MonoBehaviour
         disguiseHealth = startingDisguiseHealth;
 
         lm = LayerMask.GetMask("Obstacle", "ObstacleNoSpotlight");
+
+        AnimationController = GetComponentInChildren<AnimationController>();
     }
 
     //Update called each frame update, collects player inputs
@@ -298,6 +300,7 @@ public class PlayerController : MonoBehaviour
         spinningMesh = true;
 
         Instantiate(attack, this.transform);
+        AnimationController.PlayAttackAnimation();
     }
 
     public void ChangeDisguiseHealth(float val)

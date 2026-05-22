@@ -48,10 +48,19 @@ public class AnimationController: MonoBehaviour
     public void ShowWeapon()
     {
         daggerMesh.SetActive(true);
+        Debug.Log("ShowWeapon called");
     }
 
     public void HideWeapon()
     {
         daggerMesh.SetActive(false);
+    }
+
+    public void PlayAttackAnimation()
+    {
+        if(animator != null)
+        {
+            animator.SetTrigger("attack");
+        }
     }
 }
