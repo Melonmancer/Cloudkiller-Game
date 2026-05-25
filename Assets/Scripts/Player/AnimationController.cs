@@ -6,6 +6,7 @@ public class AnimationController: MonoBehaviour
 {
     [SerializeField] private GameObject daggerMesh;
     [SerializeField] private Animator animator;
+
     private float animationSpeed;
     private float horizontalInput;
     private float verticalInput;
@@ -48,7 +49,7 @@ public class AnimationController: MonoBehaviour
     public void ShowWeapon()
     {
         daggerMesh.SetActive(true);
-        Debug.Log("ShowWeapon called");
+        //Debug.Log("ShowWeapon called");
     }
 
     public void HideWeapon()
