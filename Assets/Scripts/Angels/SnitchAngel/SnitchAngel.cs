@@ -75,6 +75,8 @@ public class SnitchAngel : MonoBehaviour
     [SerializeField] private GameObject textObject;
     private TMP_Text text;
 
+    bool newSpawn = true;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -118,6 +120,12 @@ public class SnitchAngel : MonoBehaviour
     // Update is called once per frame
     void Update()
     { 
+        if(newSpawn && agent != null && home != null)
+        {
+            agent.destination = home;
+            newSpawn = false;
+        }
+
         //ON ANGEL AI:
         //The angel has a few different states it progresses through!
         //If it ever has line of sight to the player whilst the player is within its range, it gets ALERTED
@@ -384,7 +392,7 @@ public class SnitchAngel : MonoBehaviour
     }
 
     //Sets all variables - this is used by spawners to fill in data for the spawned angel
-    public void SetVariables(AngelSpawner spawnScript, GameObject t, float h, float s, float cD, float mWT, float sS, float dD, float bAAR)
+    public void SetVariables(AngelSpawner spawnScript, GameObject t, float h, float s, float cD, float mWT, float sS, float dD, float bAAR, Vector3 hP)
     {
         spawner = spawnScript;
         target = t;
@@ -395,6 +403,17 @@ public class SnitchAngel : MonoBehaviour
         spotSpeed = sS;
         disguiseDamage = dD;
         bigAngelAlertRange = bAAR;
+        home = hP;
     }
 
+    //Used by the AngelPatrolPoint script to move this angel from place to place - should be manually linked
+    public void PatrolAngel(Vector3 nextPoint)
+    {
+        home = nextPoint;
+        //If the angel is not doing anything involving the player, it proceeds immediately to the next patrol point
+        if(!alerted && !isWaiting)
+        {
+            agent.destination = home;
+        }
+    }
 }

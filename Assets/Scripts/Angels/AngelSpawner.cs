@@ -21,6 +21,10 @@ public class AngelSpawner : MonoBehaviour
     //Used only by Snitches
     [SerializeField] private float angelBigAngelAlertRange;
 
+    private Vector3 angelHomePoint;
+
+    private GameObject currentAliveAngel;
+
 
     //Cooldown timer for respawning a dead angel
     [SerializeField] private float respawnCooldown;
@@ -32,6 +36,8 @@ public class AngelSpawner : MonoBehaviour
     {
         angelIsDead = true;
         respawnTimer = respawnCooldown;
+
+        angelHomePoint = transform.GetChild(0).transform.position;
     }
 
     // Update is called once per frame
@@ -67,19 +73,27 @@ public class AngelSpawner : MonoBehaviour
     {
         GameObject newAngel = Instantiate(angelPrefab, this.transform);
         newAngel.transform.GetChild(0).GetComponent<SmallAngel>().SetVariables(this, angelTarget, angelHealth, angelDamage, angelSpeed, angelChaseDistance, 
-                angelAttackCooldown, angelMaxWaitTime, angelSpotSpeed, angelDisguiseDamage);
+                angelAttackCooldown, angelMaxWaitTime, angelSpotSpeed, angelDisguiseDamage, angelHomePoint);
+        currentAliveAngel = newAngel.transform.GetChild(0).gameObject;
     }
 
     void SpawnSnitchAngel()
     {
         GameObject newAngel = Instantiate(angelPrefab, this.transform);
         newAngel.transform.GetChild(0).GetComponent<SnitchAngel>().SetVariables(this, angelTarget, angelHealth, angelSpeed, angelChaseDistance, 
-                angelMaxWaitTime, angelSpotSpeed, angelDisguiseDamage, angelBigAngelAlertRange);        
+                angelMaxWaitTime, angelSpotSpeed, angelDisguiseDamage, angelBigAngelAlertRange, angelHomePoint);    
+        currentAliveAngel = newAngel.transform.GetChild(0).gameObject; 
     }
 
     //Alert sent by the spawned angel on death
     public void DeathAlert()
     {
         angelIsDead = true;
+        currentAliveAngel = null;
+    }
+
+    public GameObject GetCurrentAngel()
+    {
+        return currentAliveAngel;
     }
 }

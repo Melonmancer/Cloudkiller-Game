@@ -70,6 +70,8 @@ public class SmallAngel : MonoBehaviour
 
     private InGameUI ui;
 
+    bool newSpawn = true;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -90,7 +92,7 @@ public class SmallAngel : MonoBehaviour
         //All small angels should have a NavMeshAgent attached for moving and navigating!
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
         
-        home = this.transform.position;
+        //home = this.transform.position;
 
         //Sizes the attached bubble to visually represent the angel's chase distance. May remove/rework this later!!
         if(bubble != null)
@@ -117,6 +119,12 @@ public class SmallAngel : MonoBehaviour
     // Update is called once per frame
     void Update()
     { 
+        if(newSpawn && agent != null && home != null)
+        {
+            agent.destination = home;
+            newSpawn = false;
+        }
+
         //ON ANGEL AI:
         //The angel has a few different states it progresses through!
         //If it ever has line of sight to the player whilst the player is within its range, it gets ALERTED
@@ -374,7 +382,7 @@ public class SmallAngel : MonoBehaviour
     }
 
     //Sets all variables - this is used by spawners to fill in data for the spawned angel
-    public void SetVariables(AngelSpawner spawnScript, GameObject t, float h, float d, float s, float cD, float aC, float mWT, float sS, float dD)
+    public void SetVariables(AngelSpawner spawnScript, GameObject t, float h, float d, float s, float cD, float aC, float mWT, float sS, float dD, Vector3 hP)
     {
         spawner = spawnScript;
         target = t;
@@ -386,5 +394,17 @@ public class SmallAngel : MonoBehaviour
         maxWaitTime = mWT;
         spotSpeed = sS;
         disguiseDamage = dD;
+        home = hP;
+    }
+
+    //Used by the AngelPatrolPoint script to move this angel from place to place - should be manually linked
+    public void PatrolAngel(Vector3 nextPoint)
+    {
+        home = nextPoint;
+        //If the angel is not doing anything involving the player, it proceeds immediately to the next patrol point
+        if(!alerted && !isWaiting)
+        {
+            agent.destination = home;
+        }
     }
 }
