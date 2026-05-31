@@ -31,7 +31,7 @@ Transform:
   - {fileID: 6711426606206209091}
   - {fileID: 5287438225941042112}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &6236437158308132707
 PrefabInstance:
@@ -48,8 +48,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 739762812388102861, guid: 38f3a15f061995d4781c8bf4e49f954e,
         type: 3}
+      propertyPath: maxSpeed
+      value: 6.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 739762812388102861, guid: 38f3a15f061995d4781c8bf4e49f954e,
+        type: 3}
       propertyPath: jumpHeight
       value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 739762812388102861, guid: 38f3a15f061995d4781c8bf4e49f954e,
+        type: 3}
+      propertyPath: acceleration
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 739762812388102861, guid: 38f3a15f061995d4781c8bf4e49f954e,
         type: 3}

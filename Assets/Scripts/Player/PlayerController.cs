@@ -13,10 +13,13 @@ public class PlayerController : MonoBehaviour
     //speed manages how fast the player moves at base - manually modify this to speed up or slow down the player character
     //rotationSpeed manages how quickly the player object rotates to match the direction the camera is pointing
     //meshRotationSpeed affects how quickly the mesh rotates to face a new direction (purely aesthetic)
-    [SerializeField] private float speed = 1.0f;
+    [SerializeField] private float maxSpeed = 1f;
+    [SerializeField] private float acceleration = 1f;
     [SerializeField] private float jumpHeight = 9f;
     [SerializeField] private float rotationSpeed = 0.3f;
     [SerializeField] private float meshRotationSpeed = 7.5f;
+
+    private float speed = 0f;
     
     //Player inputs stored in these variables
     private float horizontalInput;
@@ -195,6 +198,15 @@ public class PlayerController : MonoBehaviour
         //Moves the player object in the new direction
         //playerObject.transform.Translate(direction * speed);
         var prevVerticalVelocity = playerRigidbody.velocity.y;
+
+        if(direction == Vector3.zero)
+        {
+            speed = Mathf.Lerp(speed, 0f, Time.deltaTime * acceleration);
+        }
+        else
+        {
+            speed = Mathf.Lerp(speed, maxSpeed, Time.deltaTime * acceleration);
+        }
         playerRigidbody.velocity = direction * speed; 
         playerRigidbody.velocity += prevVerticalVelocity * Vector3.up;
 
