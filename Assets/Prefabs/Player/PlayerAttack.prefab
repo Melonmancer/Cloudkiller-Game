@@ -58,9 +58,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6ee8cd7267ead248b869ca20de2ca05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifespan: 0.55
+  lifespan: 0.2
   damage: 5
   harvestValue: 10
+  windupTime: 0.5
 --- !u!1 &8657331365328042622
 GameObject:
   m_ObjectHideFlags: 0

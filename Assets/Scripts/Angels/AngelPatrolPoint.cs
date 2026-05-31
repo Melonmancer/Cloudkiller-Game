@@ -31,7 +31,7 @@ public class AngelPatrolPoint : MonoBehaviour
 
             if(distanceFromPoint.magnitude <= 1f)
             {
-                Debug.Log("Angel reached patrol point");
+                //Debug.Log("Angel reached patrol point");
                 if(smallAngel != null) 
                 {
                     smallAngel.PatrolAngel(nextPatrolPoint.transform.position);
