@@ -76,7 +76,7 @@ Transform:
   - {fileID: 2313298927693376131}
   - {fileID: 459495501270083289}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2850994494458416488
 PrefabInstance:
@@ -165,6 +165,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Fence_2Mesh
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 99e0f7e93c7709041aa0013f8108ba84,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
