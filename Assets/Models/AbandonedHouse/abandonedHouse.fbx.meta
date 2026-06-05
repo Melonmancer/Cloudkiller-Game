@@ -3,7 +3,12 @@ guid: 50d33e4817b9adc439ef618412a2ff72
 ModelImporter:
   serializedVersion: 22103
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: abandondedHouse_mat
+    second: {fileID: 2100000, guid: c5487eb7cd282fb4796fed5e323062fc, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
