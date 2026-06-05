@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - KillableEnemy
+  - BigAngel
   layers:
   - Default
   - TransparentFX
@@ -27,9 +28,9 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
-  - 
+  - LayerMask
+  - SeeThrough
+  - Underground
   - 
   - 
   - 
