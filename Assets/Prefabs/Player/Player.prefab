@@ -84,7 +84,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 10
   respawnPoint: {fileID: 0}
-  maxSpeed: 6.6
+  maxSpeed: 7.2
   acceleration: 9
   jumpHeight: 11
   rotationSpeed: 0.3

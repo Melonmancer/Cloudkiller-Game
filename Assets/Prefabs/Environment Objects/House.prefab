@@ -377,6 +377,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: f13f2abbf13d1c94bb3de423b0880ebf, type: 2}
+    - target: {fileID: -3705509362368857995, guid: 50d33e4817b9adc439ef618412a2ff72,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: -85744201872177665, guid: 50d33e4817b9adc439ef618412a2ff72,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -386,6 +391,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: abandonedHouseMesh
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 50d33e4817b9adc439ef618412a2ff72,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 1318803543628549196, guid: 50d33e4817b9adc439ef618412a2ff72,
         type: 3}
@@ -402,16 +412,36 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -0.0161
       objectReference: {fileID: 0}
+    - target: {fileID: 4514637012000876570, guid: 50d33e4817b9adc439ef618412a2ff72,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 5723623106617691631, guid: 50d33e4817b9adc439ef618412a2ff72,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: f13f2abbf13d1c94bb3de423b0880ebf, type: 2}
+    - target: {fileID: 6372699434948812005, guid: 50d33e4817b9adc439ef618412a2ff72,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8108137668600984862, guid: 50d33e4817b9adc439ef618412a2ff72,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 8863706329712738696, guid: 50d33e4817b9adc439ef618412a2ff72,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: f13f2abbf13d1c94bb3de423b0880ebf, type: 2}
+    - target: {fileID: 8930888639833619994, guid: 50d33e4817b9adc439ef618412a2ff72,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 50d33e4817b9adc439ef618412a2ff72, type: 3}

@@ -8,8 +8,9 @@ public class InGameUI : MonoBehaviour
 {
     public Slider healthSlider;
     public Slider disguiseSlider;
+    [SerializeField] private Image deathScreen;
 
-    public PlayerController playerController;
+    [SerializeField] private PlayerController playerController;
 
     private float maxHealth;
     private float currHealth;
@@ -18,8 +19,13 @@ public class InGameUI : MonoBehaviour
 
     public GameObject disguiseControlsText;
 
+    private bool fadingInDeathScreen = false;
+    private bool fadingOutDeathScreen = false;
 
+    private float counter = 0f;
     
+    private Color deathScreenC = Color.black;
+
     void Start()
     {
 
@@ -29,6 +35,7 @@ public class InGameUI : MonoBehaviour
         currHealth = maxHealth;
 
         disguiseControlsText.SetActive(false);
+
     }
 
     
@@ -37,6 +44,39 @@ public class InGameUI : MonoBehaviour
         UpdateHealthUI();
         UpdateDisguiseUI();
 
+        if(fadingOutDeathScreen)
+        {
+            if(fadingInDeathScreen)
+            {
+                fadingOutDeathScreen = false;
+            }
+
+            //Debug.Log(counter);
+            counter = Mathf.Lerp(counter, 0f, Time.deltaTime * 0.5f);
+            deathScreenC.a = counter;
+            deathScreen.color = deathScreenC;
+
+            if(counter <= 0.0025)
+            {
+                deathScreenC.a = 0f;
+                deathScreen.color = deathScreenC;
+                fadingOutDeathScreen = false;
+            }            
+        }
+
+        if(fadingInDeathScreen)
+        {
+            counter = Mathf.Lerp(counter, 1f, Time.deltaTime * 10);
+            deathScreenC.a = counter;
+            deathScreen.color = deathScreenC;
+
+            if(counter >= 0.95)
+            {
+                fadingInDeathScreen = false;
+                fadingOutDeathScreen = true;
+                counter = 1f;
+            }
+        }
     }
 
     void UpdateHealthUI()
@@ -80,5 +120,9 @@ public class InGameUI : MonoBehaviour
         disguiseControlsText.SetActive(false);
     }
 
+    public void FadeDeathScreen()
+    {
+        fadingInDeathScreen = true;
+    }
 
 }

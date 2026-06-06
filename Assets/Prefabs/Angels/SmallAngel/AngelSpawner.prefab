@@ -80,7 +80,7 @@ MonoBehaviour:
     type: 3}
   angelTarget: {fileID: 0}
   angelHealth: 5
-  angelDamage: 1
+  angelDamage: 3
   angelSpeed: 9
   angelChaseDistance: 30
   angelAttackCooldown: 1

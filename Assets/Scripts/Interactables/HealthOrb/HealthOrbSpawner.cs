@@ -47,20 +47,20 @@ public class HealthOrbSpawner : MonoBehaviour
 
     //Alert sent by the spawned angel on death
     public void DeathAlert()
-{
-    orbIsGone = true;
+    {
+        orbIsGone = true;
 
-    // Spawn particle effect at apples position
-    ParticleSystem effect = Instantiate(
-        healthPickupEffect,
-        transform.position,
-        Quaternion.identity
-    );
+        // Spawn particle effect at apples position
+        ParticleSystem effect = Instantiate(
+            healthPickupEffect,
+            transform.position,
+            Quaternion.identity
+        );
 
-    effect.Play();
+        effect.Play();
 
-    // Destroy effect after it finishes
-    Destroy(effect.gameObject, effect.main.duration);
-}
+        // Destroy effect after it finishes
+        Destroy(effect.gameObject, effect.main.duration);
+    }
 
 }

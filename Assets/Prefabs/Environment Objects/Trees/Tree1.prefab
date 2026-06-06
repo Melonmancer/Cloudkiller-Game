@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4037572986191302593}
   - component: {fileID: 5768588073204476782}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: TreeBaseCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -55,7 +55,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8887426078109427077}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Colliders
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -122,7 +122,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5432918103953125752}
   - component: {fileID: 3695720136050583327}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: TreeTrunkCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -245,6 +245,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Tree_1Mesh
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 563f577f66fa79d4fb1f8854684aec00,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []

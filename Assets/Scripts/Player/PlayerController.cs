@@ -79,6 +79,8 @@ public class PlayerController : MonoBehaviour
     private AnimationController AnimationController;
 
     [SerializeField] private float outOfBoundsFloor;
+
+    private InGameUI ui;
    
 
     // Start is called before the first frame update
@@ -98,6 +100,8 @@ public class PlayerController : MonoBehaviour
         lm = LayerMask.GetMask("Obstacle", "ObstacleNoSpotlight");
 
         AnimationController = GetComponentInChildren<AnimationController>();
+
+        ui = GameObject.FindWithTag("GameManager").GetComponent<InGameUI>();
     }
 
     //Update called each frame update, collects player inputs
@@ -336,7 +340,8 @@ public class PlayerController : MonoBehaviour
             ParticleSystem effect = Instantiate(
                 disguiseDepletedEffect,
                 transform.position + Vector3.down * 0.9f,
-                Quaternion.identity
+                Quaternion.identity, 
+                transform
             );
 
             effect.Play();
@@ -356,6 +361,8 @@ public class PlayerController : MonoBehaviour
     //Add all other respawn work in here (clear stored disguise material, etc.)
     private void RespawnPlayer()
     {
+        ui.FadeDeathScreen();
+
         Debug.Log("Respawning player!");
 
         if(respawnPoint != null)
@@ -386,7 +393,8 @@ public class PlayerController : MonoBehaviour
                 ParticleSystem effect = Instantiate(
                 disguiseInactiveEffect,
                 transform.position + Vector3.down * 0.9f,
-                Quaternion.identity
+                Quaternion.identity,
+                transform
                 );
 
                 effect.Play();
@@ -406,7 +414,8 @@ public class PlayerController : MonoBehaviour
                 ParticleSystem effect = Instantiate(
                     disguiseActiveEffect,
                     transform.position + Vector3.down * 0.9f,
-                    Quaternion.identity
+                    Quaternion.identity,
+                    transform
                 );
 
                 effect.Play();
