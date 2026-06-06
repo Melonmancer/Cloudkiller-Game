@@ -504,17 +504,17 @@ PrefabInstance:
     - target: {fileID: 597904179137547342, guid: cdd7c8f63a7919540b92d05a79d501ff,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -17.46
+      value: -394.19
       objectReference: {fileID: 0}
     - target: {fileID: 597904179137547342, guid: cdd7c8f63a7919540b92d05a79d501ff,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -54.2
       objectReference: {fileID: 0}
     - target: {fileID: 597904179137547342, guid: cdd7c8f63a7919540b92d05a79d501ff,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 6.4
+      value: -132.71
       objectReference: {fileID: 0}
     - target: {fileID: 597904179137547342, guid: cdd7c8f63a7919540b92d05a79d501ff,
         type: 3}
@@ -28755,7 +28755,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1348254745}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 63.65, y: 0.06, z: -253.99}
+  m_LocalPosition: {x: 440.2, y: 54.2, z: -114.9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -30604,6 +30604,26 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1490153804}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1499061746 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4036481738357698798, guid: fbccd328ecd10d54eadbe4195457cfe7,
+    type: 3}
+  m_PrefabInstance: {fileID: 1665610728}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1499061749
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1499061746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ffd351f71f2e3545b48ca06d9888c13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  winPanel: {fileID: 1784741059}
+  win: 0
 --- !u!4 &1500061446 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5452646621831401964, guid: 38a6c48413154ea4dbca9e77be0bbc66,
@@ -33948,6 +33968,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Portal (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2980039638071212144, guid: fbccd328ecd10d54eadbe4195457cfe7,
+        type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2980039638071212144, guid: fbccd328ecd10d54eadbe4195457cfe7,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7273619965223731347, guid: fbccd328ecd10d54eadbe4195457cfe7,
         type: 3}
