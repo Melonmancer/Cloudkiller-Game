@@ -556,6 +556,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerWithCameraPrefab
       objectReference: {fileID: 0}
+    - target: {fileID: 6685713315079873966, guid: cdd7c8f63a7919540b92d05a79d501ff,
+        type: 3}
+      propertyPath: maxSpeed
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 6685713315079873966, guid: cdd7c8f63a7919540b92d05a79d501ff,
+        type: 3}
+      propertyPath: acceleration
+      value: 9.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: cdd7c8f63a7919540b92d05a79d501ff, type: 3}

@@ -10,6 +10,7 @@ public class AnimationController: MonoBehaviour
     private float animationSpeed;
     private float horizontalInput;
     private float verticalInput;
+    private float movementThreshold = 0.1f;
     private PlayerController PlayerController;
 
     // Start is called before the first frame update
@@ -27,16 +28,26 @@ public class AnimationController: MonoBehaviour
 
     //Handles idle/run animations
     void UpdateAnimations()
-    {
-        //New run speed variable for use with animator. If animator detects horizontal or vertical input, 
-        //begins transition from idle to run
+    {   
         animationSpeed = new Vector3(horizontalInput, 0f, verticalInput).magnitude;
-
+        float verticalVelocity = PlayerController.GetPlayerVelocity().y; 
         if (animator != null)
         {
             animator.SetFloat("runSpeed", animationSpeed);
-            animator.SetFloat("verticalVelocity", PlayerController.GetPlayerVelocity().y);
+            animator.SetFloat("verticalVelocity", verticalVelocity);
             animator.SetBool("grounded", PlayerController.GetGrounded());
+        }
+        if (animationSpeed > movementThreshold)
+        {
+            animator.SetLayerWeight(1, 1);
+        }
+        else if (verticalVelocity > movementThreshold)
+        {
+            animator.SetLayerWeight(1, 1);
+        }
+        else
+        {
+            animator.SetLayerWeight(1, 0);
         }
     }
 
