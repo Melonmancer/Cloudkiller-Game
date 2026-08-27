@@ -19,10 +19,7 @@ public class SmallAngel : MonoBehaviour
     //How much "damage" the angel deals to the player's disguise
     [SerializeField] private float disguiseDamage;
 
-    //Bubbles are cylinders stretched to represent the angel's chase distance on the floor. May remove this later!!
-    [SerializeField] private GameObject bubble;
-
-    //How far the angel can see/will stray from its spawn point
+    //How far the angel can see/will stray from its home point
     [SerializeField] private float chaseDistance;
 
     [SerializeField] private float attackCooldown;
@@ -41,6 +38,9 @@ public class SmallAngel : MonoBehaviour
     private float tickSpotting = 0f;
     private bool spottedPlayer = false;
 
+
+
+
     //Starting point for the angel - returns here when not chasing the player
     Vector3 home;
 
@@ -52,8 +52,7 @@ public class SmallAngel : MonoBehaviour
     bool turningToPlayer = false;
     private Vector3 turnDirection = new Vector3();
 
-    //A layer mask used for the angel's line of sight - makes sure that only objects in the 'obstacle' layer block LOS
-    private LayerMask lm;
+    private VisionCone cone;
 
     //A reference to the spawner that made the angel instance - ALL ANGELS SHOULD BE MADE FROM SPAWNERS! This lets them respawn!
     private AngelSpawner spawner = null;
@@ -92,14 +91,12 @@ public class SmallAngel : MonoBehaviour
         //All small angels should have a NavMeshAgent attached for moving and navigating!
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
         
-        //home = this.transform.position;
-
-        //Sizes the attached bubble to visually represent the angel's chase distance. May remove/rework this later!!
-        if(bubble != null)
+        cone = GetComponent<VisionCone>();
+        if(cone == null)
         {
-            bubble.transform.localScale = new Vector3(chaseDistance * 2, 0, chaseDistance * 2);
+            Debug.Log("Error! Angel could not find vision cone component.");
         }
-        
+
         //Sets speed of the NavMeshAgent
         agent.speed = speed;
 
@@ -108,8 +105,6 @@ public class SmallAngel : MonoBehaviour
         animator = angelMesh.GetComponent<Animator>();
         animator.SetFloat("Offset", randomOffset);
 
-        //Sets layer mask for the line of sight system - cannot see through anything in the obstacles layers
-        lm = LayerMask.GetMask("Obstacle", "ObstacleNoSpotlight");
 
         //WIP - Gets text component
         text = textObject.GetComponent<TMP_Text>();
@@ -125,14 +120,19 @@ public class SmallAngel : MonoBehaviour
             newSpawn = false;
         }
 
-        //ON ANGEL AI:
-        //The angel has a few different states it progresses through!
-        //If it ever has line of sight to the player whilst the player is within its range, it gets ALERTED
+
+        //NEW ANGEL AI:
+        //If it ever has line of sight to the player whilst the player is within its range and vision cone, it gets ALERTED
         //Whilst ALERTED, it can SPOT the player if they are in line of sight for too long
+        //When the angel is ALERTED, it cannot be killed
+        //When the player is spotted, all nearby/linked angels become ALERTED and investigate their position
+            //Figure this out
+            //WORK OUT SPAWN AND PATROL POINTS - SIMPLIFY THIS SYSTEM!!
         //If the player is spotted and disguised, the angel stares and drains their disguise
         //If the player is spotted and not disguised, the angel chases after them!
-        //If the angel is alerted but the player breaks line of sight, the angel WAITS in place
-        //If the angel WAITS for too long, it becomes un-alerted and returns to its home point
+        //If the angel is alerted but the player breaks line of sight, the angel investigates
+        //If the angel investigates for too long, it becomes un-alerted and returns to its home point
+        
 
         //Gets the directional data to the target using vector math
         directionToTarget = (target.transform.position - this.transform.position);
@@ -166,6 +166,9 @@ public class SmallAngel : MonoBehaviour
                 isWaiting = false;
                 spottedPlayer = false;
                 alerted = false;
+
+                //Angel resumes regular vision cone
+                cone.DisableExpandedCone();
 
                 text.text = "";
             }
@@ -203,14 +206,9 @@ public class SmallAngel : MonoBehaviour
     //Handles all the line-of-sight AI, including the angel's alert and spot behaviours
     void CastLineOfSight()
     {
-        //Line of sight is calculated using a raycast line
-        //NOTE: All the programming for the angel's movement is done using NavMeshAgent - consult the Unity documentation
-        RaycastHit hit;
-        //If the raycast hits an obstacle between them and the player, the angel cannot see them
-        if(Physics.Raycast(this.transform.position, directionToTarget, out hit, chaseDistance, lm) && hit.distance < directionToTarget.magnitude)
+        //Uses vision cone to check line of sight - only returns true if player is in range and not obstructed
+        if(cone.CheckIfObjectInCone(target) == false)
         {
-            Debug.DrawRay(this.transform.position, directionToTarget.normalized * hit.distance, Color.yellow);
-
             //If the angel was spotting the player, the spotting progress resets - the player has hidden in time!
             tickSpotting = 0f;
 
@@ -220,15 +218,12 @@ public class SmallAngel : MonoBehaviour
                 isWaiting = true;
             }
         }
-        //If the raycast doesn't hit an obstacle, there is line of sight - the angel starts spotting the player
         else
         {
             //If the player has been 'spotted' the angel locks on!
             if(spottedPlayer)
             {
-                //NOTE TO SELF: Team has debated whether the angel should be fooled by the disguise whilst it is already chasing the player
-                //Right now, it IS fooled - to change this, will probably need another bool for chaseInitiated - if this is true and player is disguised,
-                //make it so the angel doesn't care about the disguise/drains it to 0 immediately
+                cone.EnableExpandedCone();
 
                 //If player is diguised, the angel stops in place and starts draining their disguise
                 if(playerController.GetIsDisguised())
@@ -248,6 +243,8 @@ public class SmallAngel : MonoBehaviour
                 //If player is not disguised, chases after them
                 if(!playerController.GetIsDisguised())
                 {
+                    playerController.BindPlayer();
+
                     text.text = "!!";
 
                     Debug.DrawRay(this.transform.position, directionToTarget, Color.red);
@@ -292,17 +289,17 @@ public class SmallAngel : MonoBehaviour
         if(turningToPlayer)
         {
             //The direction the angel should turn to face towards its target
-            turnDirection = target.transform.position - new Vector3(this.transform.position.x, 0, this.transform.position.z);
+            turnDirection = new Vector3(target.transform.position.x, 0, target.transform.position.z) - new Vector3(transform.position.x, 0, transform.position.z);
             
             //Interpolates between the direction the angel's mesh is currently facing and the direction it should be facing to turn it.
-            this.transform.forward = Vector3.Slerp(this.transform.forward, turnDirection.normalized, rotationSpeed);
+            transform.forward = Vector3.Slerp(transform.forward, turnDirection.normalized, rotationSpeed);
 
             //When the transform vector and the intended turn direction are near equal, the vector between them should be very very short
             //A short vector has a small magnitude, so we can use this to compare the two vectors without needing them to be exactly equal
             if((this.transform.forward - turnDirection.normalized).magnitude < 0.1f)
             {
                 turningToPlayer = false;
-                //Debug.Log("Finished turning!");
+                Debug.Log("Finished turning!");
             }
         }
     }
@@ -334,27 +331,34 @@ public class SmallAngel : MonoBehaviour
         }
     }
     
-    //Causes the angel to take damage, destroying it if lethal damage is dealt
+    //Causes the angel to take damage, destroying it if lethal damage is dealt AND it is not alerted
     public bool DamageAngel(float damage)
     {
-        health -= damage;
-        Debug.Log("Damaged! " + health + " health remaining!");
-
-
-        //If the angel is at 0 hp, it is destroyed. Returns true or false based on if the angel was killed or not.
-        if(health <= 0)
+        if(!alerted)
         {
-            //Sends alert to spawner so it creates a new angel
-            spawner.DeathAlert();
+            health -= damage;
+            Debug.Log("Damaged! " + health + " health remaining!");
 
-            //Destroys the whole angel prefab (the angel prefab should be an empty object containing the actual angel object and other relevant objects i.e. the bubble)
-            Destroy(this.gameObject.transform.parent.gameObject);
-           
-           //Shows text explaining that "E" toggles disguise on and off if this is the first small angel killed.
-            ui.ShowDisguiseText(); 
-           
-            return true;
+
+            //If the angel is at 0 hp, it is destroyed. Returns true or false based on if the angel was killed or not.
+            if(health <= 0)
+            {
+                //Sends alert to spawner so it creates a new angel
+                spawner.DeathAlert();
+
+                //Destroys the whole angel prefab (the angel prefab should be an empty object containing the actual angel object and other relevant objects i.e. the bubble)
+                //Note: This is done so that we can attach extra components to the angel such as patrol points (potentially)
+                Destroy(this.gameObject.transform.parent.gameObject);
             
+                //Shows text explaining that "E" toggles disguise on and off if this is the first small angel killed.
+                ui.ShowDisguiseText(); 
+            
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
         else
         {

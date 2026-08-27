@@ -46,6 +46,10 @@ public class PlayerController : MonoBehaviour
     private float attackTimer = 0f;
     private bool canAttack = true;
 
+    private bool bound = false;
+    [SerializeField] private float boundTime = 10f;
+    private float boundTimeStep = 0f;
+
     //This object is spawned when the player performs the attack input
     [SerializeField] private GameObject attack;
 
@@ -118,6 +122,15 @@ public class PlayerController : MonoBehaviour
             {
                 canAttack = true;
                 //Debug.Log("Attack off cooldown!");
+            }
+        }
+
+        if(bound)
+        {
+            boundTimeStep += (1f * Time.deltaTime);
+            if(boundTimeStep >= boundTime)
+            {
+                bound = false;
             }
         }
 
@@ -241,7 +254,7 @@ public class PlayerController : MonoBehaviour
         }
 
 
-        if(fireInput > 0f && canAttack)
+        if(fireInput > 0f && canAttack && !bound)
         {
             PlayerAttack();
         }
@@ -403,7 +416,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            if(disguiseHealth > 0)
+            if(disguiseHealth > 0 && !bound)
             {
                 isDisguised = true;
                 disguiseMesh.SetActive(true);
@@ -448,6 +461,13 @@ public class PlayerController : MonoBehaviour
             return false;
         }
     }
+
+    public void BindPlayer()
+    {
+        bound = true;
+        boundTimeStep = 0f;
+    }
+
 
     public void ChangeHealth(float hp)
     {

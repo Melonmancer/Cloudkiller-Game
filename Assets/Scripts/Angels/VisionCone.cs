@@ -8,6 +8,7 @@ public class VisionCone : MonoBehaviour
     [SerializeField] private float coneRange = 5f;
     [SerializeField] private float coneAngle = 90f;
     
+    private bool expandedCone = false;
 
     //A layer mask used for the angel's line of sight - makes sure that only objects in the 'obstacle' layer block LOS
     private LayerMask lm;
@@ -29,7 +30,7 @@ public class VisionCone : MonoBehaviour
 
             //Debug.Log(angle);
 
-            if(angle <= (coneAngle / 2) && angle >= ((coneAngle / 2) * -1f))
+            if((angle <= (coneAngle / 2) && angle >= ((coneAngle / 2) * -1f)) || expandedCone)
             {
                 //THEN raycast to player and make sure no obstacles are in the way
                 RaycastHit hit;
@@ -60,5 +61,17 @@ public class VisionCone : MonoBehaviour
         {
             return false;
         }
+    }
+
+    //When the angel has spotted the player, they need 360 degree vision to chase effectively
+    //enabling expanded cone removes the angle check, so the angel will chase as long as the player is not obscured and is in the cone range
+    public void EnableExpandedCone()
+    {
+        expandedCone = true;
+    }
+
+    public void DisableExpandedCone()
+    {
+        expandedCone = false;
     }
 }
