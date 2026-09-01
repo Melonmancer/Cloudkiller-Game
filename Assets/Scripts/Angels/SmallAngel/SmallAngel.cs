@@ -38,9 +38,6 @@ public class SmallAngel : MonoBehaviour
     private float tickSpotting = 0f;
     private bool spottedPlayer = false;
 
-
-
-
     //Starting point for the angel - returns here when not chasing the player
     Vector3 home;
 
@@ -53,6 +50,8 @@ public class SmallAngel : MonoBehaviour
     private Vector3 turnDirection = new Vector3();
 
     private VisionCone cone;
+    [SerializeField] private ShaderDetector shaderDetector;
+
 
     //A reference to the spawner that made the angel instance - ALL ANGELS SHOULD BE MADE FROM SPAWNERS! This lets them respawn!
     private AngelSpawner spawner = null;
@@ -147,6 +146,8 @@ public class SmallAngel : MonoBehaviour
         //If the angel is alerted but the target is outside the angel's chase distance, they will wait instead of chasing further (as if they lost line of sight)
         if(alerted && directionToTargetFromHome.magnitude > chaseDistance && agent.remainingDistance <= 0.5f)
         {
+            shaderDetector.SetDeactivated();
+
             tickSpotting = 0f;
             isWaiting = true;
         }
@@ -168,8 +169,9 @@ public class SmallAngel : MonoBehaviour
                 alerted = false;
 
                 //Angel resumes regular vision cone
+                shaderDetector.ShowShader();
                 cone.DisableExpandedCone();
-
+                
                 text.text = "";
             }
             else
@@ -209,6 +211,8 @@ public class SmallAngel : MonoBehaviour
         //Uses vision cone to check line of sight - only returns true if player is in range and not obstructed
         if(cone.CheckIfObjectInCone(target) == false)
         {
+            shaderDetector.SetDeactivated();
+
             //If the angel was spotting the player, the spotting progress resets - the player has hidden in time!
             tickSpotting = 0f;
 
@@ -220,9 +224,12 @@ public class SmallAngel : MonoBehaviour
         }
         else
         {
+            shaderDetector.SetActivated();
+
             //If the player has been 'spotted' the angel locks on!
             if(spottedPlayer)
             {
+                shaderDetector.HideShader();
                 cone.EnableExpandedCone();
 
                 //If player is diguised, the angel stops in place and starts draining their disguise
