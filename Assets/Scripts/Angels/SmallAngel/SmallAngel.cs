@@ -149,6 +149,16 @@ public class SmallAngel : MonoBehaviour
         if(directionToTargetFromHome.magnitude <= chaseDistance)
         {
             CastLineOfSight();   
+
+            //If any angel spots the player and flags them with a raised alarm, all nearby angels will beeline to their last known position.
+            if(playerController.GetAlarmRaised() && !spottedPlayer)
+            {
+                agent.destination = target.transform.position;
+                
+                timeWaiting = 0f;
+                isWaiting = false;
+                alerted = true;     
+            }
         }
         
         //If the angel is alerted but the target is outside the angel's chase distance, they will wait instead of chasing further (as if they lost line of sight)

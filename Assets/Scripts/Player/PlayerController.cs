@@ -50,6 +50,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float boundTime = 10f;
     private float boundTimeStep = 0f;
 
+    private bool alarmRaised = false;
+    private float alarmPeriod = 1.5f;
+    private float alarmTimeStep = 0f;
+
     //This object is spawned when the player performs the attack input
     [SerializeField] private GameObject attack;
 
@@ -131,6 +135,15 @@ public class PlayerController : MonoBehaviour
             if(boundTimeStep >= boundTime)
             {
                 bound = false;
+            }
+        }
+
+        if(alarmRaised)
+        {
+            alarmTimeStep += (1f * Time.deltaTime);
+            if(alarmTimeStep >= alarmPeriod)
+            {
+                alarmRaised = false;
             }
         }
 
@@ -466,6 +479,8 @@ public class PlayerController : MonoBehaviour
     {
         bound = true;
         boundTimeStep = 0f;
+        alarmRaised = true;
+        alarmTimeStep = 0f;
     }
 
 
@@ -506,5 +521,10 @@ public class PlayerController : MonoBehaviour
     public bool GetGrounded()
     {
         return grounded;
+    }
+
+    public bool GetAlarmRaised()
+    {
+        return alarmRaised;
     }
 } 

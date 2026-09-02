@@ -79,10 +79,10 @@ MonoBehaviour:
   angelPrefab: {fileID: 8253372038188727995, guid: 1a15ff774a189584db2dd35efa04fb81,
     type: 3}
   angelTarget: {fileID: 0}
-  angelHealth: 5
-  angelDamage: 3
+  angelHealth: 1
+  angelDamage: 100
   angelSpeed: 9
-  angelChaseDistance: 30
+  angelChaseDistance: 20
   angelAttackCooldown: 1
   angelMaxWaitTime: 5
   angelSpotSpeed: 1
