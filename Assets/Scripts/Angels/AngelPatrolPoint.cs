@@ -13,6 +13,13 @@ public class AngelPatrolPoint : MonoBehaviour
 
     private SmallAngel smallAngel = null;
     private SnitchAngel snitchAngel = null;
+    
+    [SerializeField] private float waitTime = 0f;
+    private float waitStep = 0f;
+
+    private bool goingNext = false;
+
+    [SerializeField] private GameObject nextLookAtObject;
 
 
     // Start is called before the first frame update
@@ -31,10 +38,34 @@ public class AngelPatrolPoint : MonoBehaviour
 
             if(distanceFromPoint.magnitude <= 1f)
             {
+                if(waitTime > 0)
+                {
+                    if(waitStep >= waitTime)
+                    {
+                        waitStep = 0f;
+                        goingNext = true;
+                    }
+                    else
+                    {
+                        waitStep += 1f * Time.deltaTime;
+                    }
+                }
+                else
+                {
+                    goingNext = true;
+                }
+            }
+            else
+            {
+                waitStep = 0f;
+            }
+
+            if(goingNext)
+            {
                 //Debug.Log("Angel reached patrol point");
                 if(smallAngel != null) 
                 {
-                    smallAngel.PatrolAngel(nextPatrolPoint.transform.position);
+                    smallAngel.PatrolAngel(nextPatrolPoint.transform.position, nextLookAtObject);
                 }
                 else if(snitchAngel != null) 
                 {
@@ -44,6 +75,8 @@ public class AngelPatrolPoint : MonoBehaviour
                 {
                     Debug.Log("Error! Angel patrol point could not find an angel script to order around.");
                 }
+
+                goingNext = false;
             }
         }
         else

@@ -47,7 +47,7 @@ public class VisionCone : MonoBehaviour
                 {
                     Debug.DrawRay(transform.position, (obj.transform.position - transform.position).normalized * coneRange, Color.red);
 
-                    Debug.Log("Hit player!");
+                    //Debug.Log("Hit player!");
                     return true;
                 }
             }
@@ -73,5 +73,11 @@ public class VisionCone : MonoBehaviour
     public void DisableExpandedCone()
     {
         expandedCone = false;
+    }
+
+    public void SizeCone(float range, float angle)
+    {
+        coneRange = range;
+        coneAngle = angle;
     }
 }

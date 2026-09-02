@@ -46,12 +46,16 @@ public class SmallAngel : MonoBehaviour
     private Vector3 directionToTargetFromHome = new Vector3();
 
     //Makes the angel turn towards the player/its target
-    bool turningToPlayer = false;
+    private bool turningToTarget = false;
     private Vector3 turnDirection = new Vector3();
 
     private VisionCone cone;
+    private float coneRange;
+    private float coneAngle;
     [SerializeField] private ShaderDetector shaderDetector;
 
+    private bool turningToPatrolObject = false;
+    private Transform lookAtPoint;
 
     //A reference to the spawner that made the angel instance - ALL ANGELS SHOULD BE MADE FROM SPAWNERS! This lets them respawn!
     private AngelSpawner spawner = null;
@@ -94,6 +98,10 @@ public class SmallAngel : MonoBehaviour
         if(cone == null)
         {
             Debug.Log("Error! Angel could not find vision cone component.");
+        }
+        else
+        {
+            cone.SizeCone(coneRange, coneAngle);
         }
 
         //Sets speed of the NavMeshAgent
@@ -202,6 +210,12 @@ public class SmallAngel : MonoBehaviour
             }
         }
 
+        //If the angel is not doing anything and has been given a point to look at, it turns towards it.
+        if(!isWaiting && !alerted && agent.remainingDistance <= 0.5f && lookAtPoint != null)
+        {
+            turningToPatrolObject = true;
+        }
+
         UpdateAnimations();
     }
 
@@ -235,7 +249,7 @@ public class SmallAngel : MonoBehaviour
                 //If player is diguised, the angel stops in place and starts draining their disguise
                 if(playerController.GetIsDisguised())
                 {
-                    turningToPlayer = true;
+                    turningToTarget = true;
 
                     text.text = "!?";
 
@@ -262,7 +276,7 @@ public class SmallAngel : MonoBehaviour
             //If the angel can see the player but has not spotted them, spot value builds until the player is spotted - the angel stops moving whilst spotting
             else
             {
-                turningToPlayer = true;
+                turningToTarget = true;
 
                 text.text = "?";
 
@@ -293,8 +307,10 @@ public class SmallAngel : MonoBehaviour
     void FixedUpdate()
     {
         //Angel will turn to face the player whilst trying to spot them
-        if(turningToPlayer)
+        if(turningToTarget)
         {
+            turningToPatrolObject = false;
+
             //The direction the angel should turn to face towards its target
             turnDirection = new Vector3(target.transform.position.x, 0, target.transform.position.z) - new Vector3(transform.position.x, 0, transform.position.z);
             
@@ -303,11 +319,23 @@ public class SmallAngel : MonoBehaviour
 
             //When the transform vector and the intended turn direction are near equal, the vector between them should be very very short
             //A short vector has a small magnitude, so we can use this to compare the two vectors without needing them to be exactly equal
-            if((this.transform.forward - turnDirection.normalized).magnitude < 0.1f)
+            if((transform.forward - turnDirection.normalized).magnitude < 0.1f)
             {
-                turningToPlayer = false;
-                Debug.Log("Finished turning!");
+                turningToTarget = false;
+                //Debug.Log("Finished turning!");
             }
+        }
+        else if(turningToPatrolObject)
+        {
+            turnDirection = new Vector3(lookAtPoint.position.x, 0, lookAtPoint.position.z) - new Vector3(transform.position.x, 0, transform.position.z);
+            
+            transform.forward = Vector3.Slerp(transform.forward, turnDirection.normalized, rotationSpeed / 4f);
+
+            if((transform.forward - turnDirection.normalized).magnitude < 0.1f)
+            {
+                turningToPatrolObject = false;
+                //Debug.Log("Finished turning!");
+            }            
         }
     }
 
@@ -393,7 +421,7 @@ public class SmallAngel : MonoBehaviour
     }
 
     //Sets all variables - this is used by spawners to fill in data for the spawned angel
-    public void SetVariables(AngelSpawner spawnScript, GameObject t, float h, float d, float s, float cD, float aC, float mWT, float sS, float dD, Vector3 hP)
+    public void SetVariables(AngelSpawner spawnScript, GameObject t, float h, float d, float s, float cD, float aC, float mWT, float sS, float dD, Vector3 hP, float cR, float cA)
     {
         spawner = spawnScript;
         target = t;
@@ -406,11 +434,24 @@ public class SmallAngel : MonoBehaviour
         spotSpeed = sS;
         disguiseDamage = dD;
         home = hP;
+        coneRange = cR;
+        coneAngle = cA;
     }
 
     //Used by the AngelPatrolPoint script to move this angel from place to place - should be manually linked
-    public void PatrolAngel(Vector3 nextPoint)
+    public void PatrolAngel(Vector3 nextPoint, GameObject newLookAtPoint)
     {
+        turningToPatrolObject = false;
+
+        if(newLookAtPoint != null)
+        {
+            lookAtPoint = newLookAtPoint.transform;
+        }
+        else
+        {
+            lookAtPoint = null;
+        }
+
         home = nextPoint;
         //If the angel is not doing anything involving the player, it proceeds immediately to the next patrol point
         if(!alerted && !isWaiting)

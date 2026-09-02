@@ -17,6 +17,8 @@ public class AngelSpawner : MonoBehaviour
     [SerializeField] private float angelMaxWaitTime;
     [SerializeField] private float angelSpotSpeed;
     [SerializeField] private float angelDisguiseDamage;
+    [SerializeField] private float angelVisionConeRange;
+    [SerializeField] private float angelVisionConeAngle;
 
     //Used only by Snitches
     [SerializeField] private float angelBigAngelAlertRange;
@@ -73,7 +75,7 @@ public class AngelSpawner : MonoBehaviour
     {
         GameObject newAngel = Instantiate(angelPrefab, this.transform);
         newAngel.transform.GetChild(0).GetComponent<SmallAngel>().SetVariables(this, angelTarget, angelHealth, angelDamage, angelSpeed, angelChaseDistance, 
-                angelAttackCooldown, angelMaxWaitTime, angelSpotSpeed, angelDisguiseDamage, angelHomePoint);
+                angelAttackCooldown, angelMaxWaitTime, angelSpotSpeed, angelDisguiseDamage, angelHomePoint, angelVisionConeRange, angelVisionConeAngle);
         currentAliveAngel = newAngel.transform.GetChild(0).gameObject;
     }
 
