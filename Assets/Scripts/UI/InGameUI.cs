@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+//using System.Diagnostics;
 using System.Xml.Schema;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class InGameUI : MonoBehaviour
 {
-    public Slider healthSlider;
+    //public Slider healthSlider;
     public Slider disguiseSlider;
     [SerializeField] private Image deathScreen;
 
@@ -18,6 +19,11 @@ public class InGameUI : MonoBehaviour
     private bool disguiseTextDone = false;
 
     public GameObject disguiseControlsText;
+    public GameObject border;
+    public GameObject yellowVignette;
+    public GameObject purpleVignette;
+    
+    
 
     private bool fadingInDeathScreen = false;
     private bool fadingOutDeathScreen = false;
@@ -29,20 +35,22 @@ public class InGameUI : MonoBehaviour
     void Start()
     {
 
-        float[] healthValues = playerController.GetHealthValues();
-        healthSlider.maxValue = healthValues[1];
+        //float[] healthValues = playerController.GetHealthValues();
+        //healthSlider.maxValue = healthValues[1];
 
         currHealth = maxHealth;
 
         disguiseControlsText.SetActive(false);
+        border.SetActive(true);
+        
 
     }
 
     
     void Update()
     {
-        UpdateHealthUI();
         UpdateDisguiseUI();
+        VignetteUI();
 
         if(fadingOutDeathScreen)
         {
@@ -79,6 +87,34 @@ public class InGameUI : MonoBehaviour
         }
     }
 
+    public void VignetteUI () 
+    {
+        if (playerController.bound == true)
+        {
+            yellowVignette.SetActive(true);
+
+        }
+        else
+        {
+            yellowVignette.SetActive(false);
+        }
+
+        if (playerController.isDisguised == true)
+        {
+            purpleVignette.SetActive(true);
+        }
+        else
+        {
+            purpleVignette.SetActive(false);
+        }
+
+        
+    }
+
+
+
+
+    /*
     void UpdateHealthUI()
     {
         float[] healthValues = playerController.GetHealthValues();
@@ -90,6 +126,8 @@ public class InGameUI : MonoBehaviour
         healthSlider.value = currHealth;
 
     }
+
+    */
 
     void UpdateDisguiseUI()
     {

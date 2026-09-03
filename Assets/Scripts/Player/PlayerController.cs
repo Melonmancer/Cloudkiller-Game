@@ -46,7 +46,7 @@ public class PlayerController : MonoBehaviour
     private float attackTimer = 0f;
     private bool canAttack = true;
 
-    private bool bound = false;
+    public bool bound = false;
     [SerializeField] private float boundTime = 10f;
     private float boundTimeStep = 0f;
 
@@ -78,7 +78,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float disguiseHealthMax;
     [SerializeField] private float startingDisguiseHealth = 0;
     private float disguiseHealth = 0;
-    private bool isDisguised = false;
+    public bool isDisguised = false;
 
     public ParticleSystem disguiseDepletedEffect;
     public ParticleSystem disguiseActiveEffect;

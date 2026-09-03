@@ -24,7 +24,7 @@ public class MainMenu : MonoBehaviour
     public void Play()
     {
         Time.timeScale = 1f;
-        SceneManager.LoadScene("Level1LayoutV2");
+        SceneManager.LoadScene("Cave");
     }
 
     public void OpenControls()
