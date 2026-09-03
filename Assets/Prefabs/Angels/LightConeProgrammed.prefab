@@ -11,7 +11,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: a4ad1f3af7005d34e82aa63b5796f8e6,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a4ad1f3af7005d34e82aa63b5796f8e6,
         type: 3}
@@ -97,11 +97,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 19f38a67fd43a7d45bb348c7c0b78843, type: 2}
+      objectReference: {fileID: 2100000, guid: 3fccf5188140ea24db51983cc15f18f5, type: 2}
     - target: {fileID: 919132149155446097, guid: a4ad1f3af7005d34e82aa63b5796f8e6,
         type: 3}
       propertyPath: m_Name
-      value: lightConeProgrammed
+      value: LightConeProgrammed
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: a4ad1f3af7005d34e82aa63b5796f8e6,
         type: 3}
@@ -141,4 +141,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coneRenderer: {fileID: 527770618233358522}
-  coneMaterial: {fileID: 2100000, guid: 19f38a67fd43a7d45bb348c7c0b78843, type: 2}
+  redMaterial: {fileID: 2100000, guid: 809f94f80d4345043b81dd9bff47d4c1, type: 2}
+  whiteMaterial: {fileID: 2100000, guid: 3fccf5188140ea24db51983cc15f18f5, type: 2}

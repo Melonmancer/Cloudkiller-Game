@@ -5,25 +5,26 @@ using UnityEngine;
 public class ShaderDetector : MonoBehaviour
 {
     [SerializeField] private Renderer coneRenderer;
-    [SerializeField] private Material coneMaterial;
+    [SerializeField] private Material redMaterial;
+    [SerializeField] private Material whiteMaterial;
 
     void Start()
     {
-        coneMaterial.SetFloat("isdetected", 0f);
+        coneRenderer.material = whiteMaterial;
     }
 
     //private void OnTriggerEnter(Collider other)
     public void SetActivated()
     {
         //if (other.CompareTag("Player"))
-        coneMaterial.SetFloat("isdetected", 1f);
+        coneRenderer.material = redMaterial;
     }
 
     //private void OnTriggerExit(Collider other)
     public void SetDeactivated()
     {
         //if (other.CompareTag("Player"))
-        coneMaterial.SetFloat("isdetected", 0f);
+        coneRenderer.material = whiteMaterial;
     }
 
     public void HideShader()
