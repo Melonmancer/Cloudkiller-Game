@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.15487246, g: 0.17664528, b: 0.18864016, a: 1}
+  m_IndirectSpecularColor: {r: 0.18273018, g: 0.22577542, b: 0.29160446, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1549,7 +1549,7 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 1, g: 0.7708184, b: 0.42138356, a: 1}
-  m_Intensity: 0.6
+  m_Intensity: 0.44
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -1606,14 +1606,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 162678080}
-  m_LocalRotation: {x: -0.029368874, y: -0.16181315, z: -0.68536794, w: 0.70938337}
+  m_LocalRotation: {x: 0.18660726, y: 0.06833267, z: -0.6601284, w: 0.72438866}
   m_LocalPosition: {x: 45.82094, y: 17.392189, z: -49.061752}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1441059752}
   m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: -15.276, y: -11.318, z: -86.504}
+  m_LocalEulerAnglesHint: {x: 21.135, y: -9.091, z: -86.385}
 --- !u!1 &179556389
 GameObject:
   m_ObjectHideFlags: 0
@@ -2511,7 +2511,7 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 0, g: 0.8241992, b: 1, a: 1}
-  m_Intensity: 1.25
+  m_Intensity: 0.58
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -2568,14 +2568,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 294948066}
-  m_LocalRotation: {x: -0.690514, y: -0.7167215, z: -0.034641393, w: -0.09110854}
+  m_LocalRotation: {x: -0.69101363, y: -0.71502167, z: -0.02258132, w: -0.10360693}
   m_LocalPosition: {x: 45.82094, y: 17.392189, z: -49.061752}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1441059752}
   m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 4.368, y: 169.691, z: 447.472}
+  m_LocalEulerAnglesHint: {x: 6.367, y: 169.602, z: 447.464}
 --- !u!114 &294948069
 MonoBehaviour:
   m_ObjectHideFlags: 0

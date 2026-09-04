@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97c23e3b12dc18c42a140437e53d3951, type: 3}
   m_Name: Tonemapping
   m_EditorClassIdentifier: 
-  active: 0
+  active: 1
   mode:
     m_OverrideState: 1
     m_Value: 2
@@ -31,13 +31,13 @@ MonoBehaviour:
   active: 1
   shadows:
     m_OverrideState: 1
-    m_Value: {x: 0.8964336, y: 0.92612475, z: 1, w: -0.3537587}
+    m_Value: {x: 0.8964336, y: 0.92612475, z: 1, w: 0.15729354}
   midtones:
     m_OverrideState: 1
-    m_Value: {x: 1, y: 0.9637732, z: 0.8246813, w: -0.025268491}
+    m_Value: {x: 1, y: 0.9637732, z: 0.8246813, w: -0.049948953}
   highlights:
     m_OverrideState: 1
-    m_Value: {x: 1, y: 0.9662991, z: 0.80431455, w: 0.0777003}
+    m_Value: {x: 1, y: 0.9662991, z: 0.80431455, w: 0.064772055}
   shadowsStart:
     m_OverrideState: 0
     m_Value: 0
@@ -318,13 +318,13 @@ MonoBehaviour:
   active: 0
   lift:
     m_OverrideState: 0
-    m_Value: {x: 0.8445587, y: 0.91793585, z: 1, w: -0.08633391}
+    m_Value: {x: 0.8445587, y: 0.91793585, z: 1, w: -0.07369967}
   gamma:
     m_OverrideState: 1
-    m_Value: {x: 0.9968513, y: 1, z: 0.9659929, w: -0.037902717}
+    m_Value: {x: 0.9968513, y: 1, z: 0.9659929, w: -0.07168934}
   gain:
     m_OverrideState: 1
-    m_Value: {x: 0.6832539, y: 0.7491305, z: 1, w: 0.49463052}
+    m_Value: {x: 0.6832539, y: 0.7491305, z: 1, w: 0.39679074}
 --- !u!114 &-585788259674033859
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -390,7 +390,7 @@ MonoBehaviour:
     m_Value: {x: 0.5, y: 0.5}
   intensity:
     m_OverrideState: 1
-    m_Value: 0.396
+    m_Value: 0.35
   smoothness:
     m_OverrideState: 1
     m_Value: 0.29
