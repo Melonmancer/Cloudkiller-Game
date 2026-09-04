@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97c23e3b12dc18c42a140437e53d3951, type: 3}
   m_Name: Tonemapping
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   mode:
     m_OverrideState: 1
     m_Value: 2
@@ -31,13 +31,13 @@ MonoBehaviour:
   active: 1
   shadows:
     m_OverrideState: 1
-    m_Value: {x: 0.8964336, y: 0.92612475, z: 1, w: 0.15729354}
+    m_Value: {x: 0.83408225, y: 0.86454344, z: 1, w: 0.24090566}
   midtones:
     m_OverrideState: 1
-    m_Value: {x: 1, y: 0.9637732, z: 0.8246813, w: -0.049948953}
+    m_Value: {x: 1, y: 0.9357982, z: 0.653492, w: 0.10055273}
   highlights:
     m_OverrideState: 1
-    m_Value: {x: 1, y: 0.9662991, z: 0.80431455, w: 0.064772055}
+    m_Value: {x: 1, y: 0.9662991, z: 0.80431455, w: 0.75039095}
   shadowsStart:
     m_OverrideState: 0
     m_Value: 0
@@ -238,16 +238,25 @@ MonoBehaviour:
         m_Curve:
         - serializedVersion: 3
           time: 0
-          value: 0.25883806
-          inSlope: 2.8250437
-          outSlope: 2.8250437
+          value: 0.62144095
+          inSlope: -0.079083264
+          outSlope: -0.079083264
           tangentMode: 0
           weightedMode: 0
           inWeight: 0
           outWeight: 0
         - serializedVersion: 3
-          time: 0.25440195
-          value: 0.5050502
+          time: 0.34948373
+          value: 0.5963153
+          inSlope: -0.12781058
+          outSlope: -0.12781058
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        - serializedVersion: 3
+          time: 0.76648134
+          value: 0.58123994
           inSlope: 0
           outSlope: 0
           tangentMode: 0
@@ -255,19 +264,10 @@ MonoBehaviour:
           inWeight: 0
           outWeight: 0
         - serializedVersion: 3
-          time: 0.7826351
-          value: 0.5012623
-          inSlope: 0
-          outSlope: 0
-          tangentMode: 0
-          weightedMode: 0
-          inWeight: 0
-          outWeight: 0
-        - serializedVersion: 3
-          time: 1
-          value: 0.21717143
-          inSlope: -3.375002
-          outSlope: -3.375002
+          time: 0.97140586
+          value: 0.48576254
+          inSlope: 0.2636097
+          outSlope: 0.2636097
           tangentMode: 0
           weightedMode: 0
           inWeight: 0
@@ -290,7 +290,7 @@ MonoBehaviour:
   active: 1
   postExposure:
     m_OverrideState: 1
-    m_Value: 1.12
+    m_Value: 1.38
   contrast:
     m_OverrideState: 0
     m_Value: 8.2
@@ -315,16 +315,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5485954d14dfb9a4c8ead8edb0ded5b1, type: 3}
   m_Name: LiftGammaGain
   m_EditorClassIdentifier: 
-  active: 0
+  active: 1
   lift:
-    m_OverrideState: 0
-    m_Value: {x: 0.8445587, y: 0.91793585, z: 1, w: -0.07369967}
+    m_OverrideState: 1
+    m_Value: {x: 0.9980483, y: 1, z: 0.99746084, w: -0.0068101026}
   gamma:
     m_OverrideState: 1
-    m_Value: {x: 0.9968513, y: 1, z: 0.9659929, w: -0.07168934}
+    m_Value: {x: 0.9968513, y: 1, z: 0.9659929, w: 0.06208994}
   gain:
     m_OverrideState: 1
-    m_Value: {x: 0.6832539, y: 0.7491305, z: 1, w: 0.39679074}
+    m_Value: {x: 0.9600853, y: 0.96909744, z: 1, w: 0.2809363}
 --- !u!114 &-585788259674033859
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -346,7 +346,7 @@ MonoBehaviour:
     m_Value: {r: 1, g: 1, b: 1, a: 1}
   balance:
     m_OverrideState: 1
-    m_Value: 45.9
+    m_Value: -77
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
