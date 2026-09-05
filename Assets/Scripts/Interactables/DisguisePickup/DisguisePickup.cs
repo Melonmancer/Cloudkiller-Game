@@ -7,11 +7,12 @@ public class DisguisePickup : MonoBehaviour
     [SerializeField] private float disguiseRestored;
 
     private DisguisePickupSpawner spawner;
+    private InGameUI ui;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        ui = FindObjectOfType<InGameUI>();
     }
 
     // Update is called once per frame
@@ -32,6 +33,9 @@ public class DisguisePickup : MonoBehaviour
             pc.ChangeDisguiseHealth(disguiseRestored);
 
             spawner.DeathAlert();
+
+            //Shows text explaining that "E" toggles disguise on and off if this is the first small angel killed.
+            ui.ShowDisguiseText();
 
             Destroy(this.gameObject);
         }

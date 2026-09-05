@@ -396,7 +396,7 @@ public class SmallAngel : MonoBehaviour
                 Destroy(this.gameObject.transform.parent.gameObject);
             
                 //Shows text explaining that "E" toggles disguise on and off if this is the first small angel killed.
-                ui.ShowDisguiseText(); 
+                //ui.ShowDisguiseText(); 
             
                 return true;
             }
