@@ -494,6 +494,15 @@ public class PlayerController : MonoBehaviour
         //Debug.Log("Health changed! New health: " + health);
     }
 
+    //Shows text explaining how to attck an angel when th eplayer reaches halfway through the cave
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("AttackTextTrigger"))
+        {
+            ui.ShowAttackText();
+        }
+    }
+
     public float[] GetHealthValues()
     {
         float[] values = new float[2];

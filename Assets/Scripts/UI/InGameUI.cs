@@ -17,8 +17,10 @@ public class InGameUI : MonoBehaviour
     private float currHealth;
 
     private bool disguiseTextDone = false;
+    private bool attackTextDone = false;
 
     public GameObject disguiseControlsText;
+    public GameObject attackControlsText;
     public GameObject border;
     public GameObject yellowVignette;
     public GameObject purpleVignette;
@@ -141,7 +143,7 @@ public class InGameUI : MonoBehaviour
         if(disguiseTextDone == false)
         {
             disguiseTextDone = true;
-            StartCoroutine(ShowTextRoutine());
+            StartCoroutine(ShowDisguiseTextRoutine());
         }
         else
         {
@@ -150,7 +152,20 @@ public class InGameUI : MonoBehaviour
         
     }
 
-    IEnumerator ShowTextRoutine()
+    public void ShowAttackText()
+    {
+        if(attackTextDone == false)
+        {
+            attackTextDone = true;
+            StartCoroutine(ShowAttackTextRoutine());
+        }
+        else
+        {
+            Debug.Log("attack info already shown");
+        }
+    }
+
+    IEnumerator ShowDisguiseTextRoutine()
     {
         yield return new WaitForSeconds(0.2f);
         disguiseControlsText.SetActive(true);
@@ -158,9 +173,21 @@ public class InGameUI : MonoBehaviour
         disguiseControlsText.SetActive(false);
     }
 
+    IEnumerator ShowAttackTextRoutine()
+        {
+            yield return new WaitForSeconds(0.2f);
+            attackControlsText.SetActive(true);
+            yield return new WaitForSeconds(4f);
+            attackControlsText.SetActive(false);
+        }
+
     public void FadeDeathScreen()
     {
         fadingInDeathScreen = true;
     }
+
+    
+
+
 
 }
