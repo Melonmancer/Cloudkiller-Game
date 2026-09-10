@@ -15,7 +15,7 @@ public class ProgrammedCamera : MonoBehaviour
     [SerializeField] private float cameraSmoothing = 10f;
 
     //How responsive the camera is to mouse inputs
-    [SerializeField] private float sensitivity = 5f;
+    [SerializeField] public float sensitivity = 5f;
 
     [SerializeField] private float minimumYTilt = -30f;
     [SerializeField] private float maximumYTilt = 40f;

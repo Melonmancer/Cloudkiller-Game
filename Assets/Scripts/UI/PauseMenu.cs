@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
@@ -15,11 +18,32 @@ public class PauseMenu : MonoBehaviour
     public static bool isPaused;
 
     public LevelEnd levelEnd;
+
+    [SerializeField] private Slider exposureSlider;
+    [SerializeField] private Volume volume;
+
+    [SerializeField] private Slider sensitivitySlider;
+    [SerializeField] private ProgrammedCamera programmedCamera;
+
+    private ColorAdjustments colorAdjustments;
     
     void Start()
     {
         controlsPanel.SetActive(false);
         pauseMenu.SetActive(false);
+
+        {
+        if (volume.profile.TryGet(out colorAdjustments))
+        {
+            exposureSlider.onValueChanged.AddListener(SetExposure);
+
+            exposureSlider.value = colorAdjustments.postExposure.value;
+        }
+
+        sensitivitySlider.value = programmedCamera.sensitivity;
+
+        sensitivitySlider.onValueChanged.AddListener(SetSensitivity);
+    }
     }
 
     
@@ -39,6 +63,25 @@ public class PauseMenu : MonoBehaviour
 
         }
 
+    }
+
+    private void SetExposure(float value)
+    {
+        if (colorAdjustments != null)
+        {
+            colorAdjustments.postExposure.value = value;
+        }
+    }
+
+    private void OnDestroy()
+    {
+        exposureSlider.onValueChanged.RemoveListener(SetExposure);
+        sensitivitySlider.onValueChanged.RemoveListener(SetSensitivity);
+    }
+
+    private void SetSensitivity(float value)
+    {
+        programmedCamera.sensitivity = value;
     }
 
 

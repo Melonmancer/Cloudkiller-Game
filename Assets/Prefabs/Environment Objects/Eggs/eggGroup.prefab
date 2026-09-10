@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4181795615124763658}
   - component: {fileID: 2156185996261900480}
   - component: {fileID: 2872023898100108166}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: eggGroup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36,7 +36,7 @@ Transform:
   - {fileID: 2652404819591055309}
   - {fileID: 5914187644403584150}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &4181795615124763658
 MeshFilter:
@@ -112,7 +112,7 @@ GameObject:
   - component: {fileID: 6688180206142669087}
   - component: {fileID: 5235948780687559609}
   - component: {fileID: 7674783230001061081}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -146,8 +146,8 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 0.623411, g: 1, b: 0.2688679, a: 1}
-  m_Intensity: 1.9
-  m_Range: 10
+  m_Intensity: 0.3
+  m_Range: 0.95
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -227,7 +227,7 @@ GameObject:
   - component: {fileID: 5914187644403584150}
   - component: {fileID: 6228020723333854857}
   - component: {fileID: 9051482819498879539}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Point Light (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -261,7 +261,7 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 0.90561235, b: 0.68235296, a: 1}
-  m_Intensity: 16.52
+  m_Intensity: 16.5
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -342,7 +342,7 @@ GameObject:
   - component: {fileID: 2652404819591055309}
   - component: {fileID: 8034784932039497912}
   - component: {fileID: 365646654706895601}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Point Light (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -376,8 +376,8 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 0.90561235, b: 0.68235296, a: 1}
-  m_Intensity: 0.64
-  m_Range: 10
+  m_Intensity: 0.1
+  m_Range: 0.5
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -457,7 +457,7 @@ GameObject:
   - component: {fileID: 3864326897575672559}
   - component: {fileID: 2837324304511524650}
   - component: {fileID: 2425421268602568275}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Point Light (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -491,8 +491,8 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 0.8164927, b: 0.6745283, a: 1}
-  m_Intensity: 1.7
-  m_Range: 10
+  m_Intensity: 0.57
+  m_Range: 0.53
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
