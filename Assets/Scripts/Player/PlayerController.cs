@@ -343,6 +343,7 @@ public class PlayerController : MonoBehaviour
 
         Instantiate(attack, this.transform);
         AnimationController.PlayAttackAnimation();
+        
     }
 
     public void ChangeDisguiseHealth(float val)
@@ -406,7 +407,7 @@ public class PlayerController : MonoBehaviour
 
     //Toggles the player's disguise
     //Only activates the disguise if it has charge
-    private void ToggleDisguise()
+    public void ToggleDisguise()
     {
         if(isDisguised)
         {

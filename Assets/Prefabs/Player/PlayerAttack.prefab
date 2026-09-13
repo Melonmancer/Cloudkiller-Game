@@ -44,7 +44,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 5, z: 1.25}
+  m_Size: {x: 3, y: 6, z: 2.25}
   m_Center: {x: 0, y: 0, z: 0.1}
 --- !u!114 &5100253579635235438
 MonoBehaviour:
@@ -59,9 +59,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lifespan: 0.2
-  damage: 5
-  harvestValue: 10
-  windupTime: 0.5
+  damage: 100
+  harvestValue: 0
+  windupTime: 0.3
 --- !u!1 &8657331365328042622
 GameObject:
   m_ObjectHideFlags: 0

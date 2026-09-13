@@ -379,7 +379,7 @@ public class SmallAngel : MonoBehaviour
     //Causes the angel to take damage, destroying it if lethal damage is dealt AND it is not alerted
     public bool DamageAngel(float damage)
     {
-        if(!alerted)
+        if(!alerted || playerController.GetIsDisguised())
         {
             health -= damage;
             Debug.Log("Damaged! " + health + " health remaining!");
@@ -391,10 +391,17 @@ public class SmallAngel : MonoBehaviour
                 //Sends alert to spawner so it creates a new angel
                 spawner.DeathAlert();
 
+                //Breaks player's disguise if they are wearing it.
+                if(playerController.GetIsDisguised()) 
+                {
+                    playerController.ToggleDisguise();
+                }
+
                 //Destroys the whole angel prefab (the angel prefab should be an empty object containing the actual angel object and other relevant objects i.e. the bubble)
                 //Note: This is done so that we can attach extra components to the angel such as patrol points (potentially)
                 Destroy(this.gameObject.transform.parent.gameObject);
             
+
                 //Shows text explaining that "E" toggles disguise on and off if this is the first small angel killed.
                 //ui.ShowDisguiseText(); 
             
@@ -417,7 +424,7 @@ public class SmallAngel : MonoBehaviour
         if(attackReady)
         {
             //Checks if collision is with the player object
-            if(col.gameObject.tag == "Player")
+            if(col.gameObject.tag == "Player" && playerController.GetIsDisguised() == false)
             {
                 Debug.Log("Hit player!");
                 attackReady = false;

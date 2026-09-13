@@ -7,7 +7,7 @@ public class PlayerAttack : MonoBehaviour
     //Lifespan is how long the weapon lasts before disappearing.
     [SerializeField] private float lifespan = 0.2f;
     [SerializeField] private float damage = 5f;
-    [SerializeField] private float harvestValue = 10f;
+    //[SerializeField] private float harvestValue = 10f;
     [SerializeField] private float windupTime = 0.5f;
 
     private float timer = 0f;
@@ -56,22 +56,20 @@ public class PlayerAttack : MonoBehaviour
             if(angel != null)
             {
                 //Returns 'true' if angel is killed by this damage
-                if(angel.DamageAngel(damage))
-                {
+                angel.DamageAngel(damage);
+
                     //Gets the parent of this object's parent, which is the player object, to access playerController and add to the disguise
-                    this.transform.parent.transform.parent.GetComponent<PlayerController>().ChangeDisguiseHealth(harvestValue);
-                }
+                    //this.transform.parent.transform.parent.GetComponent<PlayerController>().ChangeDisguiseHealth(harvestValue);
             }
             else
             {
                 SnitchAngel sAngel = col.gameObject.GetComponent<SnitchAngel>();
 
                 //Returns 'true' if angel is killed by this damage
-                if(sAngel.DamageAngel(damage))
-                {
+                sAngel.DamageAngel(damage);
+
                     //Gets the parent of this object's parent, which is the player object, to access playerController and add to the disguise
-                    this.transform.parent.transform.parent.GetComponent<PlayerController>().ChangeDisguiseHealth(harvestValue);
-                }
+                    //this.transform.parent.transform.parent.GetComponent<PlayerController>().ChangeDisguiseHealth(harvestValue);
             }
         }
     }
