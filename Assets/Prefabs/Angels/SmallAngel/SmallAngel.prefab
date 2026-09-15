@@ -410,7 +410,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 78bf40e0ce29de04d8bfe980a12d7047,
         type: 3}
       propertyPath: m_Name
-      value: smallAngel
+      value: SmallAngelMesh
       objectReference: {fileID: 0}
     - target: {fileID: 1743641219516642704, guid: 78bf40e0ce29de04d8bfe980a12d7047,
         type: 3}
@@ -437,6 +437,19 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 2481054743541912281}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &369104441991726606
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3363929389741911944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 665bf8a0456433348954d53aeccc68f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemy: {fileID: 8253372038188727995}
 --- !u!1001 &6080409542856535505
 PrefabInstance:
   m_ObjectHideFlags: 0

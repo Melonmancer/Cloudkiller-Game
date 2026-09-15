@@ -384,23 +384,22 @@ public class SmallAngel : MonoBehaviour
             health -= damage;
             Debug.Log("Damaged! " + health + " health remaining!");
 
-
             //If the angel is at 0 hp, it is destroyed. Returns true or false based on if the angel was killed or not.
             if(health <= 0)
             {
                 //Sends alert to spawner so it creates a new angel
                 spawner.DeathAlert();
+                animator.SetFloat("health", 0f);
 
                 //Breaks player's disguise if they are wearing it.
                 if(playerController.GetIsDisguised()) 
                 {
                     playerController.ToggleDisguise();
                 }
-
+                
                 //Destroys the whole angel prefab (the angel prefab should be an empty object containing the actual angel object and other relevant objects i.e. the bubble)
                 //Note: This is done so that we can attach extra components to the angel such as patrol points (potentially)
-                Destroy(this.gameObject.transform.parent.gameObject);
-            
+                //Destroy(this.gameObject.transform.parent.gameObject);
 
                 //Shows text explaining that "E" toggles disguise on and off if this is the first small angel killed.
                 //ui.ShowDisguiseText(); 
@@ -416,7 +415,7 @@ public class SmallAngel : MonoBehaviour
         {
             return false;
         }
-    }
+    }  
 
     //Runs whilst this angel's trigger collider is colliding with something
     public void OnTriggerStay(Collider col)
