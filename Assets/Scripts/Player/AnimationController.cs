@@ -75,4 +75,20 @@ public class AnimationController: MonoBehaviour
             animator.SetTrigger("attack");
         }
     }
+
+    public void PlayDeathAnimation()
+    {
+        if(animator != null)
+        {
+            animator.SetFloat("health", 0f);
+        }
+    }
+
+    public void ResetDeathAnimation()
+    {
+        if(animator != null)
+        {
+            animator.SetFloat("health", 1f);
+        }
+    }
 }

@@ -396,7 +396,7 @@ public class PlayerController : MonoBehaviour
     public void RespawnPlayer()
     {
         ui.FadeDeathScreen();
-
+        AnimationController.ResetDeathAnimation();
         //Debug.Log("Respawning player!");
 
         if(respawnPoint != null)
@@ -485,6 +485,7 @@ public class PlayerController : MonoBehaviour
         {
             //Debug.Log("PLAYER IS DEAD!");
             playerIsDead = true;
+            AnimationController.PlayDeathAnimation();
             rc.TriggerReset();
             return true;
         }
