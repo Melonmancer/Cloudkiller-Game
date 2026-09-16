@@ -4,16 +4,18 @@ using UnityEngine;
 
 public class DisguisePickupSpawner : MonoBehaviour
 {
-[SerializeField] private GameObject prefab;
+    [SerializeField] private GameObject prefab;
 
     [SerializeField] private float disguiseRestored;
 
     //Cooldown timer for respawning a used orb
     [SerializeField] private float respawnCooldown;
     private float respawnTimer = 0f;
-    private bool pickupGone;
+    private bool pickupGone = false;
 
     public ParticleSystem disguisePickupEffect;
+
+    private GameObject currentPickup;
 
 
     // Start is called before the first frame update
@@ -26,7 +28,8 @@ public class DisguisePickupSpawner : MonoBehaviour
     void Update()
     {
         //If orb is gone, ticks up the respawn timer
-        if(pickupGone)
+        //If respawnCooldown is set to 0, does not automatically respawn
+        if(pickupGone && respawnCooldown != 0f)
         {
             respawnTimer += (1f * Time.deltaTime);
             if(respawnTimer >= respawnCooldown)
@@ -43,6 +46,7 @@ public class DisguisePickupSpawner : MonoBehaviour
     {
         GameObject newPickup = Instantiate(prefab, this.transform);
         newPickup.GetComponent<DisguisePickup>().SetVariables(this, disguiseRestored);
+        currentPickup = newPickup;
     }
 
     //Alert sent by the spawned angel on death
@@ -63,4 +67,14 @@ public class DisguisePickupSpawner : MonoBehaviour
         Destroy(effect.gameObject, effect.main.duration);
     }
 
+    private void DestroyCurrentPickup()
+    {
+        Destroy(currentPickup);
+    }
+
+    public void ResetSpawn()
+    {
+        Destroy(currentPickup);
+        SpawnOrb();
+    }
 }

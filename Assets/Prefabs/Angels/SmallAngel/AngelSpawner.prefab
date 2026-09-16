@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 7978827705454892597}
   m_Layer: 0
   m_Name: AngelSpawner
-  m_TagString: Untagged
+  m_TagString: AngelSpawner
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -87,7 +87,7 @@ MonoBehaviour:
   angelMaxWaitTime: 5
   angelSpotSpeed: 0.3
   angelDisguiseDamage: 10
-  angelVisionConeRange: 10
+  angelVisionConeRange: 11
   angelVisionConeAngle: 90
   angelBigAngelAlertRange: 0
-  respawnCooldown: 10
+  respawnCooldown: 0

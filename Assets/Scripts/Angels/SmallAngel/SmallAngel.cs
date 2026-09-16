@@ -38,6 +38,8 @@ public class SmallAngel : MonoBehaviour
     private float tickSpotting = 0f;
     private bool spottedPlayer = false;
 
+    private bool sawPlayerUndisguised = false;
+
     //Starting point for the angel - returns here when not chasing the player
     Vector3 home;
 
@@ -146,7 +148,7 @@ public class SmallAngel : MonoBehaviour
         directionToTargetFromHome = (target.transform.position - home);
 
         //If the target is in range, uses a raycast to check if and for how long the target has been in line of sight, handling the alert and spotting behaviours
-        if(directionToTargetFromHome.magnitude <= chaseDistance)
+        if(directionToTargetFromHome.magnitude <= chaseDistance && health > 0)
         {
             CastLineOfSight();   
 
@@ -185,6 +187,7 @@ public class SmallAngel : MonoBehaviour
                 isWaiting = false;
                 spottedPlayer = false;
                 alerted = false;
+                sawPlayerUndisguised = false;
 
                 //Angel resumes regular vision cone
                 shaderDetector.ShowShader();
@@ -248,7 +251,10 @@ public class SmallAngel : MonoBehaviour
         }
         else
         {
-            shaderDetector.SetActivated();
+            if(!playerController.GetIsDisguised())
+            {
+                shaderDetector.SetActivated();
+            }
 
             //If the player has been 'spotted' the angel locks on!
             if(spottedPlayer)
@@ -271,9 +277,11 @@ public class SmallAngel : MonoBehaviour
                     //Drains disguise
                     playerController.ChangeDisguiseHealth((disguiseDamage * -1) *  Time.deltaTime);
                 }
-                //If player is not disguised, chases after them
-                if(!playerController.GetIsDisguised())
+                //If player is not disguised, or angel has seen player undisguised, chases after them
+                if(!playerController.GetIsDisguised() || sawPlayerUndisguised)
                 {
+                    sawPlayerUndisguised = true;
+
                     playerController.BindPlayer();
 
                     text.text = "!!";
@@ -286,6 +294,11 @@ public class SmallAngel : MonoBehaviour
             //If the angel can see the player but has not spotted them, spot value builds until the player is spotted - the angel stops moving whilst spotting
             else
             {
+                if(!playerController.GetIsDisguised())
+                {
+                    sawPlayerUndisguised = true;
+                }
+
                 turningToTarget = true;
 
                 text.text = "?";
@@ -381,6 +394,7 @@ public class SmallAngel : MonoBehaviour
     {
         if(!alerted || playerController.GetIsDisguised())
         {
+            
             health -= damage;
             Debug.Log("Damaged! " + health + " health remaining!");
 
@@ -390,6 +404,8 @@ public class SmallAngel : MonoBehaviour
                 //Sends alert to spawner so it creates a new angel
                 spawner.DeathAlert();
                 animator.SetFloat("health", 0f);
+
+                shaderDetector.HideShader();
 
                 //Breaks player's disguise if they are wearing it.
                 if(playerController.GetIsDisguised()) 
@@ -420,7 +436,7 @@ public class SmallAngel : MonoBehaviour
     //Runs whilst this angel's trigger collider is colliding with something
     public void OnTriggerStay(Collider col)
     {
-        if(attackReady)
+        if(attackReady && health > 0)
         {
             //Checks if collision is with the player object
             if(col.gameObject.tag == "Player" && playerController.GetIsDisguised() == false)

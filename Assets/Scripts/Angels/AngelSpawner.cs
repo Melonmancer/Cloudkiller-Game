@@ -29,24 +29,24 @@ public class AngelSpawner : MonoBehaviour
 
 
     //Cooldown timer for respawning a dead angel
+    //Setting this to 0 disables automatic respawn
     [SerializeField] private float respawnCooldown;
     private float respawnTimer = 0f;
-    private bool angelIsDead;
+    private bool angelIsDead = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        angelIsDead = true;
-        respawnTimer = respawnCooldown;
-
         angelHomePoint = transform.GetChild(0).transform.position;
+        
+        MakeNewAngel();
     }
 
     // Update is called once per frame
     void Update()
     {
         //If angel is dead, ticks up the respawn timer
-        if(angelIsDead)
+        if(angelIsDead && respawnCooldown != 0f)
         {
             respawnTimer += (1f * Time.deltaTime);
             if(respawnTimer >= respawnCooldown)
@@ -54,24 +54,29 @@ public class AngelSpawner : MonoBehaviour
                 respawnTimer = 0f;
                 angelIsDead = false;
 
-                if(angelPrefab.transform.GetChild(0).GetComponent<SmallAngel>() != null)
-                {
-                    SpawnAngel();            
-                }
-                else if(angelPrefab.transform.GetChild(0).GetComponent<SnitchAngel>() != null)
-                {
-                    SpawnSnitchAngel();
-                }
-                else
-                {
-                    Debug.Log("Error! Spawner has no assigned angel prefab.");
-                }
+                MakeNewAngel();
             }
         }
     }
 
+    private void MakeNewAngel()
+    {
+        if(angelPrefab.transform.GetChild(0).GetComponent<SmallAngel>() != null)
+        {
+            SpawnAngel();            
+        }
+        else if(angelPrefab.transform.GetChild(0).GetComponent<SnitchAngel>() != null)
+        {
+            SpawnSnitchAngel();
+        }        
+        else
+        {
+            Debug.Log("Error! Spawner has no assigned angel prefab.");
+        }
+    }
+
     //Creates a new angel at this spawner's position, passing in the variables
-    void SpawnAngel()
+    private void SpawnAngel()
     {
         GameObject newAngel = Instantiate(angelPrefab, this.transform);
         newAngel.transform.GetChild(0).GetComponent<SmallAngel>().SetVariables(this, angelTarget, angelHealth, angelDamage, angelSpeed, angelChaseDistance, 
@@ -79,7 +84,7 @@ public class AngelSpawner : MonoBehaviour
         currentAliveAngel = newAngel.transform.GetChild(0).gameObject;
     }
 
-    void SpawnSnitchAngel()
+    private void SpawnSnitchAngel()
     {
         GameObject newAngel = Instantiate(angelPrefab, this.transform);
         newAngel.transform.GetChild(0).GetComponent<SnitchAngel>().SetVariables(this, angelTarget, angelHealth, angelSpeed, angelChaseDistance, 
@@ -97,5 +102,17 @@ public class AngelSpawner : MonoBehaviour
     public GameObject GetCurrentAngel()
     {
         return currentAliveAngel;
+    }
+
+    private void DestroyCurrentAngel()
+    {
+        Destroy(currentAliveAngel);
+    }
+
+
+    public void ResetSpawn()
+    {
+        DestroyCurrentAngel();
+        MakeNewAngel();
     }
 }

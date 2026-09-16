@@ -29,6 +29,8 @@ public class PlayerController : MonoBehaviour
 
     private bool disguiseInput;
 
+    private bool playerIsDead = false;
+
 
     //Controls player's ability to jump slightly after leaving a platform
     private bool coyoteTime = false;
@@ -90,6 +92,7 @@ public class PlayerController : MonoBehaviour
 
     private InGameUI ui;
    
+    private RespawnController rc;
 
     // Start is called before the first frame update
     void Start()
@@ -110,12 +113,16 @@ public class PlayerController : MonoBehaviour
         AnimationController = GetComponentInChildren<AnimationController>();
 
         ui = GameObject.FindWithTag("GameManager").GetComponent<InGameUI>();
+        rc = GameObject.FindWithTag("GameManager").GetComponent<RespawnController>();
     }
 
     //Update called each frame update, collects player inputs
     void Update()
     {
-        GetPlayerInputs();
+        if(!playerIsDead)
+        {
+            GetPlayerInputs();
+        }
        
 
         //If the player's attack is on cooldown, this ticks it.
@@ -165,7 +172,7 @@ public class PlayerController : MonoBehaviour
 
 
         //If the player is supposed to be facing a certain direction, spin the mesh closer to this direction
-        if(spinningMesh)
+        if(spinningMesh && !playerIsDead)
         {
             //Adjusts the mesh to face whichever way the camera is facing
             playerMesh.transform.forward = Vector3.Slerp(playerMesh.transform.forward, viewDirection.normalized, meshRotationSpeed);
@@ -386,11 +393,11 @@ public class PlayerController : MonoBehaviour
     }
 
     //Add all other respawn work in here (clear stored disguise material, etc.)
-    private void RespawnPlayer()
+    public void RespawnPlayer()
     {
         ui.FadeDeathScreen();
 
-        Debug.Log("Respawning player!");
+        //Debug.Log("Respawning player!");
 
         if(respawnPoint != null)
         {
@@ -403,6 +410,16 @@ public class PlayerController : MonoBehaviour
         }
 
         health = maxHealth;
+        disguiseHealth = startingDisguiseHealth;
+
+        playerIsDead = false;
+
+        bound = false;
+        alarmRaised = false;
+        if(isDisguised)
+        {
+            ToggleDisguise();
+        }
     }
 
     //Toggles the player's disguise
@@ -467,7 +484,8 @@ public class PlayerController : MonoBehaviour
         if(health <= 0)
         {
             //Debug.Log("PLAYER IS DEAD!");
-            RespawnPlayer();
+            playerIsDead = true;
+            rc.TriggerReset();
             return true;
         }
         else
@@ -482,6 +500,11 @@ public class PlayerController : MonoBehaviour
         boundTimeStep = 0f;
         alarmRaised = true;
         alarmTimeStep = 0f;
+        if(isDisguised)
+        {
+            ToggleDisguise();
+        }
+
     }
 
 
