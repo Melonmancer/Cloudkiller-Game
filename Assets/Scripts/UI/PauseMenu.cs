@@ -157,4 +157,14 @@ public class PauseMenu : MonoBehaviour
         #endif
     }
 
+    public void LowQualityGraphics()
+    {
+        //disable bloom
+    }
+
+    public void HighQualityGraphics()
+    {
+        //enable bloom
+    }
+
 }
