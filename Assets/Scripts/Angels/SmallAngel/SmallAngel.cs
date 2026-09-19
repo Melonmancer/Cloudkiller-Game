@@ -76,6 +76,25 @@ public class SmallAngel : MonoBehaviour
 
     bool newSpawn = true;
 
+
+    //UI section to enable the disguise slider to go red when disguise is being drained
+
+    public static List<SmallAngel> AllSmallAngels = new List<SmallAngel>();
+
+    public bool angelIsDrainingDisguise = false;
+
+    void OnEnable()
+    {
+        AllSmallAngels.Add(this);
+    }
+
+    void OnDisable()
+    {
+        AllSmallAngels.Remove(this);
+    }
+
+    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -276,6 +295,13 @@ public class SmallAngel : MonoBehaviour
 
                     //Drains disguise
                     playerController.ChangeDisguiseHealth((disguiseDamage * -1) *  Time.deltaTime);
+
+                    //Tells InGameUI script to change visuals of disguise slider
+                    angelIsDrainingDisguise = true;
+                }
+                else
+                {
+                    angelIsDrainingDisguise = false;
                 }
                 //If player is not disguised, or angel has seen player undisguised, chases after them
                 if(!playerController.GetIsDisguised() || sawPlayerUndisguised)

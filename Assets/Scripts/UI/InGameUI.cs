@@ -1,14 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
-//using System.Diagnostics;
+using System.Security.Cryptography.X509Certificates;
+
 using System.Xml.Schema;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class InGameUI : MonoBehaviour
 {
-    //public Slider healthSlider;
     public Slider disguiseSlider;
+    public Image disguiseSliderFillImage;
+
     [SerializeField] private Image deathScreen;
 
     [SerializeField] private PlayerController playerController;
@@ -24,8 +26,13 @@ public class InGameUI : MonoBehaviour
     public GameObject border;
     public GameObject yellowVignette;
     public GameObject purpleVignette;
+    public GameObject disguiseDrainingUI;
+
+    public Image disguiseIcon;
+    public RawImage knifeIcon;
     
-    
+    private bool isDisguiseFlashing = false;
+    private bool isKnifeFlashing = false;
 
     private bool fadingInDeathScreen = false;
     private bool fadingOutDeathScreen = false;
@@ -33,19 +40,17 @@ public class InGameUI : MonoBehaviour
     private float counter = 0f;
     
     private Color deathScreenC = Color.black;
+    private Color boundGreyedOutC = new Color(135, 116, 0);
 
     void Start()
     {
-
-        //float[] healthValues = playerController.GetHealthValues();
-        //healthSlider.maxValue = healthValues[1];
-
         currHealth = maxHealth;
 
         disguiseControlsText.SetActive(false);
         border.SetActive(true);
         
-
+        disguiseSliderFillImage.color = new Color32(208,236,124,255);
+        disguiseDrainingUI.SetActive(false);
     }
 
     
@@ -53,6 +58,7 @@ public class InGameUI : MonoBehaviour
     {
         UpdateDisguiseUI();
         VignetteUI();
+        DisguisSliderColourChanges();
 
         if(fadingOutDeathScreen)
         {
@@ -95,10 +101,42 @@ public class InGameUI : MonoBehaviour
         {
             yellowVignette.SetActive(true);
 
+             if (!isDisguiseFlashing)
+            {
+                disguiseIcon.color = boundGreyedOutC;
+            }
+
+            if (!isKnifeFlashing)
+            {
+                knifeIcon.color = boundGreyedOutC;
+            }
+
+            if (Input.GetKeyDown(KeyCode.E) && !isDisguiseFlashing)
+            {
+                StartCoroutine(DisguiseIconFlashRed());
+            }
+
+            if (Input.GetMouseButtonDown(0) && !isKnifeFlashing)
+            {
+                StartCoroutine(KnifeIconFlashRed());
+            }
+
+            //put chains on eye slider and knife UI
+
         }
         else
         {
             yellowVignette.SetActive(false);
+            
+            if (!isDisguiseFlashing)
+            {
+                disguiseIcon.color = Color.white;
+            }
+            
+            knifeIcon.color = Color.white;
+
+            
+            //remove chains from eye slider and knife UI
         }
 
         if (playerController.isDisguised == true)
@@ -113,23 +151,91 @@ public class InGameUI : MonoBehaviour
         
     }
 
-
-
-
-    /*
-    void UpdateHealthUI()
+    public void DisguisSliderColourChanges()
     {
-        float[] healthValues = playerController.GetHealthValues();
+        float currDisguiseHealth = playerController.GetDisguiseHealth();
 
-        float currHealth = healthValues[0];
-        float maxHealth = healthValues[1];
+        if (currDisguiseHealth == 0)
+        {
+            if(Input.GetKeyDown(KeyCode.E))
+            {
+                if(!isDisguiseFlashing)
+                {
+                    StartCoroutine(DisguiseIconFlashRed());
+                }
+            }
+        }
 
-        healthSlider.maxValue = maxHealth;
-        healthSlider.value = currHealth;
+        bool anyAngelDraining = false;
+
+        foreach (SmallAngel angel in SmallAngel.AllSmallAngels)
+        {
+            if (angel != null && angel.angelIsDrainingDisguise)
+            {
+                anyAngelDraining = true;
+                break; 
+            }
+        }
+
+        if (anyAngelDraining)
+        {
+            disguiseSliderFillImage.color = Color.red;
+            disguiseDrainingUI.SetActive(true);
+        }
+        else
+        {
+            disguiseSliderFillImage.color = new Color32(208,236,124,255);
+            disguiseDrainingUI.SetActive(false);
+        }
+    }
+
+
+    private float flashDuration = 0.1f;
+
+    IEnumerator DisguiseIconFlashRed ()
+    {
+        isDisguiseFlashing = true;
+
+        disguiseIcon.color = new Color (1f,0f,0f);
+        yield return new WaitForSeconds (flashDuration);
+        disguiseIcon.color = boundGreyedOutC;
+        yield return new WaitForSeconds (flashDuration);
+
+        disguiseIcon.color = new Color (1f,0f,0f);
+        yield return new WaitForSeconds (flashDuration);
+        disguiseIcon.color = boundGreyedOutC;
+        yield return new WaitForSeconds (flashDuration);
+
+        disguiseIcon.color = new Color (1f,0f,0f);
+        yield return new WaitForSeconds (flashDuration);
+        disguiseIcon.color = boundGreyedOutC;
+        yield return new WaitForSeconds (flashDuration);
+        
+        isDisguiseFlashing = false;
 
     }
 
-    */
+    IEnumerator KnifeIconFlashRed ()
+    {
+        isKnifeFlashing = true;
+
+        knifeIcon.color = new Color (1f,0f,0f);
+        yield return new WaitForSeconds (flashDuration);
+        knifeIcon.color = boundGreyedOutC;
+        yield return new WaitForSeconds (flashDuration);
+        
+        knifeIcon.color = new Color (1f,0f,0f);
+        yield return new WaitForSeconds (flashDuration);
+        knifeIcon.color = boundGreyedOutC;
+        yield return new WaitForSeconds (flashDuration);
+
+        knifeIcon.color = new Color (1f,0f,0f);
+        yield return new WaitForSeconds (flashDuration);
+        knifeIcon.color = boundGreyedOutC;
+        yield return new WaitForSeconds (flashDuration);
+
+        isKnifeFlashing = false;
+    }
 
     void UpdateDisguiseUI()
     {

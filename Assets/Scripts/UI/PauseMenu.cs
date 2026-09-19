@@ -32,18 +32,27 @@ public class PauseMenu : MonoBehaviour
         controlsPanel.SetActive(false);
         pauseMenu.SetActive(false);
 
-        {
         if (volume.profile.TryGet(out colorAdjustments))
         {
-            exposureSlider.onValueChanged.AddListener(SetExposure);
+            float defaultExposure = colorAdjustments.postExposure.value;
+            float savedExposure = PlayerPrefs.GetFloat("SavedExposureSliderValue", defaultExposure);
 
-            exposureSlider.value = colorAdjustments.postExposure.value;
+            colorAdjustments.postExposure.value = savedExposure;
+            exposureSlider.value = savedExposure;
+
+            exposureSlider.onValueChanged.AddListener(SetExposure);
         }
 
-        sensitivitySlider.value = programmedCamera.sensitivity;
+        if (programmedCamera != null)
+        {
+            float defaultSens = programmedCamera.sensitivity;
+            float savedSens = PlayerPrefs.GetFloat("SavedSensitivitySliderValue", defaultSens);
 
-        sensitivitySlider.onValueChanged.AddListener(SetSensitivity);
-    }
+            programmedCamera.sensitivity = savedSens;
+            sensitivitySlider.value = savedSens;
+
+            sensitivitySlider.onValueChanged.AddListener(SetSensitivity);
+        }
     }
 
     
@@ -70,34 +79,38 @@ public class PauseMenu : MonoBehaviour
         if (colorAdjustments != null)
         {
             colorAdjustments.postExposure.value = value;
+            
+            PlayerPrefs.SetFloat("SavedExposureSliderValue", value);
+            PlayerPrefs.Save();
+        }
+    }
+
+    private void SetSensitivity(float value)
+    {
+        if (programmedCamera != null)
+        {
+            programmedCamera.sensitivity = value;
+
+            PlayerPrefs.SetFloat("SavedSensitivitySliderValue", value);
+            PlayerPrefs.Save();
         }
     }
 
     private void OnDestroy()
     {
-        exposureSlider.onValueChanged.RemoveListener(SetExposure);
-        sensitivitySlider.onValueChanged.RemoveListener(SetSensitivity);
-    }
-
-    private void SetSensitivity(float value)
-    {
-        programmedCamera.sensitivity = value;
+        if (exposureSlider != null) exposureSlider.onValueChanged.RemoveListener(SetExposure);
+        if (sensitivitySlider != null) sensitivitySlider.onValueChanged.RemoveListener(SetSensitivity);
     }
 
 
     public void Pause()
     {
-        //if (levelEnd.win == false)
-        //{
-            pauseMenu.SetActive(true);
-            Time.timeScale = 0f;
-            isPaused = true;
+        pauseMenu.SetActive(true);
+        Time.timeScale = 0f;
+        isPaused = true;
 
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
-        //}
-        
-
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 
     public void Resume()
