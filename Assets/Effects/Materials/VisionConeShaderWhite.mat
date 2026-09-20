@@ -26,13 +26,13 @@ Material:
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
-  - _ALPHAPREMULTIPLY_ON
+  - _RECEIVE_SHADOWS_OFF
   - _SURFACE_TYPE_TRANSPARENT
   m_InvalidKeywords: []
   m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
+  m_CustomRenderQueue: 3000
   stringTagMap:
     RenderType: Transparent
   disabledShaderPasses:
@@ -57,24 +57,24 @@ Material:
     m_Floats:
     - _AlphaClip: 0
     - _Blend: 0
-    - _BlendModePreserveSpecular: 1
+    - _BlendModePreserveSpecular: 0
     - _CastShadows: 1
     - _Cull: 2
     - _DstBlend: 10
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _ReceiveShadows: 1
-    - _SrcBlend: 1
+    - _ReceiveShadows: 0
+    - _SrcBlend: 5
     - _Surface: 1
     - _WorkflowMode: 1
     - _ZTest: 4
     - _ZWrite: 0
     - _ZWriteControl: 0
-    - _borderpower: 5
-    - _depth: 0.5
+    - _borderpower: 2.6
+    - _depth: 2.1
     - isdetected: 0
     m_Colors:
-    - _bordercolour: {r: 1, g: 1, b: 1, a: 1}
-    - _red: {r: 0.7490196, g: 0, b: 0, a: 1}
-    - _white: {r: 1, g: 1, b: 1, a: 1}
+    - _bordercolour: {r: 0.8705506, g: 0.8705506, b: 0.8705506, a: 0.5686275}
+    - _red: {r: 1.2440978, g: 0, b: 0, a: 1}
+    - _white: {r: 0.10135574, g: 0.10135574, b: 0.10135574, a: 0.63529414}
   m_BuildTextureStacks: []
