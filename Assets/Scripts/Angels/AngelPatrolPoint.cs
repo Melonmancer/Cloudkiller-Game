@@ -21,6 +21,8 @@ public class AngelPatrolPoint : MonoBehaviour
 
     [SerializeField] private GameObject nextLookAtObject;
 
+    //One point in a patrol should start as active, which is where the angel should start
+    [SerializeField] private bool active = false;
 
     // Start is called before the first frame update
     void Start()
@@ -31,7 +33,7 @@ public class AngelPatrolPoint : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(linkedAngel != null)
+        if(linkedAngel != null && active)
         {
             Vector3 distanceFromPoint = (linkedAngel.transform.position - this.transform.position);
             //Debug.Log(distanceFromPoint.magnitude);
@@ -76,6 +78,8 @@ public class AngelPatrolPoint : MonoBehaviour
                     Debug.Log("Error! Angel patrol point could not find an angel script to order around.");
                 }
 
+                nextPatrolPoint.GetComponent<AngelPatrolPoint>().ActivatePoint();
+                DeactivatePoint();
                 goingNext = false;
             }
         }
@@ -90,5 +94,15 @@ public class AngelPatrolPoint : MonoBehaviour
                 snitchAngel = linkedAngel.GetComponent<SnitchAngel>();
             }
         }
+    }
+
+    public void ActivatePoint()
+    {
+        active = true;
+    }
+
+    private void DeactivatePoint()
+    {
+        active = false;
     }
 }

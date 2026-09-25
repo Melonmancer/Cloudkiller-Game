@@ -88,6 +88,6 @@ MonoBehaviour:
   angelSpotSpeed: 0.3
   angelDisguiseDamage: 10
   angelVisionConeRange: 11
-  angelVisionConeAngle: 90
+  angelVisionConeAngle: 80
   angelBigAngelAlertRange: 0
   respawnCooldown: 0
