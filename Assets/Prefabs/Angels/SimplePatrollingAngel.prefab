@@ -44,6 +44,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 203277959526032809, guid: a919f39bcd279bb4b90a8c68b5c0ee3d,
         type: 3}
+      propertyPath: active
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 203277959526032809, guid: a919f39bcd279bb4b90a8c68b5c0ee3d,
+        type: 3}
       propertyPath: nextPatrolPoint
       value: 
       objectReference: {fileID: 654511222028437276}
