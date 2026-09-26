@@ -259,6 +259,8 @@ public class SmallAngel : MonoBehaviour
         {
             shaderDetector.SetDeactivated();
 
+            angelIsDrainingDisguise = false;
+
             //If the angel was spotting the player, the spotting progress resets - the player has hidden in time!
             tickSpotting = 0f;
 
