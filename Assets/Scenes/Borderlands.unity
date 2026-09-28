@@ -664,6 +664,60 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -5211574676575562649, guid: a1254f1eaaa80584c8ad4039afbe174f, type: 3}
+--- !u!1 &536126737
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 536126739}
+  - component: {fileID: 536126738}
+  m_Layer: 0
+  m_Name: GrassSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &536126738
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 536126737}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd96d6cec466718408717a8e96ca6280, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ground: {fileID: 2830364480520688966, guid: 15433316282cb3941821c37de4d767fe, type: 3}
+  grassSource: {fileID: 1036680542486683177, guid: 200fd078415a3b84292f515060eb24a7,
+    type: 3}
+  grassMaterial: {fileID: 2100000, guid: dd1fa292472171442a3f39bcb2e5c8bc, type: 2}
+  targetCamera: {fileID: 1946587513}
+  densityMask: {fileID: 2800000, guid: a7ef59595e983d64eba9b65e8daef80b, type: 3}
+  density: 5
+  scaleRange: {x: 0.8, y: 1.2}
+  drawDistance: 50
+--- !u!4 &536126739
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 536126737}
+  m_LocalRotation: {x: 0.000000037748947, y: -0.00000004371139, z: -1.7112913e-15,
+    w: 1}
+  m_LocalPosition: {x: -228.41922, y: -104.01441, z: -272.87335}
+  m_LocalScale: {x: 4.4208956, y: 4.4208956, z: 4.4208956}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1988807113}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &731701230
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1739,6 +1793,12 @@ PrefabInstance:
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 56d861bd3055aec41ae6eccddca010bb, type: 3}
+--- !u!20 &1946587513 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 7717542835055016893, guid: cdd7c8f63a7919540b92d05a79d501ff,
+    type: 3}
+  m_PrefabInstance: {fileID: 1957964927}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1957964927
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2078,6 +2138,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 2106312636}
+    - targetCorrespondingSourceObject: {fileID: 1218402827263449827, guid: 15433316282cb3941821c37de4d767fe,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 536126739}
   m_SourcePrefab: {fileID: 100100000, guid: 15433316282cb3941821c37de4d767fe, type: 3}
 --- !u!1001 &1892702048761873644
 PrefabInstance:
