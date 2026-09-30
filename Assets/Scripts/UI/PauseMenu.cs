@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
+//using System.Diagnostics;
 
 public class PauseMenu : MonoBehaviour
 
@@ -21,6 +22,7 @@ public class PauseMenu : MonoBehaviour
 
     [SerializeField] private Slider exposureSlider;
     [SerializeField] private Volume volume;
+    private Bloom bloom;
 
     [SerializeField] private Slider sensitivitySlider;
     [SerializeField] private ProgrammedCamera programmedCamera;
@@ -31,6 +33,8 @@ public class PauseMenu : MonoBehaviour
     {
         controlsPanel.SetActive(false);
         pauseMenu.SetActive(false);
+
+        volume.profile.TryGet(out bloom);
 
         if (volume.profile.TryGet(out colorAdjustments))
         {
@@ -96,6 +100,22 @@ public class PauseMenu : MonoBehaviour
         }
     }
 
+    
+
+    public void LowGraphicsQuality ()
+    {
+        //disable bloom
+        bloom.active = false;
+        Debug.Log("disable bloom");
+    }
+
+    public void HighGraphicsQuality ()
+    {
+        //enable bloom
+        bloom.active = true;
+        Debug.Log("enable bloom");
+    }
+
     private void OnDestroy()
     {
         if (exposureSlider != null) exposureSlider.onValueChanged.RemoveListener(SetExposure);
@@ -157,14 +177,6 @@ public class PauseMenu : MonoBehaviour
         #endif
     }
 
-    public void LowQualityGraphics()
-    {
-        //disable bloom
-    }
 
-    public void HighQualityGraphics()
-    {
-        //enable bloom
-    }
 
 }

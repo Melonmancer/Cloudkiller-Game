@@ -21,7 +21,7 @@ public class MainMenu : MonoBehaviour
 
     void Awake()
     {
-        // Set up listeners to instantly save the data when a player drags the slider
+        
         if (exposureSlider != null)
         {
             exposureSlider.onValueChanged.AddListener(SaveExposureValue);

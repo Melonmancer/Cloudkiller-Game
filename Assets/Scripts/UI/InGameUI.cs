@@ -15,6 +15,11 @@ public class InGameUI : MonoBehaviour
 
     [SerializeField] private PlayerController playerController;
 
+    [SerializeField] private Animator chainIconAnimator1;
+    [SerializeField] private Animator chainCornerAnimator1;
+    [SerializeField] private Animator chainIconAnimator2;
+    [SerializeField] private Animator chainCornerAnimator2;
+
     private float maxHealth;
     private float currHealth;
 
@@ -40,7 +45,8 @@ public class InGameUI : MonoBehaviour
     private float counter = 0f;
     
     private Color deathScreenC = Color.black;
-    private Color boundGreyedOutC = new Color(135, 116, 0);
+    private Color boundGreyedOutC = new Color32(190, 137, 105,255);
+    //private Color boundGreyedOutC = Color.black;
 
     void Start()
     {
@@ -57,7 +63,7 @@ public class InGameUI : MonoBehaviour
     void Update()
     {
         UpdateDisguiseUI();
-        VignetteUI();
+        BoundUI();
         DisguisSliderColourChanges();
 
         if(fadingOutDeathScreen)
@@ -95,7 +101,9 @@ public class InGameUI : MonoBehaviour
         }
     }
 
-    public void VignetteUI () 
+    private bool previousBoundState = false;
+
+    public void BoundUI () 
     {
         if (playerController.bound == true)
         {
@@ -121,7 +129,12 @@ public class InGameUI : MonoBehaviour
                 StartCoroutine(KnifeIconFlashRed());
             }
 
-            //put chains on eye slider and knife UI
+            if (!previousBoundState)
+            {
+                Debug.Log("PLAYER JUST BECAME BOUND - SHOWING CHAINS");
+                ShowChains();
+            }
+                
 
         }
         else
@@ -135,9 +148,15 @@ public class InGameUI : MonoBehaviour
             
             knifeIcon.color = Color.white;
 
-            
-            //remove chains from eye slider and knife UI
+            if (previousBoundState)
+            {
+                HideChains();
+            }
+
+
         }
+
+        previousBoundState = playerController.bound;
 
         if (playerController.isDisguised == true)
         {
@@ -149,6 +168,23 @@ public class InGameUI : MonoBehaviour
         }
 
         
+    }
+
+    public void ShowChains()
+    {
+        Debug.Log("ShowChains() called");
+
+        chainIconAnimator1.SetTrigger("PlayChains");
+        chainCornerAnimator1.SetTrigger("PlayChains");
+        chainIconAnimator2.SetTrigger("PlayChains");
+        chainCornerAnimator2.SetTrigger("PlayChains");
+    }
+
+    public void HideChains() {
+        chainIconAnimator1.SetTrigger("StopChains");
+        chainCornerAnimator1.SetTrigger("StopChains");
+        chainIconAnimator2.SetTrigger("StopChains");
+        chainCornerAnimator2.SetTrigger("StopChains");
     }
 
     public void DisguisSliderColourChanges()
@@ -172,19 +208,26 @@ public class InGameUI : MonoBehaviour
         {
             if (angel != null && angel.angelIsDrainingDisguise)
             {
+                Debug.Log("draining "  + angel.angelIsDrainingDisguise);
+
                 anyAngelDraining = true;
                 break; 
             }
         }
 
-        if (anyAngelDraining)
+        if (playerController.bound)
+        {
+            disguiseSliderFillImage.color = new Color32(154, 127, 47, 255);
+            disguiseDrainingUI.SetActive(false);
+        }
+        else if (anyAngelDraining)
         {
             disguiseSliderFillImage.color = Color.red;
             disguiseDrainingUI.SetActive(true);
         }
         else
         {
-            disguiseSliderFillImage.color = new Color32(208,236,124,255);
+            disguiseSliderFillImage.color = new Color32(208, 236, 124, 255);
             disguiseDrainingUI.SetActive(false);
         }
     }
