@@ -3,10 +3,9 @@ using UnityEngine;
 public class PlayerSound : MonoBehaviour
 {
     [SerializeField] private AudioClip[] footstepsArray;
-    [SerializeField] private float volume = 1f;
+    [SerializeField] private float footstepsVolume = 1f;
 
     [SerializeField] private AudioSource footsteps;
-    [SerializeField] private Animator animator;
     private PlayerController PlayerController;
 
     void Start()
@@ -16,7 +15,6 @@ public class PlayerSound : MonoBehaviour
 
     public void PlayFootstepSound()
     {
-        // Optional: Avoid playing sounds if the character isn't grounded
         if (PlayerController.GetGrounded() == false)
         {
             return;
@@ -25,6 +23,6 @@ public class PlayerSound : MonoBehaviour
         int randomIndex = Random.Range(0, footstepsArray.Length);
         AudioClip clip = footstepsArray[randomIndex];
 
-        footsteps.PlayOneShot(clip, volume);
+        footsteps.PlayOneShot(clip, footstepsVolume);
     }
 }

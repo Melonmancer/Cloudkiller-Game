@@ -99,6 +99,11 @@ PrefabInstance:
       propertyPath: startingDisguiseHealth
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 786961829775571376, guid: 38f3a15f061995d4781c8bf4e49f954e,
+        type: 3}
+      propertyPath: daggerMesh
+      value: 
+      objectReference: {fileID: 7981245160908494586}
     - target: {fileID: 842032930271689504, guid: 38f3a15f061995d4781c8bf4e49f954e,
         type: 3}
       propertyPath: m_Pivot.x
@@ -332,16 +337,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   footstepsArray:
-  - {fileID: 8300000, guid: 4d310b549ec468a4c9e709d842738bc4, type: 3}
-  - {fileID: 8300000, guid: 98e0db06d7410594dbaa64337cb982c8, type: 3}
-  - {fileID: 8300000, guid: d18026e298c94de4fb00852bd076528f, type: 3}
-  - {fileID: 8300000, guid: f23a62e77464c37448531192467ab402, type: 3}
-  - {fileID: 8300000, guid: 33fe2b31b07e82c4498dfb1b2d189bca, type: 3}
-  - {fileID: 8300000, guid: 923692ead19ce3c4495e96375d365708, type: 3}
-  - {fileID: 8300000, guid: 3b2b8878b565b6943953ed7aba50e92e, type: 3}
-  volume: 1
+  - {fileID: 8300000, guid: 661bd9356d0221343b1ec2e24081f3fd, type: 3}
+  - {fileID: 8300000, guid: d8bc6be81886fb74f98fc8a8c4f41075, type: 3}
+  - {fileID: 8300000, guid: 17bc2a21e81851147a1a18b7ff9186bc, type: 3}
+  - {fileID: 8300000, guid: 928e863a03e5f4e4f874fcc429416070, type: 3}
+  - {fileID: 8300000, guid: 2a98fb9e25f8439469943a9bf837a0dd, type: 3}
+  - {fileID: 8300000, guid: e7d51d756e9604d45833eb85ea57db10, type: 3}
+  - {fileID: 8300000, guid: 8f0ab7debfa8ba94188793adb588001d, type: 3}
+  footstepsVolume: 1
   footsteps: {fileID: 9017632950036629976}
-  animator: {fileID: 8176251261901312860}
 --- !u!224 &6711426606206209091 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 842032930271689504, guid: 38f3a15f061995d4781c8bf4e49f954e,
@@ -354,9 +358,9 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 6236437158308132707}
   m_PrefabAsset: {fileID: 0}
---- !u!95 &8176251261901312860 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 2881080822578226239, guid: 38f3a15f061995d4781c8bf4e49f954e,
+--- !u!1 &7981245160908494586 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4057552646435840409, guid: 38f3a15f061995d4781c8bf4e49f954e,
     type: 3}
   m_PrefabInstance: {fileID: 6236437158308132707}
   m_PrefabAsset: {fileID: 0}
