@@ -11,7 +11,10 @@ public class WeaponSound : MonoBehaviour
     {
         if (!collision.gameObject.CompareTag("Player"))
         {
-            PlayHitSound();
+            if(collision.gameObject.CompareTag("KillableEnemy"))
+            {
+                PlayHitSound();
+            }      
         }    
     }
 

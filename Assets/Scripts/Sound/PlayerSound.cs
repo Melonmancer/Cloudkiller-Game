@@ -2,10 +2,15 @@ using UnityEngine;
 
 public class PlayerSound : MonoBehaviour
 {
-    [SerializeField] private AudioClip[] footstepsArray;
+    [SerializeField] private AudioClip[] footsteps;
+    [SerializeField] private AudioClip landing;
+    [SerializeField] private AudioClip melee;
+    [SerializeField] private AudioClip melee2;
     [SerializeField] private float footstepsVolume = 1f;
+    [SerializeField] private float landingVolume = 1f;
+    [SerializeField] private float meleeVolume = 1f;
 
-    [SerializeField] private AudioSource footsteps;
+    [SerializeField] private AudioSource playerAudio;
     private PlayerController PlayerController;
 
     void Start()
@@ -20,9 +25,24 @@ public class PlayerSound : MonoBehaviour
             return;
         }
         
-        int randomIndex = Random.Range(0, footstepsArray.Length);
-        AudioClip clip = footstepsArray[randomIndex];
+        int randomIndex = Random.Range(0, footsteps.Length);
+        AudioClip clip = footsteps[randomIndex];
 
-        footsteps.PlayOneShot(clip, footstepsVolume);
+        playerAudio.PlayOneShot(clip, footstepsVolume);
+    }
+
+    public void PlayLandingSound()
+    {
+        playerAudio.PlayOneShot(landing, landingVolume);
+    }
+
+    public void PlayMeleeSound()
+    {
+        playerAudio.PlayOneShot(melee, meleeVolume);
+    }
+
+    public void PlayMelee2Sound()
+    {
+        playerAudio.PlayOneShot(melee2, meleeVolume);
     }
 }

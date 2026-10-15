@@ -336,7 +336,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c37f60990197c114e8d14f2f135feff8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  footstepsArray:
+  footsteps:
   - {fileID: 8300000, guid: 661bd9356d0221343b1ec2e24081f3fd, type: 3}
   - {fileID: 8300000, guid: d8bc6be81886fb74f98fc8a8c4f41075, type: 3}
   - {fileID: 8300000, guid: 17bc2a21e81851147a1a18b7ff9186bc, type: 3}
@@ -344,8 +344,13 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 2a98fb9e25f8439469943a9bf837a0dd, type: 3}
   - {fileID: 8300000, guid: e7d51d756e9604d45833eb85ea57db10, type: 3}
   - {fileID: 8300000, guid: 8f0ab7debfa8ba94188793adb588001d, type: 3}
-  footstepsVolume: 1
-  footsteps: {fileID: 9017632950036629976}
+  landing: {fileID: 8300000, guid: 45f8a7f0904334a41a7fffcef8a2bd89, type: 3}
+  melee: {fileID: 8300000, guid: a9aec599fe538dc4ab4259135ece8ec8, type: 3}
+  melee2: {fileID: 8300000, guid: a41a48294c6e06649894c3c88a560051, type: 3}
+  footstepsVolume: 1.2
+  landingVolume: 0.35
+  meleeVolume: 0.4
+  playerAudio: {fileID: 9017632950036629976}
 --- !u!224 &6711426606206209091 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 842032930271689504, guid: 38f3a15f061995d4781c8bf4e49f954e,
