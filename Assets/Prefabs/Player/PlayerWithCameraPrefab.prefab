@@ -350,6 +350,7 @@ MonoBehaviour:
   footstepsVolume: 1.2
   landingVolume: 0.35
   meleeVolume: 0.4
+  melee2Volume: 0.2
   playerAudio: {fileID: 9017632950036629976}
 --- !u!224 &6711426606206209091 stripped
 RectTransform:

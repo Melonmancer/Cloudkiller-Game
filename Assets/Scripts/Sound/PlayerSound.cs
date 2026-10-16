@@ -9,6 +9,7 @@ public class PlayerSound : MonoBehaviour
     [SerializeField] private float footstepsVolume = 1f;
     [SerializeField] private float landingVolume = 1f;
     [SerializeField] private float meleeVolume = 1f;
+     [SerializeField] private float melee2Volume = 1f;
 
     [SerializeField] private AudioSource playerAudio;
     private PlayerController PlayerController;
@@ -43,6 +44,6 @@ public class PlayerSound : MonoBehaviour
 
     public void PlayMelee2Sound()
     {
-        playerAudio.PlayOneShot(melee2, meleeVolume);
+        playerAudio.PlayOneShot(melee2, melee2Volume);
     }
 }
