@@ -8,6 +8,7 @@ public class MainMenu : MonoBehaviour
 {
 
     public GameObject controlsPanel;
+    public GameObject creditsPanel;
     public GameObject mainMenuPanel;
 
     public Slider exposureSlider;
@@ -65,10 +66,19 @@ public class MainMenu : MonoBehaviour
         
     }
 
+    public void OpenCredits()
+    {
+        Time.timeScale = 1f;
+        creditsPanel.SetActive(true);
+        mainMenuPanel.SetActive(false);
+        
+    }
+
     public void ExitControls()
     {
         Time.timeScale = 1f;
         controlsPanel.SetActive(false);
+        creditsPanel.SetActive(false);
         mainMenuPanel.SetActive(true);
         
     }
