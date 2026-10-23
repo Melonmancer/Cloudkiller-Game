@@ -10,9 +10,14 @@ public class PlayerAttack : MonoBehaviour
     //[SerializeField] private float harvestValue = 10f;
     [SerializeField] private float windupTime = 0.5f;
 
+    //Attack sound effect fields
+    [SerializeField] private AudioClip[] attackHitArray;
+    [SerializeField] private float attackHitVolume = 1f;
+
     private float timer = 0f;
 
     private bool active = false;
+    private bool hasPlayedHitSound = false;
 
     private float windupTimer = 0f;
 
@@ -43,6 +48,31 @@ public class PlayerAttack : MonoBehaviour
             }
         }
     }
+
+    //Attack sound effect function
+    public void PlayHitSound()
+    {
+        if (hasPlayedHitSound)
+        {
+            return;
+        }
+        hasPlayedHitSound = true;
+
+        int randomIndex = Random.Range(0, attackHitArray.Length);
+        AudioClip clip = attackHitArray[randomIndex];
+
+        GameObject soundObject = new GameObject("Attack Hit Sound");
+        AudioSource source = soundObject.AddComponent<AudioSource>();
+
+        source.clip = clip;
+        source.volume = attackHitVolume;
+        source.spatialBlend = 0f;
+        source.Play();
+
+        Destroy(soundObject, clip.length);
+        Debug.Log("Played hit sound");
+    }
+
     
     //If this hits a killable enemy (only small angels at the moment) it is damaged (function in SmallAngel script).
     //Note to self: Need to clean this up or implement polymorphic angel code! Adding an exception here for every new type is bad practise.
@@ -60,6 +90,7 @@ public class PlayerAttack : MonoBehaviour
 
                     //Gets the parent of this object's parent, which is the player object, to access playerController and add to the disguise
                     //this.transform.parent.transform.parent.GetComponent<PlayerController>().ChangeDisguiseHealth(harvestValue);
+                PlayHitSound();
             }
             else
             {
@@ -70,6 +101,7 @@ public class PlayerAttack : MonoBehaviour
 
                     //Gets the parent of this object's parent, which is the player object, to access playerController and add to the disguise
                     //this.transform.parent.transform.parent.GetComponent<PlayerController>().ChangeDisguiseHealth(harvestValue);
+                PlayHitSound();
             }
         }
     }

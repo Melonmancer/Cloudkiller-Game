@@ -60,8 +60,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lifespan: 0.2
   damage: 100
-  harvestValue: 0
   windupTime: 0.3
+  attackHitArray:
+  - {fileID: 8300000, guid: 23d35a5f0fe28b14c81ea02f5b2c6403, type: 3}
+  - {fileID: 8300000, guid: 4784ba1abf7da5b409c83f463999c25b, type: 3}
+  - {fileID: 8300000, guid: a5887b36b83bf0e4c95e56923b8f2911, type: 3}
+  - {fileID: 8300000, guid: c8845ace2d8f2bd44a4fc414389c43e1, type: 3}
+  attackHitVolume: 0.15
 --- !u!1 &8657331365328042622
 GameObject:
   m_ObjectHideFlags: 0
