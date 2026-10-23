@@ -280,9 +280,11 @@ public class PlayerController : MonoBehaviour
         }
 
         //If player is out of world, respawn
-        if(transform.position.y <= outOfBoundsFloor)
+        if(transform.position.y <= outOfBoundsFloor && !playerIsDead)
         {
-            RespawnPlayer();
+            Debug.Log("Player is out of bounds. Respawning.");
+            playerIsDead = true;
+            rc.TriggerReset();
         }
 
         ResetPlayerInputs();
@@ -479,8 +481,6 @@ public class PlayerController : MonoBehaviour
         health -= damage;
         //Debug.Log("DAMAGED PLAYER! " + health + " health remaining!");
 
-
-        //If the player is at 0 hp, they need to be respawned. FINISH THIS!!
         if(health <= 0)
         {
             //Debug.Log("PLAYER IS DEAD!");

@@ -23,6 +23,7 @@ public class AngelPatrolPoint : MonoBehaviour
 
     //One point in a patrol should start as active, which is where the angel should start
     [SerializeField] private bool active = false;
+    [SerializeField] private bool startsActive = false;
 
     // Start is called before the first frame update
     void Start()
@@ -92,6 +93,15 @@ public class AngelPatrolPoint : MonoBehaviour
                 //Debug.Log("Found angel successfully!");
                 smallAngel = linkedAngel.GetComponent<SmallAngel>();
                 snitchAngel = linkedAngel.GetComponent<SnitchAngel>();
+
+                if(startsActive)
+                {
+                    active = true;
+                }
+                else
+                {
+                    active = false;
+                }
             }
         }
     }
