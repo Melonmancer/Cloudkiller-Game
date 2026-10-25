@@ -5,6 +5,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Xml.Schema;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class InGameUI : MonoBehaviour
 {
@@ -19,6 +20,11 @@ public class InGameUI : MonoBehaviour
     [SerializeField] private Animator chainCornerAnimator1;
     [SerializeField] private Animator chainIconAnimator2;
     [SerializeField] private Animator chainCornerAnimator2;
+
+    [SerializeField] private Animator disguiseControlsAnimator; 
+    [SerializeField] private Animator attackControlsAnimator; 
+    [SerializeField] private Animator yellowVignetteAnimator; 
+    [SerializeField] private Animator purpleVignetteAnimator; 
 
     private float maxHealth;
     private float currHealth;
@@ -43,6 +49,9 @@ public class InGameUI : MonoBehaviour
     private bool fadingOutDeathScreen = false;
 
     private float counter = 0f;
+
+    private bool wasDisguisedLastFrame = false;
+
     
     private Color deathScreenC = Color.black;
     private Color boundGreyedOutC = new Color32(190, 137, 105,255);
@@ -52,8 +61,11 @@ public class InGameUI : MonoBehaviour
     {
         currHealth = maxHealth;
 
-        disguiseControlsText.SetActive(false);
+        disguiseControlsText.SetActive(true);
+        attackControlsText.SetActive(true);
         border.SetActive(true);
+        yellowVignette.SetActive(true);
+        purpleVignette.SetActive(true);
         
         disguiseSliderFillImage.color = new Color32(208,236,124,255);
         disguiseDrainingUI.SetActive(false);
@@ -107,7 +119,8 @@ public class InGameUI : MonoBehaviour
     {
         if (playerController.bound == true)
         {
-            yellowVignette.SetActive(true);
+            //yellowVignette.SetActive(true);
+            yellowVignetteAnimator.SetTrigger("VignetteOn");
 
              if (!isDisguiseFlashing)
             {
@@ -139,7 +152,8 @@ public class InGameUI : MonoBehaviour
         }
         else
         {
-            yellowVignette.SetActive(false);
+            //yellowVignette.SetActive(false);
+            yellowVignetteAnimator.SetTrigger("VignetteOff");
             
             if (!isDisguiseFlashing)
             {
@@ -158,13 +172,20 @@ public class InGameUI : MonoBehaviour
 
         previousBoundState = playerController.bound;
 
-        if (playerController.isDisguised == true)
+        if (playerController.isDisguised != wasDisguisedLastFrame)
         {
-            purpleVignette.SetActive(true);
-        }
-        else
-        {
-            purpleVignette.SetActive(false);
+            if (playerController.isDisguised == true)
+            {
+                //purpleVignette.SetActive(true);
+                purpleVignetteAnimator.SetTrigger("VignetteOn");
+            }
+            else
+            {
+                //purpleVignette.SetActive(false);
+                purpleVignetteAnimator.SetTrigger("VignetteOff");
+            }
+
+            wasDisguisedLastFrame = playerController.isDisguised;
         }
 
         
@@ -289,10 +310,14 @@ public class InGameUI : MonoBehaviour
 
     public void ShowDisguiseText()
     {
-        if(disguiseTextDone == false)
+        Scene currentScene = SceneManager.GetActiveScene();
+        string sceneName = currentScene.name;
+
+        if(disguiseTextDone == false && sceneName == "Cave")
         {
             disguiseTextDone = true;
-            StartCoroutine(ShowDisguiseTextRoutine());
+            disguiseControlsAnimator.SetTrigger("ShowDisguiseControls");
+            Debug.Log("disguise info shown");
         }
         else
         {
@@ -306,7 +331,8 @@ public class InGameUI : MonoBehaviour
         if(attackTextDone == false)
         {
             attackTextDone = true;
-            StartCoroutine(ShowAttackTextRoutine());
+            attackControlsAnimator.SetTrigger("ShowAttackControls");
+            Debug.Log("attack info shown");
         }
         else
         {
@@ -314,21 +340,6 @@ public class InGameUI : MonoBehaviour
         }
     }
 
-    IEnumerator ShowDisguiseTextRoutine()
-    {
-        yield return new WaitForSeconds(0.2f);
-        disguiseControlsText.SetActive(true);
-        yield return new WaitForSeconds(4f);
-        disguiseControlsText.SetActive(false);
-    }
-
-    IEnumerator ShowAttackTextRoutine()
-        {
-            yield return new WaitForSeconds(0.2f);
-            attackControlsText.SetActive(true);
-            yield return new WaitForSeconds(4f);
-            attackControlsText.SetActive(false);
-        }
 
     public void FadeDeathScreen()
     {

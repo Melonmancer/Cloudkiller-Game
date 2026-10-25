@@ -26,13 +26,14 @@ public class PauseMenu : MonoBehaviour
 
     [SerializeField] private Slider sensitivitySlider;
     [SerializeField] private ProgrammedCamera programmedCamera;
+    [SerializeField] private Animator pauseMenuAnimator; 
 
     private ColorAdjustments colorAdjustments;
     
     void Start()
     {
         controlsPanel.SetActive(false);
-        pauseMenu.SetActive(false);
+        pauseMenu.SetActive(true);
 
         volume.profile.TryGet(out bloom);
 
@@ -125,7 +126,8 @@ public class PauseMenu : MonoBehaviour
 
     public void Pause()
     {
-        pauseMenu.SetActive(true);
+        //pauseMenu.SetActive(true);
+        pauseMenuAnimator.SetTrigger("PauseMenuOn");
         Time.timeScale = 0f;
         isPaused = true;
 
@@ -137,7 +139,8 @@ public class PauseMenu : MonoBehaviour
     {
         Debug.Log("Resume clicked");
 
-        pauseMenu.SetActive(false);
+        //pauseMenu.SetActive(false);
+        pauseMenuAnimator.SetTrigger("PauseMenuOff");
         Time.timeScale = 1f;
         isPaused = false;
 
@@ -149,13 +152,13 @@ public class PauseMenu : MonoBehaviour
     public void OpenControls()
     {
         controlsPanel.SetActive(true);
-        pauseMenu.SetActive(false);
+        //pauseMenu.SetActive(false);
     }
 
     public void CloseControls()
     {
             controlsPanel.SetActive(false);
-            pauseMenu.SetActive(true);
+            //pauseMenu.SetActive(true);
 
     }
 

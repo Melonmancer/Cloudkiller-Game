@@ -18,6 +18,9 @@ public class MainMenu : MonoBehaviour
     {
         controlsPanel.SetActive(false);
         mainMenuPanel.SetActive(true);
+
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
     }
 
     void Awake()
