@@ -29,11 +29,16 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] private Animator pauseMenuAnimator; 
 
     private ColorAdjustments colorAdjustments;
+
+    public GameObject pauseMenuAudioSourceGameObject;
+    private AudioSource pauseMenuAudioSource;
     
     void Start()
     {
         controlsPanel.SetActive(false);
         pauseMenu.SetActive(true);
+
+        pauseMenuAudioSource = pauseMenuAudioSourceGameObject.GetComponent<AudioSource>();
 
         volume.profile.TryGet(out bloom);
 
@@ -76,6 +81,7 @@ public class PauseMenu : MonoBehaviour
             }
 
         }
+
 
     }
 
@@ -126,6 +132,11 @@ public class PauseMenu : MonoBehaviour
 
     public void Pause()
     {
+        if (pauseMenu.activeSelf)
+        {
+            pauseMenuAudioSource.Play();
+        }
+
         //pauseMenu.SetActive(true);
         pauseMenuAnimator.SetTrigger("PauseMenuOn");
         Time.timeScale = 0f;
@@ -139,6 +150,11 @@ public class PauseMenu : MonoBehaviour
     {
         Debug.Log("Resume clicked");
 
+        if (pauseMenu.activeSelf)
+        {
+            pauseMenuAudioSource.Play();
+        }
+
         //pauseMenu.SetActive(false);
         pauseMenuAnimator.SetTrigger("PauseMenuOff");
         Time.timeScale = 1f;
@@ -146,6 +162,8 @@ public class PauseMenu : MonoBehaviour
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        
+
 
     }
 
