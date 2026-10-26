@@ -235,6 +235,16 @@ public class InGameUI : MonoBehaviour
                 break; 
             }
         }
+        foreach (SnitchAngel angel in SnitchAngel.AllSnitchAngels)
+        {
+            if (angel != null && angel.angelIsDrainingDisguise)
+            {
+                Debug.Log("draining "  + angel.angelIsDrainingDisguise);
+
+                anyAngelDraining = true;
+                break;                 
+            }
+        }
 
         if (playerController.bound)
         {
