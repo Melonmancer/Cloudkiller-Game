@@ -72,7 +72,7 @@ public class AngelPatrolPoint : MonoBehaviour
                 }
                 else if(snitchAngel != null) 
                 {
-                    snitchAngel.PatrolAngel(nextPatrolPoint.transform.position);
+                    snitchAngel.PatrolAngel(nextPatrolPoint.transform.position, nextLookAtObject);
                 }
                 else
                 {
@@ -84,7 +84,7 @@ public class AngelPatrolPoint : MonoBehaviour
                 goingNext = false;
             }
         }
-        else
+        else if(linkedAngel == null)
         {
             linkedAngel = linkedAngelSpawner.GetComponent<AngelSpawner>().GetCurrentAngel();
             //Debug.Log(linkedAngel);

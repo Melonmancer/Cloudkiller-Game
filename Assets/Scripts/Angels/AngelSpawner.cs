@@ -88,7 +88,7 @@ public class AngelSpawner : MonoBehaviour
     {
         GameObject newAngel = Instantiate(angelPrefab, this.transform);
         newAngel.transform.GetChild(0).GetComponent<SnitchAngel>().SetVariables(this, angelTarget, angelHealth, angelSpeed, angelChaseDistance, 
-                angelMaxWaitTime, angelSpotSpeed, angelDisguiseDamage, angelBigAngelAlertRange, angelHomePoint);    
+                angelMaxWaitTime, angelSpotSpeed, angelDisguiseDamage, angelBigAngelAlertRange, angelHomePoint, angelVisionConeRange, angelVisionConeAngle);    
         currentAliveAngel = newAngel.transform.GetChild(0).gameObject; 
     }
 

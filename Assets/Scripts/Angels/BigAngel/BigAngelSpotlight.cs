@@ -8,7 +8,7 @@ public class BigAngelSpotlight : MonoBehaviour
     [SerializeField] private GameObject target;
     private PlayerController playerController;
 
-    [SerializeField] private GameObject angelPlane;
+    [SerializeField] private Vector3 angelPlane;
 
     [SerializeField] private GameObject bigAngel;
 
@@ -110,12 +110,15 @@ public class BigAngelSpotlight : MonoBehaviour
         MoveToDestination();
     }
 
-
+    public void SetAngelPlane(Vector3 plane)
+    {
+        angelPlane = plane;
+    }
 
     //Adjusts any given position to account for the offset of the angel's designated navmesh plane, setting the new destination
     void AdjustDestinationToAngelPlane(Vector3 d)
     {
-        destination = new Vector3(d.x, angelPlane.transform.position.y, d.z);   
+        destination = new Vector3(d.x, angelPlane.y, d.z);   
 
     }
 
@@ -159,7 +162,7 @@ public class BigAngelSpotlight : MonoBehaviour
         }
 
 
-        this.transform.position = new Vector3(this.transform.position.x, angelPlane.transform.position.y, this.transform.position.z);
+        this.transform.position = new Vector3(this.transform.position.x, angelPlane.y, this.transform.position.z);
     }
 
     public void SetPatrolMode()

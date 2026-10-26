@@ -54,11 +54,11 @@ MonoBehaviour:
   angelChaseDistance: 40
   angelAttackCooldown: 0
   angelMaxWaitTime: 10
-  angelSpotSpeed: 1
-  angelDisguiseDamage: 5
-  angelVisionConeRange: 0
-  angelVisionConeAngle: 0
-  angelBigAngelAlertRange: 5
+  angelSpotSpeed: 0.3
+  angelDisguiseDamage: 10
+  angelVisionConeRange: 11
+  angelVisionConeAngle: 80
+  angelBigAngelAlertRange: 0
   respawnCooldown: 0
 --- !u!1 &7785543809224086689
 GameObject:

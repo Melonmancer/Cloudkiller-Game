@@ -6,7 +6,7 @@ public class BigAngel : MonoBehaviour
 {
     private UnityEngine.AI.NavMeshAgent agent;
 
-    [SerializeField] private GameObject angelPlane;
+    [SerializeField] private Vector3 angelPlane;
 
     [SerializeField] private GameObject target;
     private PlayerController playerController;
@@ -47,16 +47,6 @@ public class BigAngel : MonoBehaviour
     [SerializeField] private float pursuitTimeMax;
     private float pursuitTimeTick = 0f;
 
-    [SerializeField] private GameObject patrol0;
-    [SerializeField] private GameObject patrol1;
-    [SerializeField] private GameObject patrol2;
-    [SerializeField] private GameObject patrol3;
-
-    private GameObject[] patrolPath;
-
-    private GameObject activePatrol;
-    private int aP;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -71,6 +61,9 @@ public class BigAngel : MonoBehaviour
         {
             playerController = target.GetComponent<PlayerController>();
         }
+
+        angelPlane = this.transform.position;
+        spotlightScript.SetAngelPlane(angelPlane);
         
         //Uses a navMeshAgent to get around
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();   
@@ -92,17 +85,6 @@ public class BigAngel : MonoBehaviour
         //Minimum floating distance is the distance between the angel's proxyCenter and base object in world units - the center should be this far from the surface below to avoid clipping!
         minFloatingHeight = hit.distance;
         //Debug.Log(hit.distance);
-
-        patrolPath = new GameObject[4];
-        patrolPath[0] = patrol0;
-        patrolPath[1] = patrol1;
-        patrolPath[2] = patrol2;
-        patrolPath[3] = patrol2;
-
-        aP = 0;
-        activePatrol = patrolPath[aP];
-                
-        AdjustDestinationToAngelPlane(activePatrol.transform.position);   
     }
 
     // Update is called once per frame
@@ -110,20 +92,7 @@ public class BigAngel : MonoBehaviour
     {
         if(patrolMode)
         {
-            if(agent.remainingDistance <= 0.5f)
-            {
-                aP += 1;
-                if(aP >= patrolPath.Length)
-                {
-                    aP = 0;
-                }
-                if(patrolPath[aP] != null)
-                {
-                    activePatrol = patrolPath[aP];
-                }
-                AdjustDestinationToAngelPlane(activePatrol.transform.position);   
-                //Debug.Log(aP);
-            }  
+
         }
         else if(pursuitMode)
         {
@@ -216,7 +185,7 @@ public class BigAngel : MonoBehaviour
     //Adjusts any given position to account for the offset of the angel's designated navmesh plane, setting the new destination
     void AdjustDestinationToAngelPlane(Vector3 destination)
     {
-        agent.destination = new Vector3(destination.x, angelPlane.transform.position.y, destination.z);   
+        agent.destination = new Vector3(destination.x, angelPlane.y, destination.z);   
     }
 
 

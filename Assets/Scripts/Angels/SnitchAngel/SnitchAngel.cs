@@ -35,7 +35,8 @@ public class SnitchAngel : MonoBehaviour
     [SerializeField] private float chaseDistance;
 
 
-    //How long the angel stays alerted before forgetting it saw the player
+
+ //How long the angel stays alerted before forgetting it saw the player
     [SerializeField] private float maxWaitTime;
     private float timeWaiting = 0f;
     private bool isWaiting = false;
@@ -47,6 +48,17 @@ public class SnitchAngel : MonoBehaviour
     private float tickSpotting = 0f;
     private bool spottedPlayer = false;
 
+    private bool sawPlayerUndisguised = false;
+
+
+    private VisionCone cone;
+    private float coneRange;
+    private float coneAngle;
+    [SerializeField] private ShaderDetector shaderDetector;
+
+    private bool turningToPatrolObject = false;
+    private Transform lookAtPoint;
+
     private Vector3 lastKnownPlayerPosition;
 
     //Starting point for the angel - returns here when not chasing the player
@@ -54,9 +66,10 @@ public class SnitchAngel : MonoBehaviour
 
     //Used for vector calculations - holds data about target's location relative to the angel and its home
     private Vector3 directionToTarget = new Vector3();
+    private Vector3 directionToTargetFromHome = new Vector3();
 
     //Makes the angel turn towards the player/its target
-    bool turningToPlayer = false;
+    bool turningToTarget = false;
     private Vector3 turnDirection = new Vector3();
 
     //A layer mask used for the angel's line of sight - makes sure that only objects in the 'obstacle' layer block LOS
@@ -77,9 +90,27 @@ public class SnitchAngel : MonoBehaviour
 
     bool newSpawn = true;
 
+    //UI section to enable the disguise slider to go red when disguise is being drained
+
+    public static List<SnitchAngel> AllSnitchAngels = new List<SnitchAngel>();
+
+    public bool angelIsDrainingDisguise = false;
+
+    void OnEnable()
+    {
+        AllSnitchAngels.Add(this);
+    }
+
+    void OnDisable()
+    {
+        AllSnitchAngels.Remove(this);
+    }
+
+
     // Start is called before the first frame update
     void Start()
     {
+        
         //If target is not set, tries to find the player in the scene and set it as target
         if(target == null)
         {
@@ -90,11 +121,6 @@ public class SnitchAngel : MonoBehaviour
         else
         {
             playerController = target.GetComponent<PlayerController>();
-        }
-
-        if(bigAngel == null)
-        {
-            FindBigAngel();
         }
         
         //All small angels should have a NavMeshAgent attached for moving and navigating!
@@ -114,16 +140,33 @@ public class SnitchAngel : MonoBehaviour
 
         //WIP - Gets text component
         text = textObject.GetComponent<TMP_Text>();
+
+
+        cone = GetComponent<VisionCone>();
+        if(cone == null)
+        {
+            Debug.Log("Error! Angel could not find vision cone component.");
+        }
+        else
+        {
+            cone.SizeCone(coneRange, coneAngle);
+        }
         
     }
 
     // Update is called once per frame
     void Update()
     { 
+        
         if(newSpawn && agent != null && home != null)
         {
             agent.destination = home;
             newSpawn = false;
+        }
+
+        if(bigAngel == null)
+        {
+            FindBigAngel();
         }
 
         //ON ANGEL AI:
@@ -140,29 +183,33 @@ public class SnitchAngel : MonoBehaviour
 
         if(alertingBigAngel)
         {
-            agent.destination = bigAngel.GetClosestGroundedPosition();
+            bigAngel.Alert(lastKnownPlayerPosition);
+            alertingBigAngel = false;
 
-            Vector3 bA = agent.destination;
-            Vector3 d = (bA - transform.position);
+            //agent.destination = bigAngel.GetClosestGroundedPosition();
 
-            if(d.magnitude <= bigAngelAlertRange)
-            {
-                alertingBigAngel = false;
-                bigAngel.Alert(lastKnownPlayerPosition);
-                agent.destination = home;
+            //Vector3 bA = agent.destination;
+            //Vector3 d = (bA - transform.position);
 
-                text.text = "";
-            }
+            //if(d.magnitude <= bigAngelAlertRange)
+            //{
+                //alertingBigAngel = false;
+                //bigAngel.Alert(lastKnownPlayerPosition);
+                //agent.destination = home;
+
+                //text.text = "";
+            //}
         }
         else
         {
             //Gets the directional data to the target using vector math
             directionToTarget = (target.transform.position - this.transform.position);
+            directionToTargetFromHome = (target.transform.position - home);
 
             //If the target is in range, uses a raycast to check if and for how long the target has been in line of sight, handling the alert and spotting behaviours
             //Note: As the regular small angel always stays near its home, they check distance to home for casting LOS.
             //      The Snitch always checks distance from itself, as it often strays far to get to the big angel (and needs the ability to see the player on its way back home)
-            if(directionToTarget.magnitude <= chaseDistance)
+            if(directionToTargetFromHome.magnitude <= chaseDistance && health > 0)
             {
                 CastLineOfSight();   
             }
@@ -170,6 +217,8 @@ public class SnitchAngel : MonoBehaviour
             //If the angel is alerted but the target is outside the angel's chase distance, they will wait instead of chasing further (as if they lost line of sight)
             if(alerted && directionToTarget.magnitude > chaseDistance && agent.remainingDistance <= 0.5f)
             {
+                shaderDetector.SetDeactivated();
+
                 tickSpotting = 0f;
                 isWaiting = true;
             }
@@ -189,6 +238,11 @@ public class SnitchAngel : MonoBehaviour
                     isWaiting = false;
                     spottedPlayer = false;
                     alerted = false;
+                    sawPlayerUndisguised = false;
+
+                    //Angel resumes regular vision cone
+                    shaderDetector.ShowShader();
+                    cone.DisableExpandedCone();
 
                     text.text = "";
                 }
@@ -208,19 +262,25 @@ public class SnitchAngel : MonoBehaviour
             }
         }
 
+        //If the angel is not doing anything and has been given a point to look at, it turns towards it.
+        if(!isWaiting && !alerted && agent.remainingDistance <= 0.5f && lookAtPoint != null)
+        {
+            turningToPatrolObject = true;
+        }
+
         UpdateAnimations();
     }
 
+ 
     //Handles all the line-of-sight AI, including the angel's alert and spot behaviours
     void CastLineOfSight()
     {
-        //Line of sight is calculated using a raycast line
-        //NOTE: All the programming for the angel's movement is done using NavMeshAgent - consult the Unity documentation
-        RaycastHit hit;
-        //If the raycast hits an obstacle between them and the player, the angel cannot see them
-        if(Physics.Raycast(this.transform.position, directionToTarget, out hit, chaseDistance, lm) && hit.distance < directionToTarget.magnitude)
+        //Uses vision cone to check line of sight - only returns true if player is in range and not obstructed
+        if(cone.CheckIfObjectInCone(target) == false)
         {
-            Debug.DrawRay(this.transform.position, directionToTarget.normalized * hit.distance, Color.yellow);
+            shaderDetector.SetDeactivated();
+
+            angelIsDrainingDisguise = false;
 
             //If the angel was spotting the player, the spotting progress resets - the player has hidden in time!
             tickSpotting = 0f;
@@ -231,20 +291,23 @@ public class SnitchAngel : MonoBehaviour
                 isWaiting = true;
             }
         }
-        //If the raycast doesn't hit an obstacle, there is line of sight - the angel starts spotting the player
         else
         {
+            if(!playerController.GetIsDisguised())
+            {
+                shaderDetector.SetActivated();
+            }
+
             //If the player has been 'spotted' the angel locks on!
             if(spottedPlayer)
             {
-                //NOTE TO SELF: Team has debated whether the angel should be fooled by the disguise whilst it is already chasing the player
-                //Right now, it IS fooled - to change this, will probably need another bool for chaseInitiated - if this is true and player is disguised,
-                //make it so the angel doesn't care about the disguise/drains it to 0 immediately
+                shaderDetector.HideShader();
+                cone.EnableExpandedCone();
 
                 //If player is diguised, the angel stops in place and starts draining their disguise
                 if(playerController.GetIsDisguised())
                 {
-                    turningToPlayer = true;
+                    turningToTarget = true;
 
                     text.text = "!?";
 
@@ -255,30 +318,38 @@ public class SnitchAngel : MonoBehaviour
 
                     //Drains disguise
                     playerController.ChangeDisguiseHealth((disguiseDamage * -1) *  Time.deltaTime);
+
+                    //Tells InGameUI script to change visuals of disguise slider
+                    angelIsDrainingDisguise = true;
                 }
-                //If player is not disguised, paths towards the Seraphim! The Snitch will alert the Seraphim when they are close enough.
-                if(!playerController.GetIsDisguised())
+                else
                 {
+                    angelIsDrainingDisguise = false;
+                }
+                //If player is not disguised, or angel has seen player undisguised, chases after them
+                if(!playerController.GetIsDisguised() || sawPlayerUndisguised)
+                {
+                    sawPlayerUndisguised = true;
+
+                    playerController.BindPlayer();
+
                     text.text = "!!";
 
                     //Snitch goes to alert the big angel
                     alertingBigAngel = true;       
 
-                    lastKnownPlayerPosition = target.transform.position;            
-
-                    //Resets all LOS behaviour after switching to snich mode - the angel will return to normal after reaching the seraphim.
-                    timeWaiting = 0f;
-                    isWaiting = false;
-                    spottedPlayer = false;
-                    alerted = false;
-
-                    turningToPlayer = false;                    
+                    lastKnownPlayerPosition = target.transform.position;                     
                 } 
             }
             //If the angel can see the player but has not spotted them, spot value builds until the player is spotted - the angel stops moving whilst spotting
             else
             {
-                turningToPlayer = true;
+                if(!playerController.GetIsDisguised())
+                {
+                    sawPlayerUndisguised = true;
+                }
+
+                turningToTarget = true;
 
                 text.text = "?";
 
@@ -309,7 +380,7 @@ public class SnitchAngel : MonoBehaviour
     void FixedUpdate()
     {
         //Angel will turn to face the player whilst trying to spot them
-        if(turningToPlayer)
+        if(turningToTarget)
         {
             //The direction the angel should turn to face towards its target
             turnDirection = target.transform.position - new Vector3(this.transform.position.x, 0, this.transform.position.z);
@@ -321,9 +392,21 @@ public class SnitchAngel : MonoBehaviour
             //A short vector has a small magnitude, so we can use this to compare the two vectors without needing them to be exactly equal
             if((this.transform.forward - turnDirection.normalized).magnitude < 0.1f)
             {
-                turningToPlayer = false;
+                turningToTarget = false;
                 //Debug.Log("Finished turning!");
             }
+        }
+        else if(turningToPatrolObject)
+        {
+            turnDirection = new Vector3(lookAtPoint.position.x, 0, lookAtPoint.position.z) - new Vector3(transform.position.x, 0, transform.position.z);
+            
+            transform.forward = Vector3.Slerp(transform.forward, turnDirection.normalized, rotationSpeed / 4f);
+
+            if((transform.forward - turnDirection.normalized).magnitude < 0.1f)
+            {
+                turningToPatrolObject = false;
+                //Debug.Log("Finished turning!");
+            }            
         }
     }
 
@@ -392,7 +475,7 @@ public class SnitchAngel : MonoBehaviour
     }
 
     //Sets all variables - this is used by spawners to fill in data for the spawned angel
-    public void SetVariables(AngelSpawner spawnScript, GameObject t, float h, float s, float cD, float mWT, float sS, float dD, float bAAR, Vector3 hP)
+    public void SetVariables(AngelSpawner spawnScript, GameObject t, float h, float s, float cD, float mWT, float sS, float dD, float bAAR, Vector3 hP, float cR, float cA)
     {
         spawner = spawnScript;
         target = t;
@@ -404,11 +487,24 @@ public class SnitchAngel : MonoBehaviour
         disguiseDamage = dD;
         bigAngelAlertRange = bAAR;
         home = hP;
+        coneRange = cR;
+        coneAngle = cA;
     }
 
     //Used by the AngelPatrolPoint script to move this angel from place to place - should be manually linked
-    public void PatrolAngel(Vector3 nextPoint)
+    public void PatrolAngel(Vector3 nextPoint, GameObject newLookAtPoint)
     {
+        turningToPatrolObject = false;
+
+        if(newLookAtPoint != null)
+        {
+            lookAtPoint = newLookAtPoint.transform;
+        }
+        else
+        {
+            lookAtPoint = null;
+        }
+
         home = nextPoint;
         //If the angel is not doing anything involving the player, it proceeds immediately to the next patrol point
         if(!alerted && !isWaiting)

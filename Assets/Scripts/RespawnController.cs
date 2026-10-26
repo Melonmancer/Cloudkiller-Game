@@ -5,6 +5,7 @@ using UnityEngine;
 public class RespawnController : MonoBehaviour
 {
     private GameObject[] angelSpawners;
+    private GameObject[] bigAngelSpawners;
     private GameObject[] pickupSpawners;
     private GameObject player;
 
@@ -17,6 +18,7 @@ public class RespawnController : MonoBehaviour
     {
         angelSpawners = GameObject.FindGameObjectsWithTag("AngelSpawner");
         pickupSpawners = GameObject.FindGameObjectsWithTag("PickupSpawner");
+        bigAngelSpawners = GameObject.FindGameObjectsWithTag("BigAngelSpawner");
         player = GameObject.FindWithTag("Player");
     }
 
@@ -45,6 +47,10 @@ public class RespawnController : MonoBehaviour
         foreach(GameObject angelSpawner in angelSpawners)
         {
             angelSpawner.GetComponent<AngelSpawner>().ResetSpawn();
+        }
+        foreach(GameObject bigAngelSpawner in bigAngelSpawners)
+        {
+            bigAngelSpawner.GetComponent<BigAngelSpawner>().ResetSpawn();
         }
         foreach(GameObject pickupSpawner in pickupSpawners)
         {
