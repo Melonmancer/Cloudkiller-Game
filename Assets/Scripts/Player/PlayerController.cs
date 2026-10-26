@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using TMPro;
 
 public class PlayerController : MonoBehaviour
@@ -18,6 +19,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float jumpHeight = 9f;
     [SerializeField] private float rotationSpeed = 0.3f;
     [SerializeField] private float meshRotationSpeed = 7.5f;
+
+    [SerializeField] private UnityEvent onDeath;
+    [SerializeField] private UnityEvent onRespawn;
 
     private float speed = 0f;
     
@@ -422,6 +426,7 @@ public class PlayerController : MonoBehaviour
         {
             ToggleDisguise();
         }
+        onRespawn.Invoke();
     }
 
     //Toggles the player's disguise
@@ -487,6 +492,7 @@ public class PlayerController : MonoBehaviour
             playerIsDead = true;
             AnimationController.PlayDeathAnimation();
             rc.TriggerReset();
+            onDeath.Invoke();
             return true;
         }
         else

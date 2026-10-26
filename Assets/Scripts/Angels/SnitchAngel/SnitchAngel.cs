@@ -83,6 +83,7 @@ public class SnitchAngel : MonoBehaviour
     private Animator animator;
     private float animationSpeed;
     private float randomOffset;
+    private bool hasCalledSeraphim = false;
 
     //WIP - Might delete later - Allows a text display over the angel's head (Using this to demonstrate its L.O.S. behaviours at the moment)
     [SerializeField] private GameObject textObject;
@@ -185,6 +186,12 @@ public class SnitchAngel : MonoBehaviour
         {
             bigAngel.Alert(lastKnownPlayerPosition);
             alertingBigAngel = false;
+            if (!hasCalledSeraphim)
+            {
+                hasCalledSeraphim = true;
+                animator.SetTrigger("isStartled");
+                animator.SetBool("isCalling", true);
+            }
 
             //agent.destination = bigAngel.GetClosestGroundedPosition();
 
@@ -239,7 +246,9 @@ public class SnitchAngel : MonoBehaviour
                     spottedPlayer = false;
                     alerted = false;
                     sawPlayerUndisguised = false;
-
+                    hasCalledSeraphim = false;
+                    animator.SetBool("isCalling", false);
+                    animator.ResetTrigger("isStartled");
                     //Angel resumes regular vision cone
                     shaderDetector.ShowShader();
                     cone.DisableExpandedCone();
