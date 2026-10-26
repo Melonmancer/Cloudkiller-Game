@@ -19,25 +19,26 @@ public class PlayerEffects : MonoBehaviour
     [SerializeField] private float respawnDuration = 0.9f; 
     [SerializeField] private float fireWallHeight = 0.6f;
 
-    const float EdgeStart = -0.15f, EdgeEnd = 1.05f;
+    private const float EdgeStart = -0.15f; 
+    private const float EdgeEnd = 1.05f;
 
-    readonly List<Renderer> renderers = new List<Renderer>();
-    readonly List<Material[]> normal = new List<Material[]>(); 
-    readonly List<Material[]> death = new List<Material[]>(); 
-    readonly List<Material[]> respawn = new List<Material[]>();
+    private readonly List<Renderer> renderers = new List<Renderer>();
+    private readonly List<Material[]> normal = new List<Material[]>(); 
+    private readonly List<Material[]> death = new List<Material[]>(); 
+    private readonly List<Material[]> respawn = new List<Material[]>();
     
-    Material deathCopy; 
-    Material respawnCopy; 
-    Material wallCopy;
+    private Material deathCopy; 
+    private Material respawnCopy; 
+    private Material wallCopy;
     
-    bool isDead;
+    private bool isDead;
 
-    float bottom; 
-    float top; 
-    float wallFeet;
-    float flameRate; 
-    float emberRate;
-    Coroutine running;
+    private float bottom; 
+    private float top; 
+    private float wallFeet;
+    private float flameRate; 
+    private float emberRate;
+    private Coroutine running;
 
     void Awake()
     {
@@ -62,7 +63,6 @@ public class PlayerEffects : MonoBehaviour
         }
         bottom = bounds.min.y - character.position.y;
         top = bounds.max.y - character.position.y;
-        // The fire wall is placed at the feet in the prefab; it grows up from there.
         wallFeet = fireWall.transform.localPosition.y;
         wallCopy = fireWall.material;
         fireWall.enabled = false;

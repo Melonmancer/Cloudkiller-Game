@@ -47,12 +47,11 @@ Material:
     - _QueueOffset: 0
     - _Reveal: 1.05
     m_Colors:
-    - _BaseColor: {r: 0.35, g: 0.07, b: 0.02, a: 1}
-    - _BaseColour: {r: 0.45, g: 0.5, b: 0.6, a: 1}
+    - _BaseColour: {r: 0.4245283, g: 0, b: 0.10019923, a: 1}
     - _EdgeColour: {r: 6, g: 3, b: 0.8, a: 1}
     - _HeightRange: {r: -1, g: 1, b: 0, a: 0}
   m_BuildTextureStacks: []
---- !u!114 &345851590325653849
+--- !u!114 &1162543527054004226
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}

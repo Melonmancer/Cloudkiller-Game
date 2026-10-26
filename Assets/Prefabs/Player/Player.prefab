@@ -89,8 +89,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   character: {fileID: 8150261241588940357}
-  deathMaterial: {fileID: 2100000, guid: ded0d8a7ff483444b8b693bb1360051f, type: 2}
-  respawnMaterial: {fileID: 2100000, guid: 599fac4eb905fa747b2bb475a69ed70d, type: 2}
+  deathMaterial: {fileID: 2100000, guid: 9a636415e7829f7429f78c49b047875e, type: 2}
+  respawnMaterial: {fileID: 2100000, guid: e061bbab359782e48af7de71054ab166, type: 2}
   deathFlames: {fileID: 5672031865463526477}
   embers: {fileID: 8213624931582857700}
   respawnBurst: {fileID: 5679157385526878486}
@@ -331,6 +331,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8336286890346057420, guid: e292735899d20444a8d8af944068f208,
         type: 3}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8336286890346057420, guid: e292735899d20444a8d8af944068f208,
+        type: 3}
       propertyPath: ShapeModule.m_SkinnedMeshRenderer
       value: 
       objectReference: {fileID: 2119568126497617022}
@@ -449,6 +454,11 @@ PrefabInstance:
         type: 3}
       propertyPath: ShapeModule.type
       value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 546161831849359706, guid: d6b385176547d744d8ad54fe9d5c3f4f,
+        type: 3}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 546161831849359706, guid: d6b385176547d744d8ad54fe9d5c3f4f,
         type: 3}
