@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlatformNode : MonoBehaviour
+public class PatrolNode : MonoBehaviour
 {
-    [SerializeField] private PlatformNode nextNode;
+    [SerializeField] private PatrolNode nextNode;
     [SerializeField] private float speedToNextNode;
     [SerializeField] private float delayBeforeMoving;
 
@@ -25,7 +25,7 @@ public class PlatformNode : MonoBehaviour
         return transform.position;
     }
 
-    public PlatformNode GetNextNode()
+    public PatrolNode GetNextNode()
     {
         return nextNode;
     }

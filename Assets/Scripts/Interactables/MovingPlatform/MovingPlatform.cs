@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class MovingPlatform : MonoBehaviour
 {
-    private PlatformNode[] nodes;
-    private PlatformNode targetNode;
+    private PatrolNode[] nodes;
+    private PatrolNode targetNode;
 
     private Vector3 lastNodePosition;
 
     [SerializeField] private float platformSpeed;
 
-    //The nodePath should be a gameObject containing objects at different positions, each with PlatformNode scripts that link to each other
+    //The nodePath should be a gameObject containing objects at different positions, each with PatrolNode scripts that link to each other
     //View the sample in prefabs for an example of a node path, but you can make your own
     [SerializeField] private GameObject nodePath; 
 
@@ -25,7 +25,7 @@ public class MovingPlatform : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        nodes = nodePath.GetComponentsInChildren<PlatformNode>();
+        nodes = nodePath.GetComponentsInChildren<PatrolNode>();
         targetNode = nodes[0];
 
         lastNodePosition = transform.position;

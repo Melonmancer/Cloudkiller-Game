@@ -47,6 +47,10 @@ public class BigAngel : MonoBehaviour
     [SerializeField] private float pursuitTimeMax;
     private float pursuitTimeTick = 0f;
 
+
+    private PatrolNode[] currentPatrolNodes;
+    private PatrolNode targetPatrolNode; 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -92,7 +96,10 @@ public class BigAngel : MonoBehaviour
     {
         if(patrolMode)
         {
-
+            if(agent.remainingDistance <= 0.5f)
+            {
+                StartPatrolToNextNode();
+            }
         }
         else if(pursuitMode)
         {
@@ -101,15 +108,15 @@ public class BigAngel : MonoBehaviour
             Vector3 d = (target.transform.position - proxyCenter.transform.position);
 
             //If the player is nearby, the angel's spotlight starts tracking toward them, and if it reaches its first destination it goes for the player
-            if(d.magnitude <= pursuitVisionRange)
-            {
-                spotlightScript.SetPursuitMode();
-                if(agent.remainingDistance <= 0.5f)
-                {
-                    agent.destination = target.transform.position;
+            //if(d.magnitude <= pursuitVisionRange)
+            //{
+                //spotlightScript.SetPursuitMode();
+                //if(agent.remainingDistance <= 0.5f)
+                //{
+                    //agent.destination = target.transform.position;
                     //Debug.Log("I SEE YOU.");
-                }
-            }
+                //}
+            //}
 
             //After a while, the angel stops pursuing - this resets if a snitch alerts them again
             pursuitTimeTick += 1f * Time.deltaTime;
@@ -245,5 +252,26 @@ public class BigAngel : MonoBehaviour
     public Vector3 GetClosestGroundedPosition()
     {
         return closestGroundedPosition;
+    }
+
+    public void GiveNewPatrol(GameObject patrolPath, GameObject spotlightPatrolPath, float newFloatHeight)
+    {
+        Debug.Log("Setting new patrol path for Seraphim");
+
+        currentPatrolNodes = patrolPath.GetComponentsInChildren<PatrolNode>();
+        targetPatrolNode = currentPatrolNodes[0];
+
+        defaultFloatHeight = newFloatHeight;
+
+        spotlightScript.GiveNewPatrol(spotlightPatrolPath);
+    }
+
+    private void StartPatrolToNextNode()
+    {
+        if(targetPatrolNode.GetNextNode() != null)
+        {   
+            targetPatrolNode = targetPatrolNode.GetNextNode();
+            AdjustDestinationToAngelPlane(targetPatrolNode.gameObject.transform.position);
+        }        
     }
 }

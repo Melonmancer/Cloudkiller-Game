@@ -180,4 +180,9 @@ public class BigAngelSpotlight : MonoBehaviour
 
         currentSpeed = pursuitSpeed;
     }
+
+    public void GiveNewPatrol(GameObject spotlightPatrolPath)
+    {
+        
+    }
 }

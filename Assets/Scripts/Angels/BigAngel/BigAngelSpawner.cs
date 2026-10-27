@@ -8,6 +8,8 @@ public class BigAngelSpawner : MonoBehaviour
     //The angel prefab spawned by this spawner
     [SerializeField] private GameObject angelPrefab;
 
+    [SerializeField] private BigAngelCheckpoint linkedCheckpoint;
+
     private GameObject currentAliveAngel;
 
     [SerializeField] public bool startsActive = false;
@@ -31,6 +33,8 @@ public class BigAngelSpawner : MonoBehaviour
         GameObject newAngel = Instantiate(angelPrefab, this.transform);
 
         currentAliveAngel = newAngel;
+
+        linkedCheckpoint.SendDirectionsToBigAngel();
     }
 
     public GameObject GetCurrentAngel()
