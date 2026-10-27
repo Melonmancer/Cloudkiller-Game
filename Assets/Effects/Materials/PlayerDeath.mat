@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-1094044648881956735
+--- !u!114 &-8555965593823658475
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
@@ -60,7 +60,7 @@ Material:
     - _QueueControl: 0
     - _QueueOffset: 0
     m_Colors:
-    - _BaseColour: {r: 0.084905684, g: 0.08303669, b: 0.08303669, a: 1}
+    - _BaseColour: {r: 0.003529242, g: 0.003529242, b: 0.003714992, a: 1}
     - _EdgeColour: {r: 6, g: 1.6, b: 0.25, a: 1}
     - _HeightRange: {r: -1, g: 1, b: 0, a: 0}
   m_BuildTextureStacks: []

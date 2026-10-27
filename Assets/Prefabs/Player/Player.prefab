@@ -89,8 +89,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   character: {fileID: 8150261241588940357}
-  deathMaterial: {fileID: 2100000, guid: 9a636415e7829f7429f78c49b047875e, type: 2}
-  respawnMaterial: {fileID: 2100000, guid: e061bbab359782e48af7de71054ab166, type: 2}
+  deathMaterial: {fileID: 2100000, guid: a07198fc215da8c43a8408cb0caf2e27, type: 2}
+  respawnMaterial: {fileID: 2100000, guid: e05ac27c2a2f9ea4ab46250cd4ca4b95, type: 2}
   deathFlames: {fileID: 5672031865463526477}
   embers: {fileID: 8213624931582857700}
   respawnBurst: {fileID: 5679157385526878486}

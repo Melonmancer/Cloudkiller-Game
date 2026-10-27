@@ -14,6 +14,8 @@ public class SmallAngel : MonoBehaviour
     [SerializeField] private float health;
     [SerializeField] private float damage;
     [SerializeField] private float speed;
+    [SerializeField] private float attackRange;
+    [SerializeField] private float attackAngle;
     private float rotationSpeed = 0.15f;
 
     //How much "damage" the angel deals to the player's disguise
@@ -242,6 +244,12 @@ public class SmallAngel : MonoBehaviour
             }
         }
 
+        //Melee attack, attacks when the attack is ready and an undisguised player is within reach 
+        if(attackReady && health > 0 && PlayerInAttackRange())
+        {
+            MeleeAttack();
+        }
+
         //If the angel is not doing anything and has been given a point to look at, it turns towards it.
         if(!isWaiting && !alerted && agent.remainingDistance <= 0.5f && lookAtPoint != null)
         {
@@ -461,24 +469,51 @@ public class SmallAngel : MonoBehaviour
         }
     }  
 
-    //Runs whilst this angel's trigger collider is colliding with something
-    public void OnTriggerStay(Collider col)
+    //Checks if the player is undisguised, within attackRange and inside attackAngle in front of the angel
+    bool PlayerInAttackRange()
     {
-        if(attackReady && health > 0)
+        //Added player health check
+        if(playerController.GetHealthValues()[0] <= 0 || playerController.GetIsDisguised() || !spottedPlayer || !cone.CheckIfObjectInCone(target))
         {
-            //Checks if collision is with the player object
-            if(col.gameObject.tag == "Player" && playerController.GetIsDisguised() == false)
-            {
-                Debug.Log("Hit player!");
-                attackReady = false;
-                agent.isStopped = true;
-                agent.velocity = Vector3.zero;
-
-                //Damages the player
-                playerController.DamagePlayer(damage);
-            }
+            return false;
         }
+
+        Vector3 pov = new Vector3(directionToTarget.x, 0, directionToTarget.z);
+        return directionToTarget.magnitude <= attackRange && Vector3.Angle(transform.forward, pov) <= attackAngle;
     }
+
+    //Melee attack, stops the angel, plays the attack animation and damages the player
+    //Starts moving again when attackCooldown runs out
+    void MeleeAttack()
+    {
+        attackReady = false;
+        agent.isStopped = true;
+        agent.velocity = Vector3.zero;
+        animator.SetTrigger("attack");
+
+        //Damages the player
+        playerController.DamagePlayer(damage);
+    }
+
+    //Old contact attack, disabled and replaced by MeleeAttack above
+    //Runs whilst this angel's trigger collider is colliding with something
+    //public void OnTriggerStay(Collider col)
+    //{
+    //    if(attackReady && health > 0)
+    //    {
+    //        //Checks if collision is with the player object
+    //        if(col.gameObject.tag == "Player" && playerController.GetIsDisguised() == false)
+    //        {
+    //            Debug.Log("Hit player!");
+    //            attackReady = false;
+    //            agent.isStopped = true;
+    //            agent.velocity = Vector3.zero;
+    //
+    //            //Damages the player
+    //            playerController.DamagePlayer(damage);
+    //        }
+    //    }
+    //}
 
     //Sets all variables - this is used by spawners to fill in data for the spawned angel
     public void SetVariables(AngelSpawner spawnScript, GameObject t, float h, float d, float s, float cD, float aC, float mWT, float sS, float dD, Vector3 hP, float cR, float cA)
