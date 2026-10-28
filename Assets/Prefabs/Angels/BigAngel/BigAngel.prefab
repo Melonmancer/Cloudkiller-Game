@@ -583,6 +583,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: bigAngel
       objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: ce3b9e93918c26d42a0d787d9ebdbf57,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 78e9359ea97c4504abe8292ce1258de5, type: 2}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: ce3b9e93918c26d42a0d787d9ebdbf57, type: 3}
