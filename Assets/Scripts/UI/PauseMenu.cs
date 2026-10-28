@@ -36,7 +36,7 @@ public class PauseMenu : MonoBehaviour
     void Start()
     {
         controlsPanel.SetActive(false);
-        pauseMenu.SetActive(true);
+        pauseMenu.SetActive(false);
 
         pauseMenuAudioSource = pauseMenuAudioSourceGameObject.GetComponent<AudioSource>();
 
@@ -132,6 +132,8 @@ public class PauseMenu : MonoBehaviour
 
     public void Pause()
     {
+        pauseMenu.SetActive(true);
+
         if (pauseMenu.activeSelf)
         {
             pauseMenuAudioSource.Play();
@@ -149,6 +151,7 @@ public class PauseMenu : MonoBehaviour
     public void Resume()
     {
         Debug.Log("Resume clicked");
+        pauseMenu.SetActive(false);
 
         if (pauseMenu.activeSelf)
         {
