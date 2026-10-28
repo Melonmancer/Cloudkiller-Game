@@ -89,6 +89,8 @@ public class BigAngel : MonoBehaviour
         //Minimum floating distance is the distance between the angel's proxyCenter and base object in world units - the center should be this far from the surface below to avoid clipping!
         minFloatingHeight = hit.distance;
         //Debug.Log(hit.distance);
+
+        spotlightScript.SetPatrolMode();
     }
 
     // Update is called once per frame
@@ -246,7 +248,7 @@ public class BigAngel : MonoBehaviour
 
         agent.speed = pursuitSpeed;
 
-        //spotlightScript.SetPursuitMode();
+        spotlightScript.SetPursuitMode();
     }
 
     public Vector3 GetClosestGroundedPosition()

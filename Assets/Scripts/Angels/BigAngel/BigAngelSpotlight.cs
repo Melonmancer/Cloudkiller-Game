@@ -16,21 +16,22 @@ public class BigAngelSpotlight : MonoBehaviour
 
     [SerializeField] private GameObject spotlightCenter;
 
-    [SerializeField] private float leashRange;
-
     [SerializeField] private float patrolSpeed;
 
     [SerializeField] private float pursuitSpeed;
 
     private float currentSpeed;
 
-    private Vector3 destination;
+    private Vector3 destination = new Vector3(0f, 0f, 0f);
 
     private bool patrolMode;
 
-    private bool reachedPatrolPoint = true;
-
     private bool pursuitMode = false;
+
+    private PatrolNode[] currentPatrolNodes;
+    private PatrolNode targetPatrolNode; 
+
+    [SerializeField] private float offGroundModifier = -250f;
 
     //private UnityEngine.AI.NavMeshAgent agent;
     
@@ -61,6 +62,7 @@ public class BigAngelSpotlight : MonoBehaviour
         lm = LayerMask.GetMask("Obstacle");
 
         patrolMode = true;
+        pursuitMode = false;
         currentSpeed = patrolSpeed;
     }
 
@@ -81,26 +83,20 @@ public class BigAngelSpotlight : MonoBehaviour
         {
             //spotlightOnFloor = false;
 
-            spotlightCenter.transform.position = new Vector3(this.transform.position.x, (this.transform.position.y - 100f), this.transform.position.z);
+            spotlightCenter.transform.position = new Vector3(this.transform.position.x, (this.transform.position.y + offGroundModifier), this.transform.position.z);
+            
         }
 
         //Whilst patrolling, destination is set to a random point near the angel
-        if(patrolMode)
+        if(patrolMode && currentPatrolNodes != null)
         {
-            if(reachedPatrolPoint)
+            Vector3 distanceToDestination = (destination - this.transform.position);
+
+            if(distanceToDestination.magnitude <= 0.5f)
             {
-                AdjustDestinationToAngelPlane(bigAngelScript.CreatePointOfInterest(leashRange));
-                reachedPatrolPoint = false;
+                StartPatrolToNextNode();
             }
-            else
-            {
-                Vector3 distanceToDestination = new Vector3();
-                distanceToDestination = (destination - this.transform.position);
-                if(distanceToDestination.magnitude <= 0.5f)
-                {
-                    reachedPatrolPoint = true;
-                }
-            }
+
         }
         else if(pursuitMode)
         {
@@ -140,27 +136,10 @@ public class BigAngelSpotlight : MonoBehaviour
 
     private void MoveToDestination()
     {
-        Vector3 directionToAngel = new Vector3();
-        directionToAngel = (bigAngel.transform.position - this.transform.position);
-
         Vector3 directionToDestination = new Vector3();
         directionToDestination = (destination - this.transform.position);
 
         this.transform.Translate(directionToDestination.normalized * (currentSpeed * Time.deltaTime));
-
-
-        if(directionToAngel.magnitude > leashRange)
-        {
-            //Debug.Log("Too far! " + directionToAngel.magnitude);
-            this.transform.Translate(directionToAngel.normalized * (currentSpeed * Time.deltaTime));
-
-            //If spotlight is outside of leash range whilst patrolling, it probably cannot reach the current patrol point anymore - this makes a new one.
-            if(patrolMode)
-            {
-                reachedPatrolPoint = true;
-            }
-        }
-
 
         this.transform.position = new Vector3(this.transform.position.x, angelPlane.y, this.transform.position.z);
     }
@@ -183,6 +162,17 @@ public class BigAngelSpotlight : MonoBehaviour
 
     public void GiveNewPatrol(GameObject spotlightPatrolPath)
     {
-        
+        currentPatrolNodes = spotlightPatrolPath.GetComponentsInChildren<PatrolNode>();
+        targetPatrolNode = currentPatrolNodes[0];
+        AdjustDestinationToAngelPlane(targetPatrolNode.gameObject.transform.position);
+    }
+
+    private void StartPatrolToNextNode()
+    {
+        if(targetPatrolNode.GetNextNode() != null)
+        {   
+            targetPatrolNode = targetPatrolNode.GetNextNode();
+            AdjustDestinationToAngelPlane(targetPatrolNode.gameObject.transform.position);
+        }        
     }
 }

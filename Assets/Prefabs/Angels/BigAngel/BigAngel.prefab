@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 645253666205033276}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 4, z: 0}
-  m_LocalScale: {x: 28, y: 4, z: 28}
+  m_LocalScale: {x: 10, y: 4, z: 10}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4810033469960403982}
@@ -175,7 +175,7 @@ NavMeshAgent:
   m_Speed: 2.5
   m_Acceleration: 2
   avoidancePriority: 50
-  m_AngularSpeed: 120
+  m_AngularSpeed: 200
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
@@ -200,8 +200,8 @@ MonoBehaviour:
   target: {fileID: 0}
   proxyCenter: {fileID: 6256741240569480653}
   spotlightScript: {fileID: 808267372843364899}
-  patrolSpeed: 2
-  pursuitSpeed: 5
+  patrolSpeed: 5
+  pursuitSpeed: 7
   floatingHeight: 9
   maxWorldHeight: 17
   heightChangeSpeed: 0.02
@@ -400,9 +400,9 @@ MonoBehaviour:
   bigAngel: {fileID: 3510135616802763533}
   bigAngelScript: {fileID: 3180901396968573032}
   spotlightCenter: {fileID: 1690999902275165584}
-  leashRange: 15
-  patrolSpeed: 3
+  patrolSpeed: 5
   pursuitSpeed: 7
+  offGroundModifier: -500
 --- !u!1001 &3805689524109123838
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -419,7 +419,7 @@ PrefabInstance:
     - target: {fileID: 1700698145425872245, guid: fb0f6bea46910d7418697531ab75708e,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5624174346275590173, guid: fb0f6bea46910d7418697531ab75708e,
         type: 3}
@@ -429,7 +429,7 @@ PrefabInstance:
     - target: {fileID: 5624174346275590173, guid: fb0f6bea46910d7418697531ab75708e,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 12.5
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5624174346275590173, guid: fb0f6bea46910d7418697531ab75708e,
         type: 3}
@@ -439,7 +439,7 @@ PrefabInstance:
     - target: {fileID: 5624174346275590173, guid: fb0f6bea46910d7418697531ab75708e,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 12.5
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5624174346275590173, guid: fb0f6bea46910d7418697531ab75708e,
         type: 3}
@@ -454,7 +454,7 @@ PrefabInstance:
     - target: {fileID: 5624174346275590173, guid: fb0f6bea46910d7418697531ab75708e,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0.00000083069
       objectReference: {fileID: 0}
     - target: {fileID: 5624174346275590173, guid: fb0f6bea46910d7418697531ab75708e,
         type: 3}
@@ -608,7 +608,7 @@ PrefabInstance:
     - target: {fileID: 1700698145425872245, guid: fb0f6bea46910d7418697531ab75708e,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5624174346275590173, guid: fb0f6bea46910d7418697531ab75708e,
         type: 3}
@@ -618,7 +618,7 @@ PrefabInstance:
     - target: {fileID: 5624174346275590173, guid: fb0f6bea46910d7418697531ab75708e,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 12.5
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5624174346275590173, guid: fb0f6bea46910d7418697531ab75708e,
         type: 3}
@@ -628,7 +628,7 @@ PrefabInstance:
     - target: {fileID: 5624174346275590173, guid: fb0f6bea46910d7418697531ab75708e,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 12.5
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5624174346275590173, guid: fb0f6bea46910d7418697531ab75708e,
         type: 3}

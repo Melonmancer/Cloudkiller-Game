@@ -14,6 +14,10 @@ public class BigAngelCheckpoint : MonoBehaviour
     [SerializeField] private BigAngelSpawner linkedBigAngelSpawner;
     [SerializeField] private float defaultFloatHeight = -999f;
 
+    [SerializeField] private bool disabledAfterTrigger = true;
+
+    private bool disabled = false;
+
     private BigAngel seraphimController;
 
     // Start is called before the first frame update
@@ -31,6 +35,7 @@ public class BigAngelCheckpoint : MonoBehaviour
         if(seraphimController == null)
         {
             FindSeraphimInScene();
+            disabled = false;
         }
     }
 
@@ -39,7 +44,7 @@ public class BigAngelCheckpoint : MonoBehaviour
         seraphimController = GameObject.FindWithTag("BigAngel").GetComponent<BigAngel>();
     }
 
-    void OnTriggerEnter(Collider col)
+    void OnTriggerStay(Collider col)
     {
         bool found = false;
 
@@ -58,8 +63,10 @@ public class BigAngelCheckpoint : MonoBehaviour
             }
         }
 
-        if(found)
+        if(found && !disabled)
         {
+            Debug.Log("Hit big angel checkpoint.");
+
             seraphimController.GiveNewPatrol(linkedPatrolPath, linkedSpotlightPatrolPath, defaultFloatHeight);
             GameObject[] spawners = GameObject.FindGameObjectsWithTag("BigAngelSpawner");
 
@@ -69,6 +76,12 @@ public class BigAngelCheckpoint : MonoBehaviour
             }
 
             linkedBigAngelSpawner.SetIsActive(true);
+
+            if(disabledAfterTrigger)
+            {
+                disabled = true;
+                Debug.Log("Disabled checkpoint until respawn.");
+            }
         }
     }
 
