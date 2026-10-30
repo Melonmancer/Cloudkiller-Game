@@ -13,6 +13,12 @@ public class PlayerEffects : MonoBehaviour
     [SerializeField] private ParticleSystem embers; 
     [SerializeField] private ParticleSystem respawnBurst;
 
+    [SerializeField] private AudioSource fireAudio;
+    [SerializeField] private AudioClip deathSound;
+    [SerializeField] private AudioClip respawnSound;
+    [SerializeField] private float deathVolume = 1f;
+    [SerializeField] private float respawnVolume = 1f;
+
     [SerializeField] private Renderer fireWall;
 
     [SerializeField] private float deathDuration = 1.6f; 
@@ -109,6 +115,9 @@ public class PlayerEffects : MonoBehaviour
     {
         Show(death);
         deathFlames.Play();
+        fireAudio.clip = deathSound;
+        fireAudio.volume = deathVolume;
+        fireAudio.Play();
         embers.Play();
         for (float t = 0; t < 1; t += Time.deltaTime / deathDuration)
         {
@@ -133,6 +142,9 @@ public class PlayerEffects : MonoBehaviour
         embers.Stop();
         Show(respawn);
         respawnBurst.Play();
+        fireAudio.clip = respawnSound;
+        fireAudio.volume = respawnVolume;
+        fireAudio.Play();
         embers.Emit(40);
         fireWall.enabled = true;
         var wall = fireWall.transform;

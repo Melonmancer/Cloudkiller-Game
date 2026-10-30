@@ -62,14 +62,38 @@ public class GrassScatterer : MonoBehaviour
         }
     }
 
+    private readonly float[] qualityDensity = { 0.2f, 0.5f, 1f };
+    private readonly float[] qualityDistance = { 0.2f, 0.5f, 1f };
+    private float baseDensity;
+    private float baseDrawDistance;
+    private int grassQuality;
+
     private void Start()
     {
+        baseDensity = density;
+        baseDrawDistance = drawDistance;
+        ApplyQuality();
+
         GenerateGrass();
     }
 
     private void LateUpdate()
     {
+        if (QualitySettings.GetQualityLevel() != grassQuality)
+        {
+            ApplyQuality();
+            GenerateGrass();
+        }
+
         RenderGrass();
+    }
+
+    private void ApplyQuality()
+    {
+        grassQuality = QualitySettings.GetQualityLevel();
+        int index = Mathf.Clamp(grassQuality, 0, qualityDensity.Length - 1);
+        density = baseDensity * qualityDensity[index];
+        drawDistance = baseDrawDistance * qualityDistance[index];
     }
 
     private void GenerateGrass()

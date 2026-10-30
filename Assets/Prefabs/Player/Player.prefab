@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 842032930271689505}
   - component: {fileID: 842032930271689508}
   - component: {fileID: 1345750455986102706}
-  - component: {fileID: 4121472455656955591}
   - component: {fileID: 739762812388102861}
   m_Layer: 0
   m_Name: Player
@@ -94,22 +93,15 @@ MonoBehaviour:
   deathFlames: {fileID: 5672031865463526477}
   embers: {fileID: 8213624931582857700}
   respawnBurst: {fileID: 5679157385526878486}
+  fireAudio: {fileID: 0}
+  deathSound: {fileID: 0}
+  respawnSound: {fileID: 0}
+  deathVolume: 1
+  respawnVolume: 1
   fireWall: {fileID: 2932168970646496609}
   deathDuration: 1.8
   respawnDuration: 0.9
   fireWallHeight: 0.6
---- !u!114 &4121472455656955591
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 842032930271689535}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8feb4fe0813dd1b4b9a4207d9174384b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &739762812388102861
 MonoBehaviour:
   m_ObjectHideFlags: 0
