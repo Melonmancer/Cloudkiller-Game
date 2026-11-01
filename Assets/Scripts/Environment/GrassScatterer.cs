@@ -35,6 +35,7 @@ public class GrassScatterer : MonoBehaviour
     private readonly List<Chunk> chunks = new List<Chunk>();
     private Mesh renderedMesh;
     private bool ready;
+    private MaterialPropertyBlock grassProperties;
 
     private sealed class Chunk
     {
@@ -75,6 +76,10 @@ public class GrassScatterer : MonoBehaviour
         ApplyQuality();
 
         GenerateGrass();
+
+        grassProperties = new MaterialPropertyBlock();
+        grassProperties.SetFloat("_GrassBase", renderedMesh.bounds.min.y);
+        grassProperties.SetFloat("_GrassHeight", renderedMesh.bounds.size.y);
     }
 
     private void LateUpdate()
@@ -232,6 +237,7 @@ public class GrassScatterer : MonoBehaviour
         Vector3 cameraPosition = targetCamera.transform.position;
         float distance = Mathf.Max(0f, drawDistance);
         float distanceSquared = distance * distance;
+        grassProperties?.SetFloat("_GrassFadeDistance", distance);
 
         foreach (Chunk chunk in chunks)
         {
@@ -254,6 +260,7 @@ public class GrassScatterer : MonoBehaviour
                 receiveShadows = true,
                 lightProbeUsage = LightProbeUsage.Off
             };
+            rp.matProps = grassProperties;
 
             for (int start = 0; start < chunk.matrices.Length; start += BatchSize)
             {

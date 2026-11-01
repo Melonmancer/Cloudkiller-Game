@@ -419,6 +419,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FireWall
       objectReference: {fileID: 0}
+    - target: {fileID: 5759613552397394101, guid: b3e98b83db3f7d44f9c5ad490edbb994,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: b3e98b83db3f7d44f9c5ad490edbb994, type: 3}

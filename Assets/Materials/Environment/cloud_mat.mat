@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: cloud_mat
+  m_Shader: {fileID: 4800000, guid: adc07ac10f5948cd949199e4aa481314, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 1
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _NoiseTex:
+        m_Texture: {fileID: 2800000, guid: 49dda21a8f594e099cbd04233d23541f, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _AmbientStrength: 0.659
+    - _BacklightBoost: 0.531
+    - _BillowScale: 3.3
+    - _BillowSpeed: 0.75
+    - _BillowStrength: 0.3
+    - _BreakupScale: 0.05
+    - _CameraFade: 30.22
+    - _DepthFade: 1.1
+    - _EdgeBreakup: 0.046
+    - _EdgeSoftness: 0.332
+    - _Opacity: 1
+    - _RimPower: 5.03
+    - _RimStrength: 1.127
+    - _Wrap: 0.464
+    m_Colors:
+    - _LitColor: {r: 1, g: 0.96999997, b: 0.92, a: 1}
+    - _RimColor: {r: 0.64554405, g: 0.6978086, b: 0.754717, a: 1}
+    - _ShadeColor: {r: 0.7, g: 0.65999997, b: 0.85, a: 1}
+  m_BuildTextureStacks: []

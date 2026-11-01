@@ -1,4 +1,4 @@
-Shader "Custom/PortalTop"
+Shader "Shader Graphs/PortalTop"
 {
 	SubShader
 	{
