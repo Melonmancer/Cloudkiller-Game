@@ -6,6 +6,12 @@ TagManager:
   tags:
   - KillableEnemy
   - BigAngel
+  - AttackTextTrigger
+  - PickupSpawner
+  - AngelSpawner
+  - WinCube
+  - GameManager
+  - BigAngelSpawner
   layers:
   - Default
   - TransparentFX
