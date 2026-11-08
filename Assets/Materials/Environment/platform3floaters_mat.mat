@@ -94,7 +94,7 @@ Material:
     - _RockSlope: 0.6
     - _RockTiling: 22.62
     - _ShadowSoftening: 0
-    - _TintStrength: 0.216
+    - _TintStrength: 0.421
     m_Colors:
     - _GrassTint: {r: 0.20644283, g: 0.12213709, b: 0.21698102, a: 1}
     - _PathTint: {r: 0.1655123, g: 0.1414797, b: 0.17924523, a: 1}
