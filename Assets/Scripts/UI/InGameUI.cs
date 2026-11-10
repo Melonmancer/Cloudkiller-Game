@@ -52,6 +52,8 @@ public class InGameUI : MonoBehaviour
 
     private bool wasDisguisedLastFrame = false;
 
+    public AudioSource toolTipsAudioSource;
+
     
     private Color deathScreenC = Color.black;
     private Color boundGreyedOutC = new Color32(190, 137, 105,255);
@@ -327,6 +329,8 @@ public class InGameUI : MonoBehaviour
         {
             disguiseTextDone = true;
             disguiseControlsAnimator.SetTrigger("ShowDisguiseControls");
+            //play sound effect
+            toolTipsAudioSource.Play();
             Debug.Log("disguise info shown");
         }
         else
@@ -342,6 +346,7 @@ public class InGameUI : MonoBehaviour
         {
             attackTextDone = true;
             attackControlsAnimator.SetTrigger("ShowAttackControls");
+            toolTipsAudioSource.Play();
             Debug.Log("attack info shown");
         }
         else

@@ -50,17 +50,17 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _BottomSoftness: 0.406
+    - _BottomSoftness: 0.548
     - _GlowFalloff: 16
     - _GlowStrength: 0.35
-    - _HorizonHeight: -0.065
-    - _HorizonSoftness: 1
+    - _HorizonHeight: -0.081
+    - _HorizonSoftness: 0.742
     - _QueueControl: 0
     - _QueueOffset: 0
     - _SunSize: 0
     m_Colors:
-    - _BottomColour: {r: 0.509434, g: 0, b: 0.19441988, a: 1}
-    - _HorizonColour: {r: 0.5188679, g: 0.40465167, b: 0.49006876, a: 1}
-    - _SunColour: {r: 1, g: 1, b: 1, a: 1}
-    - _TopColour: {r: 1, g: 0, b: 0.42173052, a: 1}
+    - _BottomColour: {r: 0.1754183, g: 0.509434, b: 0.49147618, a: 1}
+    - _HorizonColour: {r: 0.6685208, g: 0.7830189, b: 0.69077104, a: 1}
+    - _SunColour: {r: 1, g: 0.99237424, b: 0.8349056, a: 1}
+    - _TopColour: {r: 0.21960783, g: 0.58431375, b: 0.56333816, a: 1}
   m_BuildTextureStacks: []
