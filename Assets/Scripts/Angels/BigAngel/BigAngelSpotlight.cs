@@ -33,6 +33,8 @@ public class BigAngelSpotlight : MonoBehaviour
 
     [SerializeField] private float offGroundModifier = -250f;
 
+    private float previousHeight;
+
     //private UnityEngine.AI.NavMeshAgent agent;
     
     //private bool spotlightOnFloor;
@@ -64,6 +66,8 @@ public class BigAngelSpotlight : MonoBehaviour
         patrolMode = true;
         pursuitMode = false;
         currentSpeed = patrolSpeed;
+
+        previousHeight = offGroundModifier;
     }
 
     // Update is called once per frame
@@ -78,12 +82,13 @@ public class BigAngelSpotlight : MonoBehaviour
             //spotlightOnFloor = true;
 
             spotlightCenter.transform.position = new Vector3(this.transform.position.x, (this.transform.position.y - hit.distance), this.transform.position.z);
+            previousHeight = spotlightCenter.transform.position.y;
         }
         else
         {
             //spotlightOnFloor = false;
 
-            spotlightCenter.transform.position = new Vector3(this.transform.position.x, (this.transform.position.y + offGroundModifier), this.transform.position.z);
+            spotlightCenter.transform.position = new Vector3(this.transform.position.x, (previousHeight), this.transform.position.z);
             
         }
 

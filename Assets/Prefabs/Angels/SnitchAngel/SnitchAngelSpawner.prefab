@@ -56,8 +56,8 @@ MonoBehaviour:
   angelMaxWaitTime: 10
   angelSpotSpeed: 0.3
   angelDisguiseDamage: 10
-  angelVisionConeRange: 11
-  angelVisionConeAngle: 80
+  angelVisionConeRange: 15
+  angelVisionConeAngle: 120
   angelBigAngelAlertRange: 0
   respawnCooldown: 0
 --- !u!1 &7785543809224086689
