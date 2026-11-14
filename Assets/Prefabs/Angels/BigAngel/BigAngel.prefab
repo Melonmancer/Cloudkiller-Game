@@ -203,7 +203,7 @@ MonoBehaviour:
   patrolSpeed: 5
   pursuitSpeed: 7
   floatingHeight: 9
-  maxWorldHeight: 17
+  maxWorldHeight: 120
   heightChangeSpeed: 0.02
   pursuitVisionRange: 60
   pursuitTimeMax: 15
