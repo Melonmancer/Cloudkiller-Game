@@ -167,6 +167,8 @@ public class BigAngelSpotlight : MonoBehaviour
 
     public void GiveNewPatrol(GameObject spotlightPatrolPath)
     {
+        //transform.position = spotlightPatrolPath.transform.position;
+
         currentPatrolNodes = spotlightPatrolPath.GetComponentsInChildren<PatrolNode>();
         targetPatrolNode = currentPatrolNodes[0];
         AdjustDestinationToAngelPlane(targetPatrolNode.gameObject.transform.position);

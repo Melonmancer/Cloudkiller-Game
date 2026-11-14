@@ -262,6 +262,7 @@ public class BigAngel : MonoBehaviour
 
         currentPatrolNodes = patrolPath.GetComponentsInChildren<PatrolNode>();
         targetPatrolNode = currentPatrolNodes[0];
+        AdjustDestinationToAngelPlane(targetPatrolNode.transform.position);
 
         defaultFloatHeight = newFloatHeight;
 
