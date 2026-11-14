@@ -151,14 +151,12 @@ public class PauseMenu : MonoBehaviour
     public void Resume()
     {
         Debug.Log("Resume clicked");
-        pauseMenu.SetActive(false);
 
         if (pauseMenu.activeSelf)
         {
             pauseMenuAudioSource.Play();
         }
 
-        //pauseMenu.SetActive(false);
         pauseMenuAnimator.SetTrigger("PauseMenuOff");
         Time.timeScale = 1f;
         isPaused = false;
