@@ -50,7 +50,7 @@ public class BigAngelCheckpoint : MonoBehaviour
 
         if(checkForSeraphim)
         {
-            if(col.tag == "BigAngel")
+            if(col.tag == "BigAngelCheckpointTrigger")
             {
                 found = true;
             }
