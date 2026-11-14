@@ -150,6 +150,7 @@ public class PauseMenu : MonoBehaviour
 
     public void Resume()
     {
+        StartCoroutine(PauseMenuClose());
         Debug.Log("Resume clicked");
 
         if (pauseMenu.activeSelf)
@@ -167,6 +168,11 @@ public class PauseMenu : MonoBehaviour
 
 
     }
+      IEnumerator PauseMenuClose()
+        {
+            yield return new WaitForSeconds(0.5f);
+            pauseMenu.SetActive(false);
+        }
 
     public void OpenControls()
     {
