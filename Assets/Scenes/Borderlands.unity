@@ -4383,7 +4383,7 @@ PrefabInstance:
     - target: {fileID: 8990612539808242767, guid: ecb309030d81046428a572049b471590,
         type: 3}
       propertyPath: defaultFloatHeight
-      value: 30
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 8990612539808242767, guid: ecb309030d81046428a572049b471590,
         type: 3}
@@ -4636,7 +4636,7 @@ PrefabInstance:
     - target: {fileID: 8990612539808242767, guid: ecb309030d81046428a572049b471590,
         type: 3}
       propertyPath: defaultFloatHeight
-      value: 10
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 8990612539808242767, guid: ecb309030d81046428a572049b471590,
         type: 3}
@@ -15160,7 +15160,7 @@ PrefabInstance:
     - target: {fileID: 8990612539808242767, guid: ecb309030d81046428a572049b471590,
         type: 3}
       propertyPath: defaultFloatHeight
-      value: 60
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 8990612539808242767, guid: ecb309030d81046428a572049b471590,
         type: 3}
@@ -15874,7 +15874,7 @@ PrefabInstance:
     - target: {fileID: 8990612539808242767, guid: ecb309030d81046428a572049b471590,
         type: 3}
       propertyPath: defaultFloatHeight
-      value: 170
+      value: 110
       objectReference: {fileID: 0}
     - target: {fileID: 8990612539808242767, guid: ecb309030d81046428a572049b471590,
         type: 3}
@@ -16822,7 +16822,7 @@ PrefabInstance:
     - target: {fileID: 8990612539808242767, guid: ecb309030d81046428a572049b471590,
         type: 3}
       propertyPath: defaultFloatHeight
-      value: 125
+      value: 140
       objectReference: {fileID: 0}
     - target: {fileID: 8990612539808242767, guid: ecb309030d81046428a572049b471590,
         type: 3}
