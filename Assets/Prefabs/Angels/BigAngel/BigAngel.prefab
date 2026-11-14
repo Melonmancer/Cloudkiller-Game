@@ -202,7 +202,7 @@ MonoBehaviour:
   spotlightScript: {fileID: 808267372843364899}
   patrolSpeed: 5
   pursuitSpeed: 7
-  floatingHeight: 9
+  floatingHeight: 30
   maxWorldHeight: 120
   heightChangeSpeed: 0.02
   pursuitVisionRange: 60
