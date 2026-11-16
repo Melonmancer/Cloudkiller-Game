@@ -78,7 +78,7 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.9849624
+      - time: 0.74
         functionName: HideWeapon
         data: 
         objectReferenceParameter: {instanceID: 0}
@@ -301,7 +301,7 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.9849624
+      - time: 0.74
         functionName: HideWeapon
         data: 
         objectReferenceParameter: {instanceID: 0}
@@ -358,7 +358,7 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.9849624
+      - time: 0.74
         functionName: HideWeapon
         data: 
         objectReferenceParameter: {instanceID: 0}

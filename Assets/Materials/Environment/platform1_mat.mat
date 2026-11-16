@@ -94,9 +94,9 @@ Material:
     - _RockSlope: 0.485
     - _RockTiling: 5.71
     - _ShadowSoftening: 0.31
-    - _TintStrength: 0.977
+    - _TintStrength: 1
     m_Colors:
     - _GrassTint: {r: 0, g: 0.17924526, b: 0.048885055, a: 1}
-    - _PathTint: {r: 0.17924526, g: 0.103970446, b: 0.0518571, a: 1}
-    - _RockTint: {r: 0.047169782, g: 0.0399015, b: 0.0399015, a: 1}
+    - _PathTint: {r: 0.13130057, g: 0.16981131, b: 0.050729778, a: 1}
+    - _RockTint: {r: 0, g: 0.103773594, b: 0.0495651, a: 1}
   m_BuildTextureStacks: []
